@@ -80,19 +80,24 @@ body::before {
 }
 
 /* -------- THEME TOGGLE -------- */
-.theme-btn {
+.theme-btn-fixed {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 101;
   background: none;
   border: none;
   cursor: pointer;
   color: var(--fg);
-  padding: 8px;
+  padding: 12px;
   opacity: .48;
   display: flex;
   align-items: center;
+  justify-content: center;
   transition: opacity 200ms, transform 300ms;
-  flex-shrink: 0;
 }
-.theme-btn:hover { opacity: 1; transform: scale(1.12) rotate(15deg); }
+.theme-btn-fixed:hover { opacity: 1; transform: translateX(-50%) scale(1.12) rotate(15deg); }
 
 /* rays fade out in dark mode */
 .sun-rays {
@@ -630,9 +635,7 @@ footer {
 /* -------- RESPONSIVE -------- */
 @media (max-width: 860px) {
   nav { padding: 18px 24px; }
-  .nav-right { gap: 16px; }
   .nav-links { gap: 20px; }
-  .theme-btn { padding: 6px; }
 
   #hero { padding: 0 24px 64px; }
   .scroll-hint { right: 24px; }
@@ -657,6 +660,31 @@ footer {
 </head>
 <body>
 
+<!-- THEME TOGGLE -->
+<button class="theme-btn-fixed" id="theme-btn" aria-label="toggle light/dark">
+  <svg class="theme-icon" viewBox="0 0 24 24" width="28" height="28" fill="none" aria-hidden="true">
+    <defs>
+      <mask id="crescent-mask">
+        <rect width="24" height="24" fill="white"/>
+        <circle class="cut-circle" r="6" fill="black"/>
+      </mask>
+    </defs>
+    <!-- rays -->
+    <g class="sun-rays" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+      <line x1="12" y1="2"    x2="12" y2="4.5"/>
+      <line x1="12" y1="19.5" x2="12" y2="22"/>
+      <line x1="2"  y1="12"   x2="4.5" y2="12"/>
+      <line x1="19.5" y1="12" x2="22" y2="12"/>
+      <line x1="4.93" y1="4.93"   x2="6.75" y2="6.75"/>
+      <line x1="17.25" y1="17.25" x2="19.07" y2="19.07"/>
+      <line x1="19.07" y1="4.93"  x2="17.25" y2="6.75"/>
+      <line x1="6.75"  y1="17.25" x2="4.93"  y2="19.07"/>
+    </g>
+    <!-- orb (masked to crescent in dark mode) -->
+    <circle class="sun-orb" cx="12" cy="12" r="4.5" fill="currentColor" mask="url(#crescent-mask)"/>
+  </svg>
+</button>
+
 <!-- NAV -->
 <nav id="nav">
   <a href="#hero" class="nav-logo">Messy Sensing</a>
@@ -667,30 +695,6 @@ footer {
       <li><a href="#listen">Listen</a></li>
       <li><a href="#archive">Archive</a></li>
     </ul>
-    <!-- sun/moon toggle — replace the SVG with your own graphic later -->
-    <button class="theme-btn" id="theme-btn" aria-label="toggle light/dark">
-      <svg class="theme-icon" viewBox="0 0 24 24" width="19" height="19" fill="none" aria-hidden="true">
-        <defs>
-          <mask id="crescent-mask">
-            <rect width="24" height="24" fill="white"/>
-            <circle class="cut-circle" r="6" fill="black"/>
-          </mask>
-        </defs>
-        <!-- rays -->
-        <g class="sun-rays" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
-          <line x1="12" y1="2"    x2="12" y2="4.5"/>
-          <line x1="12" y1="19.5" x2="12" y2="22"/>
-          <line x1="2"  y1="12"   x2="4.5" y2="12"/>
-          <line x1="19.5" y1="12" x2="22" y2="12"/>
-          <line x1="4.93" y1="4.93"   x2="6.75" y2="6.75"/>
-          <line x1="17.25" y1="17.25" x2="19.07" y2="19.07"/>
-          <line x1="19.07" y1="4.93"  x2="17.25" y2="6.75"/>
-          <line x1="6.75"  y1="17.25" x2="4.93"  y2="19.07"/>
-        </g>
-        <!-- orb (masked to crescent in dark mode) -->
-        <circle class="sun-orb" cx="12" cy="12" r="4.5" fill="currentColor" mask="url(#crescent-mask)"/>
-      </svg>
-    </button>
   </div>
 </nav>
 

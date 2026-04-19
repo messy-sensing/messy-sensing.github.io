@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Messy Sensing: A vs B mood compare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --mono: "Inter", system-ui, sans-serif;
+    --serif: "EB Garamond", Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { font-family: var(--mono); background: #1a1a1a; color: #ddd; }
+  .page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding: 24px;
+    min-height: 100vh;
+  }
+  .panel {
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    min-height: 900px;
+    display: flex;
+    flex-direction: column;
+  }
+  .label {
+    position: absolute;
+    top: 14px;
+    left: 18px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    z-index: 10;
+  }
+  .palette {
+    display: flex;
+    gap: 0;
+    height: 52px;
+    width: 100%;
+  }
+  .swatch {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 6px 8px;
+    font-size: 9px;
+    letter-spacing: 0.05em;
+    opacity: 0.8;
+  }
+  .hero {
+    flex: 1;
+    padding: 72px 56px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+  }
+  .nav {
+    display: flex;
+    gap: 28px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    position: absolute;
+    top: 36px;
+    right: 56px;
+  }
+  .title {
+    font-family: var(--serif);
+    font-weight: 400;
+    line-height: 0.95;
+    font-size: 76px;
+    letter-spacing: -0.01em;
+  }
+  .title i { font-style: italic; font-weight: 400; }
+  .subtitle {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    margin-top: 18px;
+    max-width: 380px;
+    line-height: 1.4;
+    opacity: 0.82;
+  }
+  .section {
+    padding: 24px 56px 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    border-top: 1px solid currentColor;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-style: italic;
+    opacity: 0.9;
+  }
+  .section-body {
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .thumb-row {
+    display: flex;
+    gap: 10px;
+    height: 110px;
+    padding: 0 56px 24px;
+  }
+  .thumb { flex: 1; border-radius: 2px; }
+  .player {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 56px 24px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+  }
+
+  /* ===== OPTION A: PALIMPSEST ===== */
+  .A {
+    background: #F2EEE7;
+    color: #141212;
+  }
+  .A .bg-wash {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(179,165,184,0.35), transparent 55%),
+      radial-gradient(ellipse at 80% 70%, rgba(90,107,74,0.28), transparent 55%),
+      radial-gradient(ellipse at 60% 20%, rgba(181,159,154,0.30), transparent 50%);
+    filter: blur(8px);
+    z-index: 0;
+  }
+  .A .hero, .A .section, .A .thumb-row, .A .player { position: relative; z-index: 1; }
+  .A .thumb { background: linear-gradient(135deg, #5A6B4A, #B3A5B8 60%, #B59F9A); opacity: 0.55; }
+  .A .thumb:nth-child(2) { background: linear-gradient(200deg, #B59F9A, #5A6B4A); }
+  .A .thumb:nth-child(3) { background: linear-gradient(45deg, #141212, #B3A5B8); }
+  .A .orb {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #B3A5B8, #5A6B4A 80%);
+    box-shadow: 0 0 24px rgba(90,107,74,0.35);
+    animation: breathe 3.5s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 0.85; }
+    50% { transform: scale(1.08); opacity: 1; }
+  }
+
+  /* ===== OPTION B: SOUNDWALK ===== */
+  .B {
+    background: #0d0f10;
+    color: #f5f0e8;
+  }
+  .B .bg-wash {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 40%, rgba(70,110,120,0.55), transparent 60%),
+      radial-gradient(ellipse at 70% 30%, rgba(120,80,110,0.50), transparent 55%),
+      radial-gradient(ellipse at 50% 80%, rgba(50,90,60,0.55), transparent 55%),
+      linear-gradient(180deg, #0d0f10 0%, #1a1f1c 50%, #0d0f10 100%);
+    z-index: 0;
+    filter: blur(2px);
+  }
+  .B .bg-wash::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent 0 2px,
+      rgba(255,255,255,0.015) 2px 3px
+    );
+  }
+  .B .hero, .B .section, .B .thumb-row, .B .player { position: relative; z-index: 1; }
+  .B .hero { align-items: center; text-align: center; }
+  .B .title { font-size: 88px; color: #f5f0e8; }
+  .B .subtitle { text-align: center; color: #e8dfcf; }
+  .B .section {
+    backdrop-filter: blur(12px);
+    background: rgba(245,240,232,0.06);
+    border-top: 1px solid rgba(245,240,232,0.12);
+    margin: 0 24px;
+    border-radius: 2px;
+  }
+  .B .section-title, .B .section-body { color: #f5f0e8; }
+  .B .thumb { background: linear-gradient(135deg, #466e78, #785070); opacity: 0.7; }
+  .B .thumb:nth-child(2) { background: linear-gradient(180deg, #325a3c, #c7a46a); }
+  .B .thumb:nth-child(3) { background: linear-gradient(45deg, #0d0f10, #785070 70%, #c7a46a); }
+  .B .player { color: #e8dfcf; border-top: 1px solid rgba(245,240,232,0.15); margin: 0 24px; }
+  .B .hairline {
+    flex: 1;
+    height: 1px;
+    background: #e8dfcf;
+    position: relative;
+  }
+  .B .hairline::before {
+    content: "";
+    position: absolute;
+    inset: -1px 0;
+    width: 40%;
+    background: #c7a46a;
+    height: 2px;
+  }
+  .B .accent { color: #c7a46a; }
+
+  /* shared nav colors */
+  .A .nav { color: #141212; opacity: 0.7; }
+  .B .nav { color: #e8dfcf; opacity: 0.8; }
+
+  /* legend */
+  .legend {
+    grid-column: 1 / -1;
+    padding: 16px 8px;
+    font-size: 12px;
+    opacity: 0.7;
+    display: flex;
+    justify-content: space-between;
+  }
+  .legend div { max-width: 48%; }
+  .legend h3 { font-family: var(--serif); font-style: italic; font-size: 18px; margin-bottom: 6px; color: #f5f5f5; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- OPTION A -->
+  <section class="panel A">
+    <div class="bg-wash"></div>
+    <span class="label">Option A · Palimpsest</span>
+    <nav class="nav">
+      <span>works</span><span>about</span><span>listen</span><span>archive</span>
+    </nav>
+    <div class="hero">
+      <div style="margin-top: 60px;">
+        <h1 class="title">Messy<br><i>Sensing</i></h1>
+        <p class="subtitle">Perpetual sensory exchanges between bodies affected by each other. A duo practice by Anna Jurkiewicz and Reza Kellner.</p>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#F2EEE7; color:#141212;">#F2EEE7</div>
+      <div class="swatch" style="background:#141212; color:#F2EEE7;">#141212</div>
+      <div class="swatch" style="background:#5A6B4A; color:#F2EEE7;">#5A6B4A</div>
+      <div class="swatch" style="background:#B3A5B8; color:#141212;">#B3A5B8</div>
+      <div class="swatch" style="background:#B59F9A; color:#141212;">#B59F9A</div>
+    </div>
+    <div class="section">
+      <div>
+        <h2 class="section-title">Voicing Places</h2>
+        <p style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; opacity:0.55; margin-top:4px;">2024 to 2025</p>
+      </div>
+      <p class="section-body">An artistic research platform amplifying embodied, community-based reflections on listening and aural practice. Working across sound art, sonic journalism and soundwalking.</p>
+    </div>
+    <div class="thumb-row">
+      <div class="thumb"></div><div class="thumb"></div><div class="thumb"></div>
+    </div>
+    <div class="player">
+      <div class="orb"></div>
+      <i>now playing: murky voices, side A</i>
+      <span style="margin-left:auto; font-family:var(--mono); font-size:11px; letter-spacing:0.1em; opacity:0.55;">03:42 / 08:17</span>
+    </div>
+  </section>
+
+  <!-- OPTION B -->
+  <section class="panel B">
+    <div class="bg-wash"></div>
+    <span class="label">Option B · Soundwalk</span>
+    <nav class="nav">
+      <span>works</span><span>about</span><span>listen</span><span>archive</span>
+    </nav>
+    <div class="hero">
+      <div style="margin-top: 90px;">
+        <h1 class="title">Messy <i>Sensing</i></h1>
+        <p class="subtitle">Perpetual sensory exchanges between bodies affected by each other. A duo practice by Anna Jurkiewicz and Reza Kellner.</p>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#0d0f10; color:#f5f0e8;">#0D0F10</div>
+      <div class="swatch" style="background:#466e78; color:#f5f0e8;">#466E78</div>
+      <div class="swatch" style="background:#325a3c; color:#f5f0e8;">#325A3C</div>
+      <div class="swatch" style="background:#785070; color:#f5f0e8;">#785070</div>
+      <div class="swatch" style="background:#c7a46a; color:#141212;">#C7A46A</div>
+      <div class="swatch" style="background:#f5f0e8; color:#141212;">#F5F0E8</div>
+    </div>
+    <div class="section">
+      <div>
+        <h2 class="section-title">Voicing Places</h2>
+        <p style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; opacity:0.6; margin-top:4px;" class="accent">2024 to 2025</p>
+      </div>
+      <p class="section-body">An artistic research platform amplifying embodied, community-based reflections on listening and aural practice. Working across sound art, sonic journalism and soundwalking.</p>
+    </div>
+    <div class="thumb-row">
+      <div class="thumb"></div><div class="thumb"></div><div class="thumb"></div>
+    </div>
+    <div class="player">
+      <i>murky voices, side A</i>
+      <div class="hairline"></div>
+      <span class="accent" style="font-family:var(--mono); font-size:11px; letter-spacing:0.1em; font-style:normal;">03:42</span>
+    </div>
+  </section>
+
+  <div class="legend">
+    <div>
+      <h3>A · Palimpsest</h3>
+      Bone paper, ink, soft wash of sap, lavender, rose blooming behind the text. Feels like a projection left on the wall. Breathing orb as the sound player. Quiet, archival, literary.
+    </div>
+    <div>
+      <h3>B · Soundwalk</h3>
+      Dark video behind everything, frosted panels hold the reading. Teal, moss, plum, a single ochre accent for dates and the active track. Hairline progress bar instead of a player UI. Cinematic, immersive.
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -82,10 +82,10 @@ body::before {
 /* -------- THEME TOGGLE -------- */
 .theme-btn-fixed {
   position: fixed;
-  top: 12px;
+  top: 68px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 99;
+  z-index: 101;
   background: none;
   border: none;
   cursor: pointer;
@@ -98,6 +98,10 @@ body::before {
   transition: opacity 200ms, transform 300ms;
 }
 .theme-btn-fixed:hover { opacity: 1; transform: translateX(-50%) scale(1.12) rotate(15deg); }
+
+@media (max-width: 860px) {
+  .theme-btn-fixed { top: 62px; }
+}
 
 /* rays fade out in dark mode */
 .sun-rays {

@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Work — Messy Sensing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="../style.css">
+<style>
+.work-index {
+  position: relative;
+  z-index: 1;
+  padding-top: 140px;
+  padding-bottom: 80px;
+}
+
+.work-index-header {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 52px 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.work-index-title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(52px, 7vw, 96px);
+  line-height: 1;
+}
+
+.work-grid {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 52px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px 32px;
+}
+
+.work-card {
+  display: block;
+  text-decoration: none;
+  color: var(--fg);
+}
+
+.work-card-img {
+  aspect-ratio: 4/3;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--fg);
+  opacity: .07;
+  transition: opacity 400ms;
+}
+.work-card:hover .work-card-img { opacity: .13; }
+
+.work-card-img.has-img {
+  opacity: 1;
+}
+.work-card:hover .work-card-img.has-img { opacity: 1; }
+
+.work-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(.8);
+  transition: transform 500ms, filter 500ms;
+}
+.work-card:hover .work-card-img img { transform: scale(1.03); filter: saturate(1); }
+
+.work-card-info { padding: 16px 0 0; }
+
+.work-card-n {
+  font-family: var(--serif);
+  font-size: 11px;
+  letter-spacing: .2em;
+  opacity: .3;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.work-card-title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(18px, 1.8vw, 26px);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.work-card-year {
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  opacity: .38;
+}
+
+@media (max-width: 860px) {
+  .work-index-header { padding-left: 24px; padding-right: 24px; padding-bottom: 40px; }
+  .work-grid { padding-left: 24px; padding-right: 24px; grid-template-columns: repeat(2, 1fr); gap: 36px 20px; }
+}
+@media (max-width: 480px) {
+  .work-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<button class="theme-btn-fixed" id="theme-btn" aria-label="toggle light/dark">
+  <svg class="theme-icon" viewBox="0 0 24 24" width="28" height="28" fill="none" aria-hidden="true">
+    <defs>
+      <mask id="crescent-mask">
+        <rect width="24" height="24" fill="white"/>
+        <circle class="cut-circle" r="6" fill="black"/>
+      </mask>
+    </defs>
+    <g class="sun-rays" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+      <line x1="12" y1="2"    x2="12" y2="4.5"/>
+      <line x1="12" y1="19.5" x2="12" y2="22"/>
+      <line x1="2"  y1="12"   x2="4.5" y2="12"/>
+      <line x1="19.5" y1="12" x2="22" y2="12"/>
+      <line x1="4.93" y1="4.93"   x2="6.75" y2="6.75"/>
+      <line x1="17.25" y1="17.25" x2="19.07" y2="19.07"/>
+      <line x1="19.07" y1="4.93"  x2="17.25" y2="6.75"/>
+      <line x1="6.75"  y1="17.25" x2="4.93"  y2="19.07"/>
+    </g>
+    <circle class="sun-orb" cx="12" cy="12" r="4.5" fill="currentColor" mask="url(#crescent-mask)"/>
+  </svg>
+</button>
+
+<nav id="nav">
+  <a href="../" class="nav-logo" id="logo-link">
+    <img src="../svg/logo.svg" alt="Messy Sensing">
+  </a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="./" class="active">Work</a></li>
+      <li><a href="../info.html#people">About</a></li>
+      <li><a href="../info.html#listen">Listen</a></li>
+      <li><a href="../info.html#archive">Archive</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="work-index">
+  <div class="work-index-header">
+    <h1 class="work-index-title">Work</h1>
+    <span class="section-label">2021 to present</span>
+  </div>
+
+  <div class="work-grid">
+
+    <a href="voicing-places/" class="work-card">
+      <div class="work-card-img">
+        <!-- <img src="voicing-places/images/thumb.jpg" alt="Voicing Places"> -->
+      </div>
+      <div class="work-card-info">
+        <span class="work-card-n">01</span>
+        <h2 class="work-card-title">Voicing Places</h2>
+        <span class="work-card-year">2024 to 2025</span>
+      </div>
+    </a>
+
+    <a href="river-becoming/" class="work-card">
+      <div class="work-card-img">
+        <!-- <img src="river-becoming/images/thumb.jpg" alt="River Becoming"> -->
+      </div>
+      <div class="work-card-info">
+        <span class="work-card-n">02</span>
+        <h2 class="work-card-title">River Becoming</h2>
+        <span class="work-card-year">2023 to 2024</span>
+      </div>
+    </a>
+
+    <a href="murky-voices/" class="work-card">
+      <div class="work-card-img">
+        <!-- <img src="murky-voices/images/thumb.jpg" alt="Murky Voices"> -->
+      </div>
+      <div class="work-card-info">
+        <span class="work-card-n">03</span>
+        <h2 class="work-card-title">Murky Voices</h2>
+        <span class="work-card-year">2023 to 2024</span>
+      </div>
+    </a>
+
+    <a href="beeing-beecoming/" class="work-card">
+      <div class="work-card-img">
+        <!-- <img src="beeing-beecoming/images/thumb.jpg" alt="Beeing, Beecoming"> -->
+      </div>
+      <div class="work-card-info">
+        <span class="work-card-n">04</span>
+        <h2 class="work-card-title">Beeing, Beecoming</h2>
+        <span class="work-card-year">2022 to 2023</span>
+      </div>
+    </a>
+
+    <a href="group-exhibitions/" class="work-card">
+      <div class="work-card-img">
+        <!-- <img src="group-exhibitions/images/thumb.jpg" alt="Group Exhibitions"> -->
+      </div>
+      <div class="work-card-info">
+        <span class="work-card-n">05</span>
+        <h2 class="work-card-title">Group Exhibitions</h2>
+        <span class="work-card-year">2024 to 2025</span>
+      </div>
+    </a>
+
+    <a href="a-word-fell-out/" class="work-card">
+      <div class="work-card-img">
+        <!-- <img src="a-word-fell-out/images/thumb.jpg" alt="A Word Fell Out of My Mouth and Broke"> -->
+      </div>
+      <div class="work-card-info">
+        <span class="work-card-n">06</span>
+        <h2 class="work-card-title">A Word Fell Out of My Mouth and Broke</h2>
+        <span class="work-card-year">2022</span>
+      </div>
+    </a>
+
+    <a href="requiem-for-a-belief/" class="work-card">
+      <div class="work-card-img">
+        <!-- <img src="requiem-for-a-belief/images/thumb.jpg" alt="Requiem for a Belief"> -->
+      </div>
+      <div class="work-card-info">
+        <span class="work-card-n">07</span>
+        <h2 class="work-card-title">Requiem for a Belief</h2>
+        <span class="work-card-year">2021</span>
+      </div>
+    </a>
+
+  </div>
+</main>
+
+<hr class="divider" style="margin-top: 80px;">
+
+<footer>
+  <span class="footer-title">Messy Sensing</span>
+  <div class="footer-links">
+    <a href="https://lakeurumia.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
+    <a href="https://soundcloud.com/lakeurumia" target="_blank" rel="noopener">SoundCloud</a>
+    <a href="https://vimeo.com/lakeurumia" target="_blank" rel="noopener">Vimeo</a>
+    <a href="https://instagram.com/lakeurumia" target="_blank" rel="noopener">Instagram</a>
+  </div>
+</footer>
+
+<script src="../main.js"></script>
+</body>
+</html>

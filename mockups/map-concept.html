@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Map Concept — Messy Sensing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
+body { background: #F2EEE7; transition: background 400ms; }
+[data-theme="dark"] body { background: #0E1012; }
+canvas { display: block; width: 100%; height: 100%; cursor: crosshair; }
+canvas.hovering { cursor: pointer; }
+
+.ui {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  padding: 22px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+  z-index: 10;
+}
+.ui-label {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #141212;
+  opacity: .28;
+}
+[data-theme="dark"] .ui-label { color: #F0EBE2; }
+
+.theme-btn {
+  position: fixed;
+  top: 20px; right: 28px;
+  z-index: 20;
+  background: none;
+  border: 1px solid currentColor;
+  border-radius: 100px;
+  cursor: pointer;
+  color: #141212;
+  opacity: .55;
+  padding: 7px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  transition: opacity 200ms;
+  pointer-events: all;
+}
+[data-theme="dark"] .theme-btn { color: #F0EBE2; }
+.theme-btn:hover { opacity: 1; }
+
+.back-btn {
+  position: fixed;
+  bottom: 28px; left: 36px;
+  z-index: 20;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #141212;
+  opacity: .28;
+  text-decoration: none;
+  transition: opacity 200ms;
+}
+[data-theme="dark"] .back-btn { color: #F0EBE2; }
+.back-btn:hover { opacity: .7; }
+</style>
+</head>
+<body>
+
+<canvas id="map"></canvas>
+
+<div class="ui">
+  <span class="ui-label">Map concept &nbsp;·&nbsp; sketch</span>
+</div>
+
+<button class="theme-btn" id="theme-btn" aria-label="toggle theme">
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
+    <defs>
+      <mask id="cm">
+        <rect width="24" height="24" fill="white"/>
+        <circle class="cut-c" r="6" fill="black"/>
+      </mask>
+    </defs>
+    <g class="sun-r" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+      <line x1="12" y1="2"    x2="12" y2="4.5"/>
+      <line x1="12" y1="19.5" x2="12" y2="22"/>
+      <line x1="2"  y1="12"   x2="4.5" y2="12"/>
+      <line x1="19.5" y1="12" x2="22" y2="12"/>
+      <line x1="4.93" y1="4.93"   x2="6.75" y2="6.75"/>
+      <line x1="17.25" y1="17.25" x2="19.07" y2="19.07"/>
+      <line x1="19.07" y1="4.93"  x2="17.25" y2="6.75"/>
+      <line x1="6.75"  y1="17.25" x2="4.93"  y2="19.07"/>
+    </g>
+    <circle class="sun-o" cx="12" cy="12" r="4.5" fill="currentColor" mask="url(#cm)"/>
+  </svg>
+  <span id="theme-label">Dark</span>
+</button>
+
+<a href="../index.html" class="back-btn">← back to site</a>
+
+<script>
+// ====== DATA ======
+// x/y are 0–1 fractions of the canvas. Adjust to taste.
+const PLACES = [
+  // --- projects ---
+  { id: 'voicing-places',   label: 'Voicing Places',       sub: '2024 – 25', type: 'project', x: 0.40, y: 0.44, href: '../work/voicing-places/' },
+  { id: 'river-becoming',   label: 'River Becoming',       sub: '2023 – 24', type: 'project', x: 0.57, y: 0.60, href: '../work/river-becoming/' },
+  { id: 'beeing-beecoming', label: 'Beeing, Beecoming',    sub: '2022 – 23', type: 'project', x: 0.30, y: 0.68, href: '../work/beeing-beecoming/' },
+  { id: 'group-shows',      label: 'Group Exhibitions',    sub: '2024 – 25', type: 'project', x: 0.63, y: 0.33, href: '../work/group-exhibitions/' },
+  // add more projects here — copy a line above
+  // { id: 'new-project', label: 'Project Name', sub: 'Year', type: 'project', x: 0.5, y: 0.5, href: '../work/new-project/' },
+
+  // --- navigation ---
+  { id: 'about',   label: 'About',   sub: '', type: 'nav', x: 0.82, y: 0.22, href: '../#about' },
+  { id: 'listen',  label: 'Listen',  sub: '', type: 'nav', x: 0.16, y: 0.26, href: '../#listen' },
+  { id: 'archive', label: 'Archive', sub: '', type: 'nav', x: 0.84, y: 0.76, href: '../#archive' },
+  { id: 'work',    label: 'All Work',sub: '', type: 'nav', x: 0.13, y: 0.56, href: '../work/' },
+];
+
+// territory blobs — each one is a landmass
+// cx/cy: center (0–1), r: base radius (fraction of min dimension), pts: smoothness, seed: shape seed
+const TERRITORIES = [
+  { cx: 0.40, cy: 0.46, r: 0.15, pts: 16, seed: 3  },
+  { cx: 0.58, cy: 0.58, r: 0.13, pts: 14, seed: 7  },
+  { cx: 0.30, cy: 0.66, r: 0.10, pts: 12, seed: 11 },
+  { cx: 0.64, cy: 0.31, r: 0.10, pts: 12, seed: 17 },
+  // small satellite islands
+  { cx: 0.50, cy: 0.50, r: 0.04, pts: 8,  seed: 23 },
+  { cx: 0.24, cy: 0.80, r: 0.04, pts: 8,  seed: 29 },
+  { cx: 0.72, cy: 0.48, r: 0.03, pts: 8,  seed: 31 },
+];
+
+// dashed lines between related projects
+const CONNECTIONS = [
+  ['voicing-places', 'river-becoming'],
+  ['river-becoming',  'beeing-beecoming'],
+  ['voicing-places',  'group-shows'],
+];
+
+// ====== THEME ======
+const html = document.documentElement;
+const saved = localStorage.getItem('ms-theme');
+if (saved) html.dataset.theme = saved;
+else if (window.matchMedia('(prefers-color-scheme: dark)').matches) html.dataset.theme = 'dark';
+
+// sync sun/moon icon
+function syncIcon() {
+  const dark = html.dataset.theme === 'dark';
+  document.querySelector('.cut-c').setAttribute('cx', dark ? '14.5' : '20');
+  document.querySelector('.cut-c').setAttribute('cy', dark ? '9.5'  : '4');
+  document.querySelector('.sun-r').style.opacity = dark ? '0' : '1';
+  document.querySelector('.sun-o').setAttribute('r', dark ? '5.5' : '4.5');
+  document.getElementById('theme-label').textContent = dark ? 'Light' : 'Dark';
+}
+syncIcon();
+
+document.getElementById('theme-btn').addEventListener('click', () => {
+  const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+  html.dataset.theme = next;
+  localStorage.setItem('ms-theme', next);
+  syncIcon();
+  draw();
+});
+
+function isDark() { return html.dataset.theme === 'dark'; }
+
+function palette() {
+  return isDark() ? {
+    bg:      '#0E1012',
+    fg:      '#F0EBE2',
+    fgA:     'rgba(240,235,226,',
+    land1:   'rgba(70,110,120,',
+    land2:   'rgba(122,82,112,',
+    land3:   'rgba(200,165,108,',
+    sea:     'rgba(240,235,226,',
+  } : {
+    bg:      '#F2EEE7',
+    fg:      '#141212',
+    fgA:     'rgba(20,18,18,',
+    land1:   'rgba(90,107,74,',
+    land2:   'rgba(179,165,184,',
+    land3:   'rgba(181,159,154,',
+    sea:     'rgba(20,18,18,',
+  };
+}
+
+// cycle through land colors by territory index
+function landColor(i, C) {
+  return [C.land1, C.land2, C.land3][i % 3];
+}
+
+// ====== NOISE ======
+function hash(x, y, s) {
+  const n = Math.sin(x * 127.1 + y * 311.7 + s * 74.3) * 43758.5453;
+  return n - Math.floor(n);
+}
+function snoise(x, y, s) {
+  const ix = Math.floor(x), iy = Math.floor(y);
+  const fx = x - ix, fy = y - iy;
+  const ux = fx*fx*(3-2*fx), uy = fy*fy*(3-2*fy);
+  return hash(ix,iy,s)*(1-ux)*(1-uy)
+       + hash(ix+1,iy,s)*ux*(1-uy)
+       + hash(ix,iy+1,s)*(1-ux)*uy
+       + hash(ix+1,iy+1,s)*ux*uy;
+}
+
+// ====== GEOMETRY ======
+function makeBlob(cx, cy, baseR, numPts, seed, W, H) {
+  const px = cx * W, py = cy * H;
+  const r  = baseR * Math.min(W, H);
+  const pts = [];
+  for (let i = 0; i < numPts; i++) {
+    const angle = (i / numPts) * Math.PI * 2;
+    const n = snoise(Math.cos(angle) * 2.5 + seed * 10, Math.sin(angle) * 2.5 + seed * 10, seed);
+    const rad = r * (0.65 + n * 0.7);
+    pts.push({ x: px + Math.cos(angle) * rad, y: py + Math.sin(angle) * rad });
+  }
+  return pts;
+}
+
+function drawSmooth(ctx, pts) {
+  const n = pts.length;
+  if (n < 2) return;
+  ctx.beginPath();
+  for (let i = 0; i < n; i++) {
+    const p0 = pts[(i-1+n)%n], p1 = pts[i], p2 = pts[(i+1)%n], p3 = pts[(i+2)%n];
+    if (i === 0) ctx.moveTo(p1.x, p1.y);
+    ctx.bezierCurveTo(
+      p1.x + (p2.x-p0.x)/6, p1.y + (p2.y-p0.y)/6,
+      p2.x - (p3.x-p1.x)/6, p2.y - (p3.y-p1.y)/6,
+      p2.x, p2.y
+    );
+  }
+  ctx.closePath();
+}
+
+function scaledBlob(pts, cx, cy, s) {
+  return pts.map(p => ({ x: cx + (p.x-cx)*s, y: cy + (p.y-cy)*s }));
+}
+
+// ====== CANVAS ======
+const canvas = document.getElementById('map');
+const ctx    = canvas.getContext('2d');
+let W = 0, H = 0, DPR = 1;
+
+function resize() {
+  DPR = window.devicePixelRatio || 1;
+  W   = window.innerWidth;
+  H   = window.innerHeight;
+  canvas.width  = W * DPR;
+  canvas.height = H * DPR;
+  canvas.style.width  = W + 'px';
+  canvas.style.height = H + 'px';
+  ctx.scale(DPR, DPR);
+}
+
+// ====== DRAW ======
+function draw() {
+  if (!W) return;
+  const C = palette();
+  ctx.clearRect(0, 0, W, H);
+
+  // 1. sea texture: faint horizontal lines
+  ctx.save();
+  ctx.strokeStyle = C.sea + '0.04)';
+  ctx.lineWidth = 0.5;
+  const lineGap = Math.max(H / 80, 6);
+  for (let y = 0; y < H; y += lineGap) {
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+  }
+  ctx.restore();
+
+  // 2. coordinate grid
+  ctx.save();
+  ctx.strokeStyle = C.fgA + '0.05)';
+  ctx.lineWidth = 0.6;
+  const gx = W / 9, gy = H / 7;
+  for (let x = gx; x < W; x += gx) {
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+  }
+  for (let y = gy; y < H; y += gy) {
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+  }
+  ctx.restore();
+
+  // 3. territories
+  TERRITORIES.forEach((t, i) => {
+    const pts = makeBlob(t.cx, t.cy, t.r, t.pts, t.seed, W, H);
+    const px  = t.cx * W, py = t.cy * H;
+    const lc  = landColor(i, C);
+
+    ctx.save();
+
+    // fill
+    drawSmooth(ctx, pts);
+    ctx.fillStyle = lc + '0.13)';
+    ctx.fill();
+
+    // crosshatch texture
+    drawSmooth(ctx, pts);
+    ctx.save();
+    ctx.clip();
+    ctx.strokeStyle = lc + '0.10)';
+    ctx.lineWidth = 0.6;
+    const hStep = 7;
+    for (let d = -(H + W); d < W + H; d += hStep) {
+      ctx.beginPath();
+      ctx.moveTo(d, 0);
+      ctx.lineTo(d + H, H);
+      ctx.stroke();
+    }
+    ctx.restore();
+
+    // contour rings
+    [0.78, 0.56].forEach(s => {
+      drawSmooth(ctx, scaledBlob(pts, px, py, s));
+      ctx.strokeStyle = lc + '0.20)';
+      ctx.lineWidth = 0.7;
+      ctx.stroke();
+    });
+
+    // shoreline
+    drawSmooth(ctx, pts);
+    ctx.strokeStyle = lc + '0.55)';
+    ctx.lineWidth = 1.3;
+    ctx.stroke();
+
+    ctx.restore();
+  });
+
+  // 4. connection paths (dashed)
+  ctx.save();
+  ctx.setLineDash([3, 9]);
+  ctx.lineWidth = 0.8;
+  ctx.strokeStyle = C.fgA + '0.14)';
+  CONNECTIONS.forEach(([aId, bId], ci) => {
+    const a = PLACES.find(p => p.id === aId);
+    const b = PLACES.find(p => p.id === bId);
+    if (!a || !b) return;
+    const ax = a.x * W, ay = a.y * H;
+    const bx = b.x * W, by = b.y * H;
+    // seeded midpoint offset so it's stable across redraws
+    const off = (hash(ci, 0, 55) - 0.5) * Math.min(W, H) * 0.08;
+    const mx  = (ax + bx) / 2 + off;
+    const my  = (ay + by) / 2 - Math.abs(off) * 0.5;
+    ctx.beginPath();
+    ctx.moveTo(ax, ay);
+    ctx.quadraticCurveTo(mx, my, bx, by);
+    ctx.stroke();
+  });
+  ctx.setLineDash([]);
+  ctx.restore();
+
+  // 5. place dots + labels
+  PLACES.forEach(p => {
+    const px = p.x * W, py = p.y * H;
+    const isProject = p.type === 'project';
+
+    // dot
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(px, py, isProject ? 3.5 : 2.5, 0, Math.PI * 2);
+    ctx.fillStyle = C.fg;
+    ctx.globalAlpha = isProject ? 0.80 : 0.38;
+    ctx.fill();
+    if (isProject) {
+      // outer ring
+      ctx.beginPath();
+      ctx.arc(px, py, 6.5, 0, Math.PI * 2);
+      ctx.strokeStyle = C.fg;
+      ctx.globalAlpha = 0.18;
+      ctx.lineWidth = 0.8;
+      ctx.stroke();
+    }
+    ctx.restore();
+
+    // label
+    ctx.save();
+    ctx.fillStyle = C.fg;
+
+    if (isProject) {
+      ctx.globalAlpha = 0.85;
+      ctx.font = 'italic 400 18px "EB Garamond", Georgia, serif';
+      ctx.fillText(p.label, px + 13, py - 5);
+      if (p.sub) {
+        ctx.globalAlpha = 0.32;
+        ctx.font = '300 10px "Inter", system-ui, sans-serif';
+        ctx.fillText(p.sub, px + 13, py + 9);
+      }
+    } else {
+      ctx.globalAlpha = 0.38;
+      ctx.font = '300 10px "Inter", system-ui, sans-serif';
+      ctx.fillText(p.label.toUpperCase(), px + 10, py + 4);
+    }
+    ctx.restore();
+  });
+
+  // 6. compass rose (bottom right)
+  drawCompass(ctx, W - 56, H - 56, 26, C);
+
+  // 7. "Messy Sensing" ghost title (bottom left)
+  ctx.save();
+  ctx.globalAlpha = 0.10;
+  ctx.fillStyle = C.fg;
+  const titleSize = Math.max(28, Math.min(W * 0.04, 52));
+  ctx.font = `italic 400 ${titleSize}px "EB Garamond", Georgia, serif`;
+  ctx.fillText('Messy Sensing', 44, H - 44);
+  ctx.restore();
+
+  // 8. scale bar (bottom center)
+  drawScaleBar(ctx, W / 2, H - 32, 80, C);
+}
+
+function drawCompass(ctx, cx, cy, r, C) {
+  ctx.save();
+  ctx.globalAlpha = 0.22;
+  ctx.strokeStyle = C.fg;
+  ctx.fillStyle   = C.fg;
+  ctx.lineWidth   = 0.8;
+
+  // outer ring
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // inner ring
+  ctx.beginPath();
+  ctx.arc(cx, cy, r * 0.25, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // cardinal lines + tick marks
+  for (let a = 0; a < 8; a++) {
+    const angle = (a / 8) * Math.PI * 2 - Math.PI / 2;
+    const isCardinal = a % 2 === 0;
+    const inner = r * (isCardinal ? 0.30 : 0.55);
+    const outer = r * (isCardinal ? 0.85 : 0.72);
+    ctx.beginPath();
+    ctx.moveTo(cx + Math.cos(angle) * inner, cy + Math.sin(angle) * inner);
+    ctx.lineTo(cx + Math.cos(angle) * outer, cy + Math.sin(angle) * outer);
+    ctx.globalAlpha = isCardinal ? 0.25 : 0.12;
+    ctx.stroke();
+  }
+
+  // N label
+  ctx.globalAlpha = 0.28;
+  ctx.font = '300 8px "Inter", system-ui, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('N', cx, cy - r - 5);
+  ctx.restore();
+}
+
+function drawScaleBar(ctx, cx, cy, len, C) {
+  ctx.save();
+  ctx.globalAlpha = 0.18;
+  ctx.strokeStyle = C.fg;
+  ctx.fillStyle   = C.fg;
+  ctx.lineWidth   = 0.8;
+
+  ctx.beginPath();
+  ctx.moveTo(cx - len/2, cy);
+  ctx.lineTo(cx + len/2, cy);
+  // end ticks
+  ctx.moveTo(cx - len/2, cy - 4); ctx.lineTo(cx - len/2, cy + 4);
+  ctx.moveTo(cx + len/2, cy - 4); ctx.lineTo(cx + len/2, cy + 4);
+  ctx.stroke();
+
+  ctx.font = '300 8px "Inter", system-ui, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('~ scale', cx, cy + 14);
+  ctx.restore();
+}
+
+// ====== HIT TEST ======
+function hitPlace(mx, my) {
+  const r = 32; // click radius in CSS pixels
+  return PLACES.find(p => {
+    const dx = p.x * W - mx, dy = p.y * H - my;
+    return Math.sqrt(dx*dx + dy*dy) < r;
+  });
+}
+
+canvas.addEventListener('mousemove', e => {
+  canvas.classList.toggle('hovering', !!hitPlace(e.clientX, e.clientY));
+});
+
+canvas.addEventListener('click', e => {
+  const p = hitPlace(e.clientX, e.clientY);
+  if (p) window.location.href = p.href;
+});
+
+canvas.addEventListener('touchend', e => {
+  const t = e.changedTouches[0];
+  const p = hitPlace(t.clientX, t.clientY);
+  if (p) window.location.href = p.href;
+}, { passive: true });
+
+// ====== INIT ======
+window.addEventListener('resize', () => { resize(); draw(); });
+document.fonts.ready.then(() => { resize(); draw(); });
+</script>
+</body>
+</html>

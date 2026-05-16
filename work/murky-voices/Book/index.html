@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Murky Voices — Booklet — Messy Sensing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="../../../style.css">
+<style>
+.book-page {
+  position: relative;
+  z-index: 1;
+  padding-top: 100px;
+  padding-bottom: 60px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.book-back {
+  align-self: flex-start;
+  margin: 0 0 32px 52px;
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--fg);
+  text-decoration: none;
+  opacity: .38;
+  transition: opacity 200ms;
+}
+.book-back::before { content: '← '; }
+.book-back:hover { opacity: 1; }
+
+.book-heading {
+  align-self: flex-start;
+  margin: 0 0 40px 52px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(18px, 2vw, 28px);
+  opacity: .45;
+}
+
+.book-stage {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 32px;
+}
+
+/* StPageFlip mounts inside #book */
+#book { box-shadow: 0 8px 48px rgba(0,0,0,.18); }
+[data-theme="dark"] #book { box-shadow: 0 8px 48px rgba(0,0,0,.55); }
+
+/* Page styles — replace inner content with <img> once images are ready */
+.page {
+  background: #F5F1EA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+[data-theme="dark"] .page { background: #1a1c1f; }
+
+.page img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+.page-placeholder {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--fg);
+  opacity: .2;
+}
+
+.book-controls {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-top: 36px;
+}
+
+.book-btn {
+  background: none;
+  border: 1px solid currentColor;
+  color: var(--fg);
+  cursor: pointer;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 15px;
+  opacity: .35;
+  transition: opacity 200ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.book-btn:hover:not(:disabled) { opacity: 1; }
+.book-btn:disabled { opacity: .1; cursor: default; }
+
+.book-counter {
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  opacity: .35;
+  font-family: var(--sans);
+  min-width: 64px;
+  text-align: center;
+}
+
+.book-hint {
+  margin-top: 16px;
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  opacity: .2;
+  font-family: var(--sans);
+}
+
+@media (max-width: 600px) {
+  .book-back, .book-heading { margin-left: 24px; }
+  .book-stage { padding: 0 16px; }
+}
+</style>
+</head>
+<body>
+
+<button class="theme-btn-fixed" id="theme-btn" aria-label="toggle light/dark">
+  <svg class="theme-icon" viewBox="0 0 24 24" width="28" height="28" fill="none" aria-hidden="true">
+    <defs><mask id="crescent-mask"><rect width="24" height="24" fill="white"/><circle class="cut-circle" r="6" fill="black"/></mask></defs>
+    <g class="sun-rays" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+      <line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/>
+      <line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/>
+      <line x1="4.93" y1="4.93" x2="6.75" y2="6.75"/><line x1="17.25" y1="17.25" x2="19.07" y2="19.07"/>
+      <line x1="19.07" y1="4.93" x2="17.25" y2="6.75"/><line x1="6.75" y1="17.25" x2="4.93" y2="19.07"/>
+    </g>
+    <circle class="sun-orb" cx="12" cy="12" r="4.5" fill="currentColor" mask="url(#crescent-mask)"/>
+  </svg>
+</button>
+
+<nav id="nav">
+  <a href="../../../" class="nav-logo" id="logo-link">
+    <img src="../../../svg/logo.svg" alt="Messy Sensing">
+  </a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="../../" class="active">Work</a></li>
+      <li><a href="../../../info.html#people">About</a></li>
+      <li><a href="../../../info.html#listen">Listen</a></li>
+      <li><a href="../../../info.html#archive">Archive</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="book-page">
+  <a href="../" class="book-back">Murky Voices</a>
+  <p class="book-heading">Murky Voices — Booklet</p>
+
+  <div class="book-stage">
+    <div id="book">
+      <div class="page" data-density="hard"><img src="data/000.jpg" alt=""></div>
+      <div class="page"><img src="data/001.jpg" alt=""></div>
+      <div class="page"><img src="data/002.jpg" alt=""></div>
+      <div class="page"><img src="data/003.jpg" alt=""></div>
+      <div class="page"><img src="data/004.jpg" alt=""></div>
+      <div class="page"><img src="data/005.jpg" alt=""></div>
+      <div class="page"><img src="data/006.jpg" alt=""></div>
+      <div class="page"><img src="data/007.jpg" alt=""></div>
+      <div class="page"><img src="data/008.jpg" alt=""></div>
+      <div class="page"><img src="data/009.jpg" alt=""></div>
+      <div class="page"><img src="data/010.jpg" alt=""></div>
+      <div class="page"><img src="data/011.jpg" alt=""></div>
+      <div class="page"><img src="data/012.jpg" alt=""></div>
+      <div class="page"><img src="data/013.jpg" alt=""></div>
+      <div class="page"><img src="data/014.jpg" alt=""></div>
+      <div class="page"><img src="data/015.jpg" alt=""></div>
+      <div class="page"><img src="data/016.jpg" alt=""></div>
+      <div class="page"><img src="data/017.jpg" alt=""></div>
+      <div class="page"><img src="data/018.jpg" alt=""></div>
+      <div class="page"><img src="data/019.jpg" alt=""></div>
+      <div class="page"><img src="data/020.jpg" alt=""></div>
+      <div class="page"><img src="data/021.jpg" alt=""></div>
+      <div class="page"><img src="data/022.jpg" alt=""></div>
+      <div class="page"><img src="data/023.jpg" alt=""></div>
+      <div class="page"><img src="data/024.jpg" alt=""></div>
+      <div class="page"><img src="data/025.jpg" alt=""></div>
+      <div class="page"><img src="data/026.jpg" alt=""></div>
+      <div class="page"><img src="data/027.jpg" alt=""></div>
+      <div class="page"><img src="data/028.jpg" alt=""></div>
+      <div class="page"><img src="data/029.jpg" alt=""></div>
+      <div class="page"><img src="data/030.jpg" alt=""></div>
+      <div class="page"><img src="data/031.jpg" alt=""></div>
+      <div class="page"><img src="data/032.jpg" alt=""></div>
+      <div class="page"><img src="data/033.jpg" alt=""></div>
+      <div class="page"><img src="data/034.jpg" alt=""></div>
+      <div class="page"><img src="data/035.jpg" alt=""></div>
+      <div class="page"><img src="data/036.jpg" alt=""></div>
+      <div class="page"><img src="data/037.jpg" alt=""></div>
+      <div class="page"><img src="data/038.jpg" alt=""></div>
+      <div class="page"><img src="data/039.jpg" alt=""></div>
+      <div class="page"><img src="data/040.jpg" alt=""></div>
+      <div class="page"><img src="data/041.jpg" alt=""></div>
+      <div class="page"><img src="data/042.jpg" alt=""></div>
+      <div class="page"><img src="data/043.jpg" alt=""></div>
+      <div class="page"><img src="data/044.jpg" alt=""></div>
+      <div class="page"><img src="data/045.jpg" alt=""></div>
+      <div class="page"><img src="data/046.jpg" alt=""></div>
+      <div class="page"><img src="data/047.jpg" alt=""></div>
+      <div class="page"><img src="data/048.jpg" alt=""></div>
+      <div class="page"><img src="data/049.jpg" alt=""></div>
+      <div class="page"><img src="data/050.jpg" alt=""></div>
+      <div class="page"><img src="data/051.jpg" alt=""></div>
+      <div class="page"><img src="data/052.jpg" alt=""></div>
+      <div class="page"><img src="data/053.jpg" alt=""></div>
+      <div class="page"><img src="data/054.jpg" alt=""></div>
+      <div class="page"><img src="data/055.jpg" alt=""></div>
+      <div class="page"><img src="data/056.jpg" alt=""></div>
+      <div class="page"><img src="data/057.jpg" alt=""></div>
+      <div class="page"><img src="data/058.jpg" alt=""></div>
+      <div class="page"><img src="data/059.jpg" alt=""></div>
+      <div class="page"><img src="data/060.jpg" alt=""></div>
+      <div class="page"><img src="data/061.jpg" alt=""></div>
+      <div class="page"><img src="data/062.jpg" alt=""></div>
+      <div class="page"><img src="data/063.jpg" alt=""></div>
+      <div class="page"><img src="data/064.jpg" alt=""></div>
+      <div class="page"><img src="data/065.jpg" alt=""></div>
+      <div class="page"><img src="data/066.jpg" alt=""></div>
+      <div class="page"><img src="data/067.jpg" alt=""></div>
+      <div class="page"><img src="data/068.jpg" alt=""></div>
+      <div class="page"><img src="data/069.jpg" alt=""></div>
+      <div class="page"><img src="data/070.jpg" alt=""></div>
+      <div class="page"><img src="data/071.jpg" alt=""></div>
+      <div class="page"><img src="data/072.jpg" alt=""></div>
+      <div class="page" data-density="hard"><img src="data/073.jpg" alt=""></div>
+    </div>
+  </div>
+
+  <div class="book-controls">
+    <button class="book-btn" id="btn-prev" aria-label="Previous page">&#8592;</button>
+    <span class="book-counter" id="counter"></span>
+    <button class="book-btn" id="btn-next" aria-label="Next page">&#8594;</button>
+  </div>
+  <p class="book-hint">arrow keys also work</p>
+</main>
+
+<script src="../../../main.js"></script>
+<script src="https://unpkg.com/page-flip/dist/js/page-flip.browser.js"></script>
+<script>
+const bookEl  = document.getElementById('book');
+const counter = document.getElementById('counter');
+const btnPrev = document.getElementById('btn-prev');
+const btnNext = document.getElementById('btn-next');
+
+const pageFlip = new St.PageFlip(bookEl, {
+  width:    500,
+  height:   704,
+  size:     'stretch',
+  minWidth: 240,
+  maxWidth: 660,
+  minHeight: 338,
+  maxHeight: 930,
+  showCover:           true,
+  mobileScrollSupport: false,
+  flippingTime:        650,
+  usePortrait:         true,
+  autoSize:            true,
+  swipeDistance:       30,
+  clickEventForward:   true,
+});
+
+pageFlip.loadFromHTML(document.querySelectorAll('#book .page'));
+
+function updateControls() {
+  const cur   = pageFlip.getCurrentPageIndex();
+  const total = pageFlip.getPageCount();
+  counter.textContent = (cur + 1) + ' / ' + total;
+  btnPrev.disabled = cur === 0;
+  btnNext.disabled = cur >= total - 1;
+}
+
+pageFlip.on('flip',        updateControls);
+pageFlip.on('changeState', updateControls);
+updateControls();
+
+btnPrev.addEventListener('click', () => pageFlip.flipPrev());
+btnNext.addEventListener('click', () => pageFlip.flipNext());
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft')  pageFlip.flipPrev();
+  if (e.key === 'ArrowRight') pageFlip.flipNext();
+});
+</script>
+</body>
+</html>

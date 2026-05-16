@@ -1,41 +1,18 @@
-// ---- COMPASS CURSOR ----
+// ---- BLOB CURSOR ----
 (function () {
-  const compass = document.createElement('div');
-  compass.id = 'cursor-compass';
-  compass.innerHTML = '<svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">'
-    + '<circle cx="26" cy="26" r="23" stroke="currentColor" stroke-width="0.8" opacity="0.38"/>'
-    + '<g id="cc-n2" style="transform-origin:26px 26px">'
-    + '<line x1="26" y1="5" x2="26" y2="47" stroke="currentColor" stroke-width="0.6" stroke-dasharray="2,4" opacity="0.18"/>'
-    + '</g>'
-    + '<g id="cc-n1" style="transform-origin:26px 26px">'
-    + '<path d="M26,5 L28.5,25 L26,29 L23.5,25 Z" fill="currentColor" opacity="0.82"/>'
-    + '<path d="M26,47 L28.5,27 L26,23 L23.5,27 Z" fill="currentColor" opacity="0.22"/>'
-    + '</g>'
-    + '<circle cx="26" cy="26" r="1.8" fill="currentColor" opacity="0.55"/>'
+  const blob = document.createElement('div');
+  blob.id = 'cursor-blob';
+  blob.className = 'hidden';
+  blob.innerHTML = '<svg width="20" height="17" viewBox="0 0 20 17" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'
+    + '<path d="M10,2 C13,1 17,3 18,6.5 C19,10 17,14 13,15 C9.5,16 5,14.5 3,11.5 C1,8.5 2,4 5,2.5 C6.5,1.5 8.5,2.5 10,2Z"/>'
     + '</svg>';
-  document.body.appendChild(compass);
-
-  const n1 = compass.querySelector('#cc-n1');
-  const n2 = compass.querySelector('#cc-n2');
-  let ang1 = 0, ang2 = 0, vel = 12;
-
-  function spinCrazy() {
-    if (Math.random() < 0.06) vel += (Math.random() - 0.45) * 9;
-    vel = Math.max(-28, Math.min(28, vel));
-    if (Math.abs(vel) < 4) vel = (vel >= 0 ? 1 : -1) * (4 + Math.random() * 4);
-    ang1 += vel;
-    ang2 += vel * 0.31 - 0.7;
-    n1.style.transform = 'rotate(' + ang1 + 'deg)';
-    n2.style.transform = 'rotate(' + ang2 + 'deg)';
-    requestAnimationFrame(spinCrazy);
-  }
-  spinCrazy();
+  document.body.appendChild(blob);
 
   document.addEventListener('mousemove', e => {
-    compass.style.transform = 'translate(' + (e.clientX - 26) + 'px,' + (e.clientY - 26) + 'px)';
-    compass.classList.remove('hidden');
+    blob.style.transform = 'translate(' + (e.clientX - 10) + 'px,' + (e.clientY - 8) + 'px)';
+    blob.classList.remove('hidden');
   });
-  document.addEventListener('mouseleave', () => compass.classList.add('hidden'));
+  document.addEventListener('mouseleave', () => blob.classList.add('hidden'));
 })();
 
 // ---- THEME ----

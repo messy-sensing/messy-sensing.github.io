@@ -40,18 +40,18 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; cursor: none !important; }
 
-/* ---- COMPASS CURSOR ---- */
-#cursor-compass {
+/* ---- BLOB CURSOR ---- */
+#cursor-blob {
   position: fixed;
   left: 0; top: 0;
   pointer-events: none;
   z-index: 99999;
   color: var(--fg);
-  opacity: .7;
+  opacity: .88;
   will-change: transform;
-  transition: color 350ms, opacity 180ms;
+  transition: color 280ms, opacity 180ms;
 }
-#cursor-compass.hidden { opacity: 0; }
+#cursor-blob.hidden { opacity: 0; }
 html { scroll-behavior: smooth; }
 
 html { transition: background 400ms, color 400ms; }

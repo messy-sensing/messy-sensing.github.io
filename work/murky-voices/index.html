@@ -45,10 +45,34 @@
 .booklet-link-title { font-family: var(--serif); font-style: italic; font-size: 22px; }
 .booklet-link-open { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; }
 .support-note { font-size: 11px; letter-spacing: .08em; opacity: .32; margin-top: 52px; line-height: 1.8; }
+.exhibition-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 52px;
+  margin-top: 24px;
+  margin-bottom: 40px;
+  align-items: start;
+}
+.exhibition-title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(28px, 4vw, 52px);
+  line-height: 1;
+  margin-bottom: 22px;
+}
+.exhibition-venue { font-size: 13px; line-height: 1.8; opacity: .55; }
+.exhibition-venue p + p { margin-top: 8px; }
+.exhibition-text { font-size: 15px; line-height: 1.72; max-width: 72ch; margin-top: 40px; }
+.exhibition-text p + p { margin-top: 14px; }
+.sound-poem { font-family: var(--serif); font-style: italic; font-size: 18px; opacity: .6; letter-spacing: .04em; }
+.exhibition-credits { margin-top: 32px; font-size: 13px; line-height: 1.85; opacity: .45; }
+.exhibition-credits p + p { margin-top: 2px; }
 @media (max-width: 860px) {
   .project-header, .project-content, .project-nav-bar { padding-left: 24px; padding-right: 24px; }
   .project-text-cols { grid-template-columns: 1fr; gap: 32px; }
   .booklet-link { flex-direction: column; gap: 14px; align-items: flex-start; padding: 22px 24px; }
+  .exhibition-block { grid-template-columns: 1fr; gap: 28px; }
 }
 </style>
 </head>
@@ -132,7 +156,33 @@
       <span class="booklet-link-open">Open →</span>
     </a>
 
-    <p class="support-note">Supported by Land Steiermark and Stadt Graz.</p>
+    <span class="project-section-label">Exhibition</span>
+
+    <div class="exhibition-block">
+      <div>
+        <h2 class="exhibition-title">Murky Voices</h2>
+        <div class="exhibition-venue">
+          <p>18 – 22 February 2025</p>
+          <p>raum<br>Griesgasse 26<br>8020 Graz, Austria</p>
+          <p>Open 16:00 – 20:00<br>Soft opening 18.02, 18:00<br>Closing concert 22.02, 18:00</p>
+        </div>
+      </div>
+      <img src="../river-becoming/Images/documentation/poster.jpg" alt="Murky Voices exhibition poster" style="width:100%; display:block; border-radius:2px;">
+    </div>
+
+    <div class="exhibition-text">
+      <p>Murky Voices attempt to interview Mur/Mura and hear its non-human stories on the move. The listening is entangled with swirling waves of human voices and perspectives on the presence and agency of Mur river in Graz. Travelling sediments and sensations soaking with murky Mur water. Sometimes deafening noise, sometimes whispers in wet wrinkles. Bodies craving the immersion in cold fluid. Dams, vibrating bridges, storm canals. The quick silent shine of a kingfisher near Augarten. What do we hear, feel and remember when we walk by the river? What and who is absent in our perception?</p>
+      <p class="sound-poem">Sheasheushiishhhhhshsheaeshuee.</p>
+      <p>The exhibition consists of a selection of works created within the River Becoming project in 2024. They include audio and video installations, printed photography and texts presenting the outcomes of artistic research on Mur river, field recordings, interviews, and scores for Mur soundwalks.</p>
+      <p>Six soundwalks took place along the Mur, facilitated by artists who approached the river with their own ways of listening. In that process, Mur became a collaborator, a witness, and a medium. The results — scores, fragments of text, poetic reflections, and a selection of photographs — have been gathered into a booklet. This collection, a map of the river's rhythms, roars, and silences, will also be presented in the exhibition, offering visitors a chance to retrace the paths of these sonic explorations.</p>
+    </div>
+
+    <div class="exhibition-credits">
+      <p>by Reza Kellner and Anna Jurkiewicz</p>
+      <p>with contributions from Chloé Ryo, Anton Tkachuk, Eva Ursprung, Lain Iwakura</p>
+      <p>With many thanks to everyone who shared their Mur stories!</p>
+      <p>Supported by Stadt Graz and Land Steiermark.</p>
+    </div>
   </div>
 </main>
 

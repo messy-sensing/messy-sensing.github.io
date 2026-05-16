@@ -32,9 +32,23 @@
 .project-nav-bar a:hover { opacity: 1; }
 .pn-next::after { content: ' →'; }
 .pn-prev::before { content: '← '; }
+.project-section-label { display: block; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; opacity: .38; margin: 72px 0 24px; }
+.booklet-link {
+  display: flex; justify-content: space-between; align-items: center;
+  border: 1px solid currentColor; border-radius: 2px;
+  padding: 28px 36px; margin-top: 14px;
+  text-decoration: none; color: var(--fg); opacity: .45;
+  transition: opacity 200ms;
+}
+.booklet-link:hover { opacity: 1; }
+.booklet-link-label { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; }
+.booklet-link-title { font-family: var(--serif); font-style: italic; font-size: 22px; }
+.booklet-link-open { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; }
+.support-note { font-size: 11px; letter-spacing: .08em; opacity: .32; margin-top: 52px; line-height: 1.8; }
 @media (max-width: 860px) {
   .project-header, .project-content, .project-nav-bar { padding-left: 24px; padding-right: 24px; }
   .project-text-cols { grid-template-columns: 1fr; gap: 32px; }
+  .booklet-link { flex-direction: column; gap: 14px; align-items: flex-start; padding: 22px 24px; }
 }
 </style>
 </head>
@@ -72,40 +86,53 @@
     <p class="project-n">03</p>
     <h1 class="project-page-title">Murky Voices</h1>
     <div class="project-meta-row">
-      <span class="project-page-year">2023 to 2024</span>
+      <span class="project-page-year">2025</span>
       <div class="project-tags">
-        <span class="project-tag">Exhibition</span>
+        <span class="project-tag">Art Book</span>
         <span class="project-tag">Sound</span>
-        <span class="project-tag">Installation</span>
+        <span class="project-tag">Photography</span>
       </div>
     </div>
   </div>
 
   <div class="project-content">
-    <p class="project-lead">An exhibition growing out of the River Becoming research — audiovisual documents, sound installations, and material traces of the Mur river's social and sonic landscapes.</p>
-
-    <!-- add hero image or video here -->
-    <div class="ph a169 c-lav" style="margin-bottom: 16px;"></div>
+    <p class="project-lead">An artist book gathering the sonic, visual and written outputs of the River Becoming research: soundwalk scores, photographs, and polyphonic letters from the Mur river.</p>
 
     <div class="project-text-cols">
       <div class="project-text-body">
-        <p>Murky Voices brought together the outputs of the River Becoming artistic research: an art book, videos, photographs, soundwalks, poems, scores, and a sound installation.</p>
-        <p>The exhibition framed the river Mur as a site of ecological memory and multispecies agency, drawing on deep listening, sensory ethnography, and hydrofeminist perspectives.</p>
-        <p>Add your description here.</p>
+        <p>Murky Voices attempts to interview Mur/Mura and hear its non-human stories on the move. The listening is entangled with swirling waves of human voices and perspectives on the presence and agency of the Mur river in Graz. Travelling sediments and sensations soaking with murky Mur water. Sometimes deafening noise, sometimes whispers in wet wrinkles. Bodies craving the immersion in cold fluid. Dams, vibrating bridges, storm canals. The quick silent shine of a kingfisher near Augarten.</p>
+        <p>Reza Kellner's photographs follow the movement of Mura and other bodies that cross paths with it. Instead of trying to freeze the shaking and oscillation, the photography embodies this movement as part of the creative process, bringing together temporality and the aspect of moving through space. The images evoke the feeling of passing by the river more than staring at it from a fixed position.</p>
+        <p>Anna Jurkiewicz's <em>Letters of Mixed Feelings</em> (2023) are sprouting, nourished by the river. Feelings understood as sensations, embodied signs, instincts and drives, entangled in interspecies and inter-object relationships. The polyphonic poem is an invitation to put out one's feelers toward non-human channels and voices caught from behind the human stream of consciousness.</p>
+        <p>Mur Soundwalk scores by Antuum, Lain Iwakura, Eva Ursprung, Chloé Ryo, Reza Kellner and Anna Jurkiewicz make up the core of this book, which is meant to be taken back to the river.</p>
       </div>
       <div class="project-text-detail">
-        <p><strong>Venue</strong><br>Naum Gallery, Graz</p>
-        <p><strong>Dates</strong><br>18 to 23 February 2025</p>
-        <p><strong>Medium</strong><br>Sound installation, video, photographs, art book</p>
+        <p><strong>Medium</strong><br>Artist book</p>
+        <p><strong>Photography</strong><br>Reza Kellner</p>
+        <p><strong>Text</strong><br>Anna Jurkiewicz</p>
+        <p><strong>Design</strong><br>Reza Kellner, Anna Jurkiewicz</p>
+        <p><strong>Soundwalk scores</strong><br>Antuum, Lain Iwakura, Eva Ursprung, Chloé Ryo, Reza Kellner, Anna Jurkiewicz</p>
+        <p><strong>Published</strong><br>Graz, 2025</p>
       </div>
     </div>
 
-    <div class="project-media">
-      <div class="img-pair">
-        <div class="ph a43 c-rose"></div>
-        <div class="ph a43 c-dark"></div>
-      </div>
+    <!-- Replace placeholders with images from images/ when ready -->
+    <div class="img-pair" style="margin-bottom: 14px;">
+      <div class="ph a43 c-rose"></div>
+      <div class="ph a43 c-dark"></div>
     </div>
+    <div class="ph a169 c-rose" style="margin-bottom: 14px;"></div>
+    <div class="img-pair">
+      <div class="ph a43 c-dark"></div>
+      <div class="ph a43 c-rose"></div>
+    </div>
+
+    <a href="Book/" class="booklet-link">
+      <span class="booklet-link-label">Art Book</span>
+      <span class="booklet-link-title">Murky Voices — Booklet</span>
+      <span class="booklet-link-open">Open →</span>
+    </a>
+
+    <p class="support-note">Supported by Land Steiermark and Stadt Graz.</p>
   </div>
 </main>
 

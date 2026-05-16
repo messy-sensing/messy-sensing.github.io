@@ -1,26 +1,41 @@
-// ---- BIRD CURSOR ----
+// ---- COMPASS CURSOR ----
 (function () {
-  const bird = document.createElement('div');
-  bird.id = 'cursor-bird';
-  bird.innerHTML = '<svg width="44" height="28" viewBox="0 0 44 28" fill="none" xmlns="http://www.w3.org/2000/svg">'
-    + '<path d="M9,15 Q17,9 30,13.5 Q34,15 38,15 Q34,16 30,15.5 Q17,20 9,15Z" fill="currentColor"/>'
-    + '<path class="bird-wing" d="M12,14 Q21,5 31,9.5 Q23,13 12,14Z" fill="currentColor"/>'
-    + '<path d="M9,15 L2,9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>'
-    + '<path d="M9,15 L2,20"  stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>'
-    + '<path d="M38,15 L44,13.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>'
-    + '<circle cx="33" cy="13" r="1.1" fill="white"/>'
+  const compass = document.createElement('div');
+  compass.id = 'cursor-compass';
+  compass.innerHTML = '<svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">'
+    + '<circle cx="26" cy="26" r="23" stroke="currentColor" stroke-width="0.8" opacity="0.38"/>'
+    + '<g id="cc-n2" style="transform-origin:26px 26px">'
+    + '<line x1="26" y1="5" x2="26" y2="47" stroke="currentColor" stroke-width="0.6" stroke-dasharray="2,4" opacity="0.18"/>'
+    + '</g>'
+    + '<g id="cc-n1" style="transform-origin:26px 26px">'
+    + '<path d="M26,5 L28.5,25 L26,29 L23.5,25 Z" fill="currentColor" opacity="0.82"/>'
+    + '<path d="M26,47 L28.5,27 L26,23 L23.5,27 Z" fill="currentColor" opacity="0.22"/>'
+    + '</g>'
+    + '<circle cx="26" cy="26" r="1.8" fill="currentColor" opacity="0.55"/>'
     + '</svg>';
-  document.body.appendChild(bird);
+  document.body.appendChild(compass);
 
-  let birdX = -100, facing = 1;
+  const n1 = compass.querySelector('#cc-n1');
+  const n2 = compass.querySelector('#cc-n2');
+  let ang1 = 0, ang2 = 0, vel = 12;
+
+  function spinCrazy() {
+    if (Math.random() < 0.06) vel += (Math.random() - 0.45) * 9;
+    vel = Math.max(-28, Math.min(28, vel));
+    if (Math.abs(vel) < 4) vel = (vel >= 0 ? 1 : -1) * (4 + Math.random() * 4);
+    ang1 += vel;
+    ang2 += vel * 0.31 - 0.7;
+    n1.style.transform = 'rotate(' + ang1 + 'deg)';
+    n2.style.transform = 'rotate(' + ang2 + 'deg)';
+    requestAnimationFrame(spinCrazy);
+  }
+  spinCrazy();
+
   document.addEventListener('mousemove', e => {
-    const dx = e.clientX - birdX;
-    birdX = e.clientX;
-    if (Math.abs(dx) > 1.5) facing = dx > 0 ? 1 : -1;
-    bird.style.transform = 'translate(' + (e.clientX - 22) + 'px,' + (e.clientY - 14) + 'px) scaleX(' + facing + ')';
-    bird.classList.remove('hidden');
+    compass.style.transform = 'translate(' + (e.clientX - 26) + 'px,' + (e.clientY - 26) + 'px)';
+    compass.classList.remove('hidden');
   });
-  document.addEventListener('mouseleave', () => bird.classList.add('hidden'));
+  document.addEventListener('mouseleave', () => compass.classList.add('hidden'));
 })();
 
 // ---- THEME ----

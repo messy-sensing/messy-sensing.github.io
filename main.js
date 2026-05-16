@@ -1,3 +1,28 @@
+// ---- BIRD CURSOR ----
+(function () {
+  const bird = document.createElement('div');
+  bird.id = 'cursor-bird';
+  bird.innerHTML = '<svg width="44" height="28" viewBox="0 0 44 28" fill="none" xmlns="http://www.w3.org/2000/svg">'
+    + '<path d="M9,15 Q17,9 30,13.5 Q34,15 38,15 Q34,16 30,15.5 Q17,20 9,15Z" fill="currentColor"/>'
+    + '<path class="bird-wing" d="M12,14 Q21,5 31,9.5 Q23,13 12,14Z" fill="currentColor"/>'
+    + '<path d="M9,15 L2,9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>'
+    + '<path d="M9,15 L2,20"  stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>'
+    + '<path d="M38,15 L44,13.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>'
+    + '<circle cx="33" cy="13" r="1.1" fill="white"/>'
+    + '</svg>';
+  document.body.appendChild(bird);
+
+  let birdX = -100, facing = 1;
+  document.addEventListener('mousemove', e => {
+    const dx = e.clientX - birdX;
+    birdX = e.clientX;
+    if (Math.abs(dx) > 1.5) facing = dx > 0 ? 1 : -1;
+    bird.style.transform = 'translate(' + (e.clientX - 22) + 'px,' + (e.clientY - 14) + 'px) scaleX(' + facing + ')';
+    bird.classList.remove('hidden');
+  });
+  document.addEventListener('mouseleave', () => bird.classList.add('hidden'));
+})();
+
 // ---- THEME ----
 const html     = document.documentElement;
 const themeBtn = document.getElementById('theme-btn');

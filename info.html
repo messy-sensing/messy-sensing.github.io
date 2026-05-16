@@ -97,85 +97,35 @@
 .bio-text { font-size: 14px; line-height: 1.75; }
 .bio-text p + p { margin-top: 12px; }
 
-/* ---- LISTEN ---- */
-#listen {
-  position: relative;
-  z-index: 1;
-  background: var(--listen-bg);
-  color: var(--listen-fg);
-  padding: 100px 0 120px;
-  margin-top: 80px;
-}
-.listen-inner {
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 0 52px;
-  display: grid;
-  grid-template-columns: 1fr 1.6fr;
-  gap: 80px;
-  align-items: start;
-}
-.listen-label { color: var(--listen-fg); opacity: .38; }
-.listen-title { font-family: var(--serif); font-style: italic; font-size: clamp(36px, 4vw, 52px); line-height: 1.1; margin-top: 20px; }
-.listen-desc { font-size: 13px; line-height: 1.68; opacity: .55; margin-top: 20px; max-width: 38ch; }
-.ext-links { display: flex; gap: 20px; margin-top: 40px; }
-.ext-link {
-  font-size: 11px;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: var(--bone);
-  text-decoration: none;
-  opacity: .42;
-  border-bottom: 1px solid rgba(242,238,231,.35);
-  padding-bottom: 2px;
-  transition: opacity 200ms;
-}
-.ext-link:hover { opacity: 1; }
-.orb {
-  width: 72px; height: 72px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 36% 36%, var(--lavender), var(--sap) 80%);
-  box-shadow: 0 0 48px rgba(179,165,184,.22), 0 0 96px rgba(90,107,74,.12);
-  animation: breathe 4s ease-in-out infinite;
-  cursor: pointer;
-  margin-bottom: 44px;
-}
-@keyframes breathe {
-  0%, 100% { transform: scale(1);    box-shadow: 0 0 48px rgba(179,165,184,.22); }
-  50%       { transform: scale(1.07); box-shadow: 0 0 72px rgba(179,165,184,.38), 0 0 140px rgba(90,107,74,.18); }
-}
-.tracklist { list-style: none; border-top: 1px solid rgba(242,238,231,.1); }
-.track { padding: 15px 0; border-bottom: 1px solid rgba(242,238,231,.1); display: flex; align-items: center; gap: 18px; cursor: pointer; transition: opacity 200ms; }
-.track:hover { opacity: .68; }
-.track.active { opacity: 1 !important; }
-.track-n { font-family: var(--serif); font-size: 12px; opacity: .28; width: 22px; text-align: right; flex-shrink: 0; }
-.track-body { flex: 1; }
-.track-name { font-family: var(--serif); font-style: italic; font-size: 18px; display: block; }
-.track-bar { display: none; height: 1px; background: rgba(242,238,231,.15); position: relative; margin-top: 7px; overflow: hidden; }
-.track-bar::after { content: ''; position: absolute; left: -100%; top: 0; width: 100%; height: 100%; background: var(--lavender); animation: run 16s linear infinite; }
-@keyframes run { to { left: 100%; } }
-.track.active .track-bar { display: block; }
-.track-dur { font-size: 11px; letter-spacing: .09em; opacity: .28; flex-shrink: 0; }
-
 /* ---- ARCHIVE ---- */
 #archive { position: relative; z-index: 1; padding: 100px 0; }
 .archive-inner { max-width: 1360px; margin: 0 auto; padding: 0 52px; }
+.archive-desc { font-size: 14px; line-height: 1.7; opacity: .55; margin-top: 16px; max-width: 52ch; }
 .shows { list-style: none; margin-top: 52px; }
-.show { display: grid; grid-template-columns: 100px 1fr 180px; gap: 28px; padding: 18px 0; border-bottom: 1px solid rgba(20,18,18,.08); align-items: baseline; }
+.show { display: grid; grid-template-columns: 72px 110px 1fr 160px; gap: 24px; padding: 16px 0; border-bottom: 1px solid rgba(20,18,18,.08); align-items: baseline; }
 .show-year { font-size: 11px; letter-spacing: .14em; opacity: .38; }
-.show-title { font-family: var(--serif); font-size: 18px; font-style: italic; }
-.show-venue { font-size: 12px; opacity: .45; text-align: right; }
+.show-type { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; opacity: .32; padding-top: 2px; }
+.show-title { font-family: var(--serif); font-size: 17px; font-style: italic; }
+.show-venue { font-size: 12px; opacity: .42; text-align: right; }
+
+/*
+  LISTEN SECTION — hidden, not deleted.
+  The section markup is preserved below in a comment block.
+  Re-enable by uncommenting the <section id="listen"> block in the HTML
+  and restoring these CSS rules.
+
+  DEV NOTE: see dev-notes.md
+*/
 
 /* ---- RESPONSIVE ---- */
 @media (max-width: 860px) {
   #hero { padding: 0 24px 64px; }
   .scroll-hint { right: 24px; }
-  .about-inner, .people-inner, .archive-inner, .listen-inner { padding-left: 24px; padding-right: 24px; }
+  .about-inner, .people-inner, .archive-inner { padding-left: 24px; padding-right: 24px; }
   .about-inner { grid-template-columns: 1fr; gap: 40px; }
   .bios        { grid-template-columns: 1fr; gap: 52px; }
-  .listen-inner{ grid-template-columns: 1fr; }
-  .show        { grid-template-columns: 80px 1fr; }
-  .show-venue  { display: none; }
+  .show        { grid-template-columns: 60px 1fr; }
+  .show-type, .show-venue { display: none; }
 }
 </style>
 </head>
@@ -211,7 +161,6 @@
     <ul class="nav-links">
       <li><a href="work/">Work</a></li>
       <li><a href="#people">About</a></li>
-      <li><a href="#listen">Listen</a></li>
       <li><a href="#archive">Archive</a></li>
     </ul>
   </div>
@@ -266,6 +215,12 @@
   </div>
 </section>
 
+<!--
+  LISTEN SECTION — hidden, not deleted. Re-enable by removing these comment tags.
+  Also restore the CSS block marked "LISTEN SECTION" in the <style> tag above,
+  and add back the nav link: <li><a href="#listen">Listen</a></li>
+  See dev-notes.md for context.
+
 <section id="listen">
   <div class="listen-inner">
     <div>
@@ -305,22 +260,24 @@
     </div>
   </div>
 </section>
+-->
 
 <section id="archive">
   <div class="archive-inner">
-    <span class="section-label">Selected exhibitions and performances</span>
+    <span class="section-label">Archive</span>
+    <p class="archive-desc">Exhibitions, performances, group shows, concerts, and other events — chronological, newest first.</p>
     <ul class="shows">
-      <li class="show"><span class="show-year">2025</span><span class="show-title"><em>Matter is Messy</em>, Forum Stadtpark</span><span class="show-venue">Graz, AT</span></li>
-      <li class="show"><span class="show-year">2025</span><span class="show-title">Voicing Places: Sonic Incarnations of Situated Knowledge</span><span class="show-venue">Forum Stadtpark, Graz</span></li>
-      <li class="show"><span class="show-year">2025</span><span class="show-title"><em>Murky Voices</em> exhibition, Naum Gallery</span><span class="show-venue">Graz, AT</span></li>
-      <li class="show"><span class="show-year">2024</span><span class="show-title"><em>Fam.</em>, Forum Stadtpark</span><span class="show-venue">Graz, AT</span></li>
-      <li class="show"><span class="show-year">2024</span><span class="show-title">River Becoming, Mur Soundwalk series</span><span class="show-venue">Graz, AT</span></li>
-      <li class="show"><span class="show-year">2023</span><span class="show-title">Beeing, Beecoming, esc medien kunst labor</span><span class="show-venue">Graz, AT</span></li>
-      <li class="show"><span class="show-year">2023</span><span class="show-title">Beeing, Beecoming, Steirischer Herbst</span><span class="show-venue">Graz, AT</span></li>
-      <li class="show"><span class="show-year">2022</span><span class="show-title">A Word Fell Out of My Mouth and Broke</span><span class="show-venue">Graz, AT</span></li>
-      <li class="show"><span class="show-year">2022</span><span class="show-title">Lake Urumia, live electronics, Unsafe+Sounds</span><span class="show-venue">Vienna, AT</span></li>
-      <li class="show"><span class="show-year">2022</span><span class="show-title">Lake Urumia, Elevate Festival</span><span class="show-venue">Graz, AT</span></li>
-      <li class="show"><span class="show-year">2021</span><span class="show-title">Requiem for a Belief</span><span class="show-venue">Graz, AT</span></li>
+      <li class="show"><span class="show-year">2025</span><span class="show-type">Group show</span><span class="show-title"><em>Matter is Messy</em>, Forum Stadtpark</span><span class="show-venue">Graz, AT</span></li>
+      <li class="show"><span class="show-year">2025</span><span class="show-type">Performance</span><span class="show-title">Voicing Places: Sonic Incarnations of Situated Knowledge</span><span class="show-venue">Forum Stadtpark, Graz</span></li>
+      <li class="show"><span class="show-year">2025</span><span class="show-type">Exhibition</span><span class="show-title"><em>Murky Voices</em>, Naum Gallery</span><span class="show-venue">Graz, AT</span></li>
+      <li class="show"><span class="show-year">2024</span><span class="show-type">Group show</span><span class="show-title"><em>Fam.</em>, Forum Stadtpark</span><span class="show-venue">Graz, AT</span></li>
+      <li class="show"><span class="show-year">2024</span><span class="show-type">Performance</span><span class="show-title">River Becoming, Mur Soundwalk series</span><span class="show-venue">Graz, AT</span></li>
+      <li class="show"><span class="show-year">2023</span><span class="show-type">Exhibition</span><span class="show-title">Beeing, Beecoming, esc medien kunst labor</span><span class="show-venue">Graz, AT</span></li>
+      <li class="show"><span class="show-year">2023</span><span class="show-type">Exhibition</span><span class="show-title">Beeing, Beecoming, Steirischer Herbst</span><span class="show-venue">Graz, AT</span></li>
+      <li class="show"><span class="show-year">2022</span><span class="show-type">Performance</span><span class="show-title">A Word Fell Out of My Mouth and Broke</span><span class="show-venue">Graz, AT</span></li>
+      <li class="show"><span class="show-year">2022</span><span class="show-type">Concert</span><span class="show-title">Lake Urumia, live electronics, Unsafe+Sounds</span><span class="show-venue">Vienna, AT</span></li>
+      <li class="show"><span class="show-year">2022</span><span class="show-type">Concert</span><span class="show-title">Lake Urumia, Elevate Festival</span><span class="show-venue">Graz, AT</span></li>
+      <li class="show"><span class="show-year">2021</span><span class="show-type">Performance</span><span class="show-title">Requiem for a Belief</span><span class="show-venue">Graz, AT</span></li>
     </ul>
   </div>
 </section>
@@ -338,18 +295,5 @@
 </footer>
 
 <script src="main.js"></script>
-<script>
-document.querySelectorAll('.track').forEach(t => {
-  t.addEventListener('click', () => {
-    document.querySelectorAll('.track').forEach(x => x.classList.remove('active'));
-    t.classList.add('active');
-    const href = t.dataset.href;
-    if (href) window.open(href, '_blank', 'noopener');
-  });
-});
-document.getElementById('orb').addEventListener('click', () => {
-  window.open('https://lakeurumia.bandcamp.com', '_blank', 'noopener');
-});
-</script>
 </body>
 </html>

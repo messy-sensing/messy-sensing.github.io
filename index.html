@@ -12,8 +12,18 @@
 html, body { width: 100%; height: 100%; overflow: hidden; }
 body { background: #F2EEE7; transition: background 400ms; }
 [data-theme="dark"] body { background: #0E1012; }
-canvas { display: block; width: 100%; height: 100%; cursor: crosshair; }
-canvas.hovering { cursor: pointer; }
+canvas { display: block; width: 100%; height: 100%; cursor: none; }
+canvas.hovering { cursor: none; }
+
+#cursor-bird {
+  position: fixed; left: 0; top: 0;
+  pointer-events: none; z-index: 99999;
+  color: #141212; opacity: .62; will-change: transform; transition: opacity 180ms;
+}
+[data-theme="dark"] #cursor-bird { color: #F0EBE2; }
+#cursor-bird.hidden { opacity: 0; }
+.bird-wing { transform-box: fill-box; transform-origin: center bottom; animation: bird-flap .9s ease-in-out infinite; }
+@keyframes bird-flap { 0%,100%{transform:scaleY(1)} 50%{transform:scaleY(.18)} }
 
 .theme-btn {
   position: fixed;
@@ -84,13 +94,13 @@ const PLACES = [
   { id: 'a-word-fell-out',  label: 'A Word Fell Out',        label2: 'of My Mouth and Broke',
     sub: '2022',     type: 'project', x: 0.10, y: 0.73, href: 'work/a-word-fell-out/' },
   { id: 'requiem',          label: 'Requiem for a Belief',   sub: '2021',
-    type: 'project', x: 0.84, y: 0.71, href: 'work/requiem-for-a-belief/' },
+    type: 'project', x: 0.22, y: 0.82, href: 'work/requiem-for-a-belief/' },
 
   // ---- navigation ----
-  { id: 'about',   label: 'About',    sub: '', type: 'nav', x: 0.83, y: 0.19, href: 'info.html#people'  },
-  { id: 'listen',  label: 'Listen',   sub: '', type: 'nav', x: 0.15, y: 0.22, href: 'info.html#listen'  },
-  { id: 'archive', label: 'Archive',  sub: '', type: 'nav', x: 0.52, y: 0.88, href: 'info.html#archive' },
-  { id: 'work',    label: 'All Work', sub: '', type: 'nav', x: 0.14, y: 0.46, href: 'work/'             },
+  { id: 'about',   label: 'About',   sub: '', type: 'nav', x: 0.83, y: 0.19, href: 'info.html#people'  },
+  { id: 'archive', label: 'Archive', sub: '', type: 'nav', x: 0.52, y: 0.88, href: 'info.html#archive' },
+  // { id: 'listen',  label: 'Listen',   sub: '', type: 'nav', x: 0.15, y: 0.22, href: 'info.html#listen'  }, // section removed, see dev-notes.md
+  // { id: 'work',    label: 'All Work', sub: '', type: 'nav', x: 0.14, y: 0.46, href: 'work/'             }, // hidden until work grid is polished, see dev-notes.md
 ];
 
 const TERRITORIES = [
@@ -100,10 +110,10 @@ const TERRITORIES = [
   { cx: 0.50, cy: 0.51, r: 0.058, pts: 10, seed: 41 }, // murky voices (small, overlaps river becoming)
   { cx: 0.30, cy: 0.63, r: 0.100, pts: 12, seed: 11 }, // beeing beecoming
   { cx: 0.10, cy: 0.73, r: 0.048, pts: 8,  seed: 53 }, // a word fell out (distant, small)
-  { cx: 0.84, cy: 0.70, r: 0.048, pts: 8,  seed: 59 }, // requiem (distant, small)
+  { cx: 0.22, cy: 0.82, r: 0.048, pts: 8,  seed: 59 }, // requiem (near a word fell out)
   // decorative satellite islands
   { cx: 0.48, cy: 0.34, r: 0.028, pts: 7,  seed: 23 },
-  { cx: 0.22, cy: 0.77, r: 0.026, pts: 7,  seed: 29 },
+  { cx: 0.05, cy: 0.88, r: 0.026, pts: 7,  seed: 29 },
   { cx: 0.71, cy: 0.66, r: 0.024, pts: 7,  seed: 37 },
   { cx: 0.06, cy: 0.62, r: 0.020, pts: 6,  seed: 43 },
   { cx: 0.90, cy: 0.58, r: 0.018, pts: 6,  seed: 47 },
@@ -495,6 +505,31 @@ canvas.addEventListener('touchend', e => {
   const p = hitPlace(t.clientX, t.clientY);
   if (p) window.location.href = p.href;
 }, { passive: true });
+
+// ====== BIRD CURSOR ======
+(function () {
+  const bird = document.createElement('div');
+  bird.id = 'cursor-bird';
+  bird.innerHTML = '<svg width="44" height="28" viewBox="0 0 44 28" fill="none">'
+    + '<path d="M9,15 Q17,9 30,13.5 Q34,15 38,15 Q34,16 30,15.5 Q17,20 9,15Z" fill="currentColor"/>'
+    + '<path class="bird-wing" d="M12,14 Q21,5 31,9.5 Q23,13 12,14Z" fill="currentColor"/>'
+    + '<path d="M9,15 L2,9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>'
+    + '<path d="M9,15 L2,20"  stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>'
+    + '<path d="M38,15 L44,13.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>'
+    + '<circle cx="33" cy="13" r="1.1" fill="white"/>'
+    + '</svg>';
+  document.body.appendChild(bird);
+
+  let birdX = -100, facing = 1;
+  document.addEventListener('mousemove', e => {
+    const dx = e.clientX - birdX;
+    birdX = e.clientX;
+    if (Math.abs(dx) > 1.5) facing = dx > 0 ? 1 : -1;
+    bird.style.transform = 'translate(' + (e.clientX - 22) + 'px,' + (e.clientY - 14) + 'px) scaleX(' + facing + ')';
+    bird.classList.remove('hidden');
+  });
+  document.addEventListener('mouseleave', () => bird.classList.add('hidden'));
+})();
 
 // ====== INIT ======
 window.addEventListener('resize', () => { resize(); draw(); });

@@ -38,7 +38,30 @@
   --rose:     var(--a3);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; cursor: none !important; }
+
+/* ---- BIRD CURSOR ---- */
+#cursor-bird {
+  position: fixed;
+  left: 0; top: 0;
+  pointer-events: none;
+  z-index: 99999;
+  color: var(--fg);
+  opacity: .62;
+  will-change: transform;
+  transition: opacity 180ms;
+}
+#cursor-bird.hidden { opacity: 0; }
+
+.bird-wing {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: bird-flap 0.9s ease-in-out infinite;
+}
+@keyframes bird-flap {
+  0%, 100% { transform: scaleY(1); }
+  50%       { transform: scaleY(0.18); }
+}
 html { scroll-behavior: smooth; }
 
 html { transition: background 400ms, color 400ms; }

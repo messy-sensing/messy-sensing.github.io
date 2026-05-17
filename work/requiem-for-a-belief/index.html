@@ -20,8 +20,8 @@
 .project-tags { display: flex; gap: 10px; flex-wrap: wrap; }
 .project-tag { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; opacity: .4; border: 1px solid currentColor; border-radius: 100px; padding: 3px 11px; }
 .project-content { max-width: 1360px; margin: 0 auto; padding: 0 52px 80px; }
-.project-lead { font-family: var(--serif); font-size: clamp(20px, 2.2vw, 28px); line-height: 1.45; max-width: 56ch; margin-bottom: 80px; }
-.project-text-cols { display: grid; grid-template-columns: 1.4fr 1fr; gap: 80px; margin-bottom: 80px; align-items: start; }
+.project-lead { font-family: var(--serif); font-size: clamp(20px, 2.2vw, 28px); line-height: 1.45; max-width: 56ch; margin-bottom: 72px; }
+.project-text-cols { display: grid; grid-template-columns: 1.4fr 1fr; gap: 80px; margin-bottom: 72px; align-items: start; }
 .project-text-body { font-size: 15px; line-height: 1.72; }
 .project-text-body p + p { margin-top: 14px; }
 .project-text-detail { font-size: 13px; line-height: 1.8; opacity: .55; }
@@ -30,7 +30,6 @@
 .project-nav-bar { max-width: 1360px; margin: 80px auto 0; padding: 36px 52px; border-top: 1px solid rgba(20,18,18,.1); display: flex; justify-content: space-between; position: relative; z-index: 1; }
 .project-nav-bar a { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--fg); text-decoration: none; opacity: .38; transition: opacity 200ms; }
 .project-nav-bar a:hover { opacity: 1; }
-.pn-next::after { content: ' →'; }
 .pn-prev::before { content: '← '; }
 @media (max-width: 860px) {
   .project-header, .project-content, .project-nav-bar { padding-left: 24px; padding-right: 24px; }
@@ -74,35 +73,46 @@
     <div class="project-meta-row">
       <span class="project-page-year">2021</span>
       <div class="project-tags">
-        <span class="project-tag">Sound</span>
         <span class="project-tag">Performance</span>
+        <span class="project-tag">Sound</span>
+        <span class="project-tag">Live Electronics</span>
       </div>
     </div>
   </div>
 
   <div class="project-content">
-    <p class="project-lead">Add a short lead description of this project here.</p>
 
-    <div class="ph a169 c-dark" style="margin-bottom: 16px;"></div>
+    <p class="project-lead">Three performers immersed in parallel processes, creating a ritual timespace for 13 minutes — exploring historic practices as natural cycles of decay and disintegration.</p>
+
+    <div class="vimeo" style="margin-bottom: 80px;">
+      <iframe src="https://player.vimeo.com/video/684352693?h=9648f75f28&badge=0&autopause=0&player_id=0&app_id=58479"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+        referrerpolicy="strict-origin-when-cross-origin"
+        title="Requiem for a Belief"></iframe>
+    </div>
 
     <div class="project-text-cols">
       <div class="project-text-body">
-        <p>Add the main project description here.</p>
-        <p>Continue with more detail about the work, process, and context.</p>
+        <p>The three performers interact and dialogue with the installation by Maryam Mohammadi and Keyvan Paydar, dealing with the number 13 and cultural practices stemming from both religion and popular culture.</p>
+        <p>Vera Hagemann reads, chews and spits 13-lettered words. They are consumed, disintegrated and transformed in a performative way. In the end, we all have to digest and process both food and information that circulate in our bodies. Language and thoughts out of place and time need to be metabolized.</p>
+        <p>Anna Jurkiewicz works the soil in a futile attempt to prepare the ground for burial. Her singing and earthy breathing accompanies the act of burying the used-up words with both respect and relief. Beliefs and words that are first subject to dismantling by chewing and spitting then become respected remnants of the past. This transformation is paired with the concept of death and decay of living beings as returning to the soil, worded in an old Polish funeral song. The latter is used here to bid farewell to beliefs the artists would like to let go of, while at the same time belonging to the reservoir of used-up ideas.</p>
+        <p>Reza Kellner performs live sound. Pre-recorded vocals, voice and various sound effects are processed and transformed into new sonic material, manipulated and mixed live on stage. The sound frames and brings together the three processes.</p>
       </div>
       <div class="project-text-detail">
-        <p><strong>Venue</strong><br>Add venue</p>
-        <p><strong>Date</strong><br>2021</p>
-        <p><strong>Medium</strong><br>Add medium</p>
+        <p><strong>Duration</strong><br>13 minutes</p>
+        <p><strong>Venue</strong><br>Schaumbad Freier Atelierhaus<br>Graz, Austria</p>
+        <p><strong>Date</strong><br>2 October 2021</p>
+        <p><strong>Event</strong><br>Long Night of the Museums 2021<br>(Lange Nacht der Museen)</p>
+        <p><strong>Concept</strong><br>Vera Hagemann, Anna Jurkiewicz, Reza Kellner</p>
+        <p><strong>Text and language</strong><br>Vera Hagemann</p>
+        <p><strong>Vocal performance, funeral ritual</strong><br>Anna Jurkiewicz</p>
+        <p><strong>Staging, live electronics</strong><br>Reza Kellner</p>
+        <p><strong>Documentation</strong><br>Reza Kellner</p>
+        <p><strong>In dialogue with</strong><br>Installation by Maryam Mohammadi and Keyvan Paydar</p>
       </div>
     </div>
 
-    <div class="project-media">
-      <div class="img-pair">
-        <div class="ph a43 c-dark"></div>
-        <div class="ph a43 c-mix"></div>
-      </div>
-    </div>
   </div>
 </main>
 

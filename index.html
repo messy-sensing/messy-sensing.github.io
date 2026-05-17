@@ -13,7 +13,7 @@ html, body { width: 100%; height: 100%; overflow: hidden; }
 body { background: #F2EEE7; transition: background 400ms; }
 [data-theme="dark"] body { background: #0E1012; }
 canvas { display: block; width: 100%; height: 100%; }
-@media (pointer: fine) { canvas, canvas.hovering { cursor: none; } }
+@media (pointer: fine) { canvas, canvas.hovering, #map-legend, #map-legend * { cursor: none; } }
 
 #cursor-blob {
   position: fixed; left: 0; top: 0;
@@ -46,9 +46,99 @@ canvas { display: block; width: 100%; height: 100%; }
 }
 [data-theme="dark"] .theme-btn { color: #F0EBE2; }
 .theme-btn:hover { opacity: 1; }
+
+/* ---- MAP LEGEND ---- */
+#map-legend {
+  position: fixed;
+  top: 20px;
+  left: 28px;
+  z-index: 10;
+  border: 1px solid rgba(20,18,18,.18);
+  border-radius: 2px;
+  padding: 14px 18px 16px;
+  background: rgba(242,238,231,.80);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #141212;
+  transition: background 400ms, border-color 400ms;
+}
+[data-theme="dark"] #map-legend {
+  border-color: rgba(240,235,226,.13);
+  background: rgba(14,16,18,.85);
+  color: #F0EBE2;
+}
+.legend-head {
+  font-size: 7px;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  opacity: .26;
+  margin-bottom: 10px;
+}
+.legend-rows { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.legend-r { display: flex; align-items: center; gap: 9px; }
+.leg-sym { width: 16px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.leg-txt { font-size: 9px; letter-spacing: .15em; text-transform: uppercase; opacity: .26; }
+.leg-a {
+  font-size: 9px; letter-spacing: .15em; text-transform: uppercase;
+  color: inherit; text-decoration: none; opacity: .46; transition: opacity 200ms;
+}
+.leg-a:hover { opacity: 1; }
+.legend-rule { border: none; border-top: 1px solid currentColor; opacity: .10; margin: 5px 0; }
+@media (max-width: 480px) {
+  #map-legend { top: auto; bottom: 20px; left: 16px; right: 16px; padding: 10px 14px 12px; }
+}
 </style>
 </head>
 <body>
+
+<div id="map-legend">
+  <div class="legend-head">Key</div>
+  <ul class="legend-rows">
+    <li class="legend-r">
+      <span class="leg-sym">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+          <circle cx="8" cy="8" r="3.5" opacity=".75"/>
+          <circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width=".8" opacity=".15"/>
+        </svg>
+      </span>
+      <span class="leg-txt">Projects</span>
+    </li>
+    <li class="legend-r">
+      <span class="leg-sym">
+        <svg width="16" height="8" viewBox="0 0 16 8">
+          <line x1="0" y1="4" x2="16" y2="4" stroke="currentColor" stroke-width=".8" stroke-dasharray="3 4" opacity=".45"/>
+        </svg>
+      </span>
+      <span class="leg-txt">Connections</span>
+    </li>
+    <li><hr class="legend-rule"></li>
+    <li class="legend-r">
+      <span class="leg-sym">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+          <circle cx="8" cy="8" r="2.5" opacity=".40"/>
+        </svg>
+      </span>
+      <a class="leg-a" href="media.html">Media</a>
+    </li>
+    <li class="legend-r">
+      <span class="leg-sym">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+          <circle cx="8" cy="8" r="2.5" opacity=".40"/>
+        </svg>
+      </span>
+      <a class="leg-a" href="info.html#people">About</a>
+    </li>
+    <li class="legend-r">
+      <span class="leg-sym">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+          <circle cx="8" cy="8" r="2.5" opacity=".40"/>
+        </svg>
+      </span>
+      <a class="leg-a" href="info.html#archive">Archive</a>
+    </li>
+  </ul>
+</div>
 
 <canvas id="map"></canvas>
 
@@ -93,6 +183,8 @@ const PLACES = [
     sub: '2022',     type: 'project', x: 0.10, y: 0.73, href: 'work/a-word-fell-out/' },
   { id: 'requiem',          label: 'Requiem for a Belief',   sub: '2021',
     type: 'project', x: 0.22, y: 0.82, href: 'work/requiem-for-a-belief/' },
+  { id: 'soundwalks',       label: 'Soundwalks',             sub: 'practice',
+    type: 'project', x: 0.76, y: 0.56, href: 'soundwalks/' },
 
   // ---- navigation ----
   { id: 'about',   label: 'About',   sub: '', type: 'nav', x: 0.83, y: 0.19, href: 'info.html#people'  },
@@ -109,6 +201,7 @@ const TERRITORIES = [
   { cx: 0.30, cy: 0.63, r: 0.100, pts: 12, seed: 11 }, // beeing beecoming
   { cx: 0.10, cy: 0.73, r: 0.048, pts: 8,  seed: 53 }, // a word fell out (distant, small)
   { cx: 0.22, cy: 0.82, r: 0.048, pts: 8,  seed: 59 }, // requiem (near a word fell out)
+  { cx: 0.76, cy: 0.56, r: 0.085, pts: 12, seed: 67 }, // soundwalks
   // decorative satellite islands
   { cx: 0.48, cy: 0.34, r: 0.028, pts: 7,  seed: 23 },
   { cx: 0.05, cy: 0.88, r: 0.026, pts: 7,  seed: 29 },
@@ -122,6 +215,8 @@ const CONNECTIONS = [
   ['river-becoming', 'murky-voices'],
   ['river-becoming', 'beeing-beecoming'],
   ['voicing-places', 'group-shows'],
+  ['soundwalks', 'voicing-places'],
+  ['soundwalks', 'river-becoming'],
 ];
 
 // ====== THEME ======

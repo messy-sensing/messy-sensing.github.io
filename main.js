@@ -1,5 +1,5 @@
 // ---- BLOB CURSOR ----
-(function () {
+if (window.matchMedia('(pointer: fine)').matches) (function () {
   const blob = document.createElement('div');
   blob.id = 'cursor-blob';
   blob.className = 'hidden';
@@ -53,3 +53,52 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 themeBtn.addEventListener('click', () => window.dispatchEvent(new Event('scroll')));
+
+// ---- MOBILE NAV ----
+(function () {
+  const navLinks = document.querySelector('.nav-links');
+  const navRight = document.querySelector('.nav-right');
+  if (!navLinks || !navRight) return;
+
+  const ICON_MENU  = '<svg width="20" height="14" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><line x1="0" y1="1" x2="20" y2="1"/><line x1="0" y1="7" x2="20" y2="7"/><line x1="0" y1="13" x2="20" y2="13"/></svg>';
+  const ICON_CLOSE = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg>';
+
+  const btn = document.createElement('button');
+  btn.id = 'menu-btn';
+  btn.setAttribute('aria-label', 'open navigation');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.innerHTML = ICON_MENU;
+  navRight.appendChild(btn);
+
+  const drawer = document.createElement('div');
+  drawer.id = 'nav-drawer';
+  const ul = navLinks.cloneNode(true);
+  drawer.appendChild(ul);
+  document.body.appendChild(drawer);
+
+  function open() {
+    drawer.classList.add('open');
+    document.body.classList.add('nav-open');
+    btn.innerHTML = ICON_CLOSE;
+    btn.setAttribute('aria-expanded', 'true');
+    btn.setAttribute('aria-label', 'close navigation');
+  }
+  function close() {
+    drawer.classList.remove('open');
+    document.body.classList.remove('nav-open');
+    btn.innerHTML = ICON_MENU;
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', 'open navigation');
+  }
+
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    drawer.classList.contains('open') ? close() : open();
+  });
+  document.addEventListener('click', e => {
+    if (drawer.classList.contains('open') && !drawer.contains(e.target)) close();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+  window.addEventListener('resize', () => { if (window.innerWidth > 700) close(); });
+})();

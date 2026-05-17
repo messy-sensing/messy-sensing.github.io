@@ -12,8 +12,8 @@
 html, body { width: 100%; height: 100%; overflow: hidden; }
 body { background: #F2EEE7; transition: background 400ms; }
 [data-theme="dark"] body { background: #0E1012; }
-canvas { display: block; width: 100%; height: 100%; cursor: none; }
-canvas.hovering { cursor: none; }
+canvas { display: block; width: 100%; height: 100%; }
+@media (pointer: fine) { canvas, canvas.hovering { cursor: none; } }
 
 #cursor-blob {
   position: fixed; left: 0; top: 0;
@@ -260,6 +260,13 @@ function drawTerrain() {
   }
   offCtx.restore();
 
+  // zoom transform for map content on narrow screens
+  const zoom = getZoom();
+  const { ox, oy } = getOffset(zoom);
+  offCtx.save();
+  offCtx.translate(ox, oy);
+  offCtx.scale(zoom, zoom);
+
   // territories
   TERRITORIES.forEach((t, i) => {
     const pts = makeBlob(t.cx, t.cy, t.r, t.pts, t.seed, W, H);
@@ -369,6 +376,8 @@ function drawTerrain() {
   offCtx.font = `italic 400 ${ts}px "EB Garamond", Georgia, serif`;
   offCtx.fillText('Messy Sensing', 44, H - 40);
   offCtx.restore();
+
+  offCtx.restore(); // end zoom transform
 }
 
 // Composite terrain + live compass (called on every mousemove)
@@ -475,15 +484,23 @@ function drawScaleBar(ctx, cx, cy, len, C) {
   ctx.restore();
 }
 
+// ====== ZOOM (mobile) ======
+function getZoom() { return W < 700 ? 0.72 : 1; }
+function getOffset(zoom) { return { ox: W*(1-zoom)/2, oy: H*(1-zoom)/2 }; }
+
 // ====== HIT TEST ======
 function hitPlace(mx, my) {
+  const zoom = getZoom();
+  const { ox, oy } = getOffset(zoom);
+  const tx = (mx - ox) / zoom;
+  const ty = (my - oy) / zoom;
   return PLACES.find(p => {
     const px = p.x*W, py = p.y*H;
-    const dx = px - mx, dy = py - my;
+    const dx = px - tx, dy = py - ty;
     if (Math.sqrt(dx*dx+dy*dy) < 20) return true;
-    if (mx >= px + 8 && mx <= px + 220) {
+    if (tx >= px + 8 && tx <= px + 220) {
       const yRange = p.label2 ? 30 : 22;
-      if (my >= py - yRange && my <= py + yRange) return true;
+      if (ty >= py - yRange && ty <= py + yRange) return true;
     }
     return false;
   });
@@ -526,7 +543,7 @@ canvas.addEventListener('touchend', e => {
 }, { passive: true });
 
 // ====== BLOB CURSOR ======
-(function () {
+if (window.matchMedia('(pointer: fine)').matches) (function () {
   const blob = document.createElement('div');
   blob.id = 'cursor-blob';
   blob.className = 'hidden';

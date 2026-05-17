@@ -102,6 +102,12 @@
 .project-text-detail p + p { margin-top: 10px; }
 .project-text-detail strong { font-weight: 400; opacity: .75; }
 
+.project-section-label { display: block; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; opacity: .38; margin: 72px 0 24px; }
+.photo-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.photo-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.photo-credit { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; opacity: .28; margin-top: 6px; margin-bottom: 52px; }
+.coming-soon { font-family: var(--serif); font-style: italic; font-size: 20px; opacity: .28; margin-top: 20px; }
+
 /* bottom nav */
 .project-nav-bar {
   max-width: 1360px;
@@ -131,6 +137,11 @@
   .project-content { padding-left: 24px; padding-right: 24px; }
   .project-text-cols { grid-template-columns: 1fr; gap: 32px; }
   .project-nav-bar { padding-left: 24px; padding-right: 24px; }
+  .photo-grid-3 { grid-template-columns: 1fr 1fr; }
+  .photo-grid-2 { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .photo-grid-3 { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -200,10 +211,10 @@
     </div>
     -->
 
-    <!-- Option B: Vimeo -->
     <div class="vimeo" style="margin-bottom: 16px;">
-      <iframe src="https://player.vimeo.com/video/1141897095?autoplay=0&title=0&byline=0&portrait=0"
-        allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      <iframe src="https://player.vimeo.com/video/1141897095?h=325c6a94c1&title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479"
+        frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" title="Voicing Places"></iframe>
     </div>
 
     <!-- BODY TEXT + DETAILS SIDE BY SIDE -->
@@ -221,37 +232,78 @@
       </div>
     </div>
 
-    <!-- MORE MEDIA: add as many blocks as needed -->
+    <span class="project-section-label">Documentation — Forum Stadtpark, November 2025</span>
 
-    <!-- Photo grid (pair) -->
-    <div class="project-media">
-      <div class="img-pair">
-        <div class="ph a34 c-sap"></div>
-        <div class="ph a34 c-lav"></div>
-      </div>
-      <!-- replace .ph divs with:
-      <div class="img-pair">
-        <img src="images/photo-1.jpg" alt="">
-        <img src="images/photo-2.jpg" alt="">
-      </div>
-      -->
+    <img src="images/1/251129_Reza_Keller_c_Yola_Moschitz004.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px; margin-bottom:10px;">
+    <div class="photo-grid-3">
+      <img src="images/1/251129_Reza_Keller_c_Yola_Moschitz006.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img src="images/1/251129_Reza_Keller_c_Yola_Moschitz008.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img src="images/1/251129_Reza_Keller_c_Yola_Moschitz011.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+    </div>
+    <img src="images/1/251129_Reza_Keller_c_Yola_Moschitz014.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px; margin-bottom:10px;">
+    <div class="photo-grid-3">
+      <img src="images/1/251129_Reza_Keller_c_Yola_Moschitz017.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img src="images/1/251129_Reza_Keller_c_Yola_Moschitz019.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img src="images/1/251129_Reza_Keller_c_Yola_Moschitz024.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+    </div>
+    <div class="photo-grid-2">
+      <img src="images/1/251129_Reza_Keller_c_Yola_Moschitz026.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img src="images/1/251129_Reza_Keller_c_Yola_Moschitz029.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+    </div>
+    <div class="photo-grid-3">
+      <img src="images/1/251129_Reza_Keller_c_Yola_Moschitz031.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img src="images/1/251129_Reza_Keller_c_Yola_Moschitz033.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img src="images/1/251129_Reza_Keller_c_Yola_Moschitz034.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+    </div>
+    <div class="photo-grid-2">
+      <img src="images/1/251129_Reza_Keller_c_Yola_Moschitz037.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img src="images/1/251129_Reza_Keller_c_Yola_Moschitz038.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+    </div>
+    <p class="photo-credit">Photography — &copy; Yola Moschitz</p>
+
+    <div class="vimeo" style="margin-bottom: 72px;">
+      <iframe src="https://player.vimeo.com/video/1141894613?title=0&byline=0&portrait=0"
+        frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+        title="Voicing Places"></iframe>
     </div>
 
-    <!-- Second video -->
-    <div class="vimeo" style="margin-top: 16px;">
-      <iframe src="https://player.vimeo.com/video/1141894613?autoplay=0&title=0&byline=0&portrait=0"
-        allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    <span class="project-section-label">Documentation — February 2026</span>
+
+    <img src="images/2/260226_Messy_Sensing_c_Peter_Hutter_02.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px; margin-bottom:10px;">
+    <div class="photo-grid-3">
+      <img src="images/2/260226_Messy_Sensing_c_Peter_Hutter_04.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img src="images/2/260226_Messy_Sensing_c_Peter_Hutter_06.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img src="images/2/260226_Messy_Sensing_c_Peter_Hutter_07.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+    </div>
+    <div class="photo-grid-3">
+      <img src="images/2/260226_Messy_Sensing_c_Peter_Hutter_11.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img src="images/2/260226_Messy_Sensing_c_Peter_Hutter_23.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img src="images/2/260226_Messy_Sensing_c_Peter_Hutter_25.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+    </div>
+    <div class="photo-grid-3">
+      <img src="images/2/260226_Messy_Sensing_c_Peter_Hutter_29.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img src="images/2/260226_Messy_Sensing_c_Peter_Hutter_30.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img src="images/2/260226_Messy_Sensing_c_Peter_Hutter_33.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+    </div>
+    <div class="photo-grid-2">
+      <img src="images/2/260226_Messy_Sensing_c_Peter_Hutter_38.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img src="images/2/260226_Messy_Sensing_c_Peter_Hutter_40.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+    </div>
+    <div class="photo-grid-2">
+      <img src="images/2/260226_Messy_Sensing_c_Peter_Hutter_41.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img src="images/2/260226_Messy_Sensing_c_Peter_Hutter_42.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+    </div>
+    <p class="photo-credit">Photography — &copy; Peter Hutter</p>
+
+    <span class="project-section-label">Posters</span>
+
+    <div class="photo-grid-2">
+      <img src="images/Posters/1.jpg" alt="Voicing Places poster" style="width:100%; display:block; border-radius:2px;">
+      <img src="images/Posters/2.jpg" alt="Voicing Places poster" style="width:100%; display:block; border-radius:2px;">
     </div>
 
-    <!-- Bandcamp embed (if applicable)
-    <div class="bandcamp" style="margin-top: 16px;">
-      <iframe src="https://bandcamp.com/EmbeddedPlayer/track=TRACK_ID/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/" seamless></iframe>
-    </div>
-    -->
-
-    <!-- More single photos
-    <img src="images/photo-3.jpg" alt="" style="width:100%; border-radius:2px; display:block; margin-top:16px;">
-    -->
+    <span class="project-section-label">Art Book</span>
+    <p class="coming-soon">Coming soon.</p>
 
   </div><!-- /project-content -->
 

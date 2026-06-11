@@ -1,3 +1,10 @@
 mockups/
 dev-notes.md
 dev-guide.md
+
+# Full-resolution originals (kept locally, not served / not tracked)
+_originals/
+
+# OS noise
+Thumbs.db
+.DS_Store

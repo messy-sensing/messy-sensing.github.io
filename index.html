@@ -4,7 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Messy Sensing</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<meta name="description" content="Messy Sensing is the artist duo Anna Jurkiewicz and Reza Kellner, based in Graz, Austria, working with sound, photography, voice, video and writing. Explore the projects as a hand-drawn map.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Messy Sensing">
+<meta property="og:title" content="Messy Sensing">
+<meta property="og:description" content="Messy Sensing is the artist duo Anna Jurkiewicz and Reza Kellner, based in Graz, Austria, working with sound, photography, voice, video and writing. Explore the projects as a hand-drawn map.">
+<meta property="og:image" content="/og.jpg"><!-- TODO: make absolute (https://your-domain/og.jpg) once the domain is live -->
+<link rel="icon" type="image/svg+xml" href="svg/favicon.svg">
+<script>(function(){var t=localStorage.getItem('ms-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t;})();</script><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 <style>
@@ -88,9 +95,47 @@ canvas { display: block; width: 100%; height: 100%; }
 @media (max-width: 480px) {
   #map-legend { top: auto; bottom: 20px; left: 16px; right: 16px; padding: 10px 14px 12px; }
 }
+
+/* ---- SITE INDEX (for crawlers + screen readers; links slide in on keyboard focus) ---- */
+#site-index a {
+  position: fixed;
+  left: 28px; bottom: -60px;
+  z-index: 40;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 11px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: #141212;
+  background: rgba(242,238,231,.94);
+  border: 1px solid rgba(20,18,18,.25);
+  border-radius: 2px;
+  padding: 8px 14px;
+  text-decoration: none;
+}
+[data-theme="dark"] #site-index a {
+  color: #F0EBE2;
+  background: rgba(14,16,18,.94);
+  border-color: rgba(240,235,226,.2);
+}
+#site-index a:focus { bottom: 24px; }
 </style>
 </head>
 <body>
+
+<nav id="site-index" aria-label="site index">
+  <a href="work/">All work</a>
+  <a href="work/voicing-places/">Voicing Places</a>
+  <a href="work/river-becoming/">River Becoming</a>
+  <a href="work/murky-voices/">Murky Voices</a>
+  <a href="work/beeing-beecoming/">Beeing, Beecoming</a>
+  <a href="work/group-exhibitions/">Group Exhibitions</a>
+  <a href="work/a-word-fell-out/">A Word Fell Out of My Mouth and Broke</a>
+  <a href="work/requiem-for-a-belief/">Requiem for a Belief</a>
+  <a href="soundwalks/">Soundwalks</a>
+  <a href="media.html">Media</a>
+  <a href="info.html#people">About</a>
+  <a href="info.html#archive">Archive</a>
+</nav>
 
 <div id="map-legend">
   <div class="legend-head">Key</div>
@@ -113,6 +158,14 @@ canvas { display: block; width: 100%; height: 100%; }
       <span class="leg-txt">Connections</span>
     </li>
     <li><hr class="legend-rule"></li>
+    <li class="legend-r">
+      <span class="leg-sym">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+          <circle cx="8" cy="8" r="2.5" opacity=".40"/>
+        </svg>
+      </span>
+      <a class="leg-a" href="work/">All Work</a>
+    </li>
     <li class="legend-r">
       <span class="leg-sym">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
@@ -190,7 +243,7 @@ const PLACES = [
   { id: 'about',   label: 'About',   sub: '', type: 'nav', x: 0.83, y: 0.19, href: 'info.html#people'  },
   { id: 'archive', label: 'Archive', sub: '', type: 'nav', x: 0.52, y: 0.88, href: 'info.html#archive' },
   // { id: 'listen',  label: 'Listen',   sub: '', type: 'nav', x: 0.15, y: 0.22, href: 'info.html#listen'  }, // section removed, see dev-notes.md
-  // { id: 'work',    label: 'All Work', sub: '', type: 'nav', x: 0.14, y: 0.46, href: 'work/'             }, // hidden until work grid is polished, see dev-notes.md
+  { id: 'work',    label: 'All Work', sub: '', type: 'nav', x: 0.14, y: 0.46, href: 'work/' },
 ];
 
 const TERRITORIES = [

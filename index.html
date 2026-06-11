@@ -2,7 +2,7 @@
 <html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Messy Sensing</title>
 <meta name="description" content="Messy Sensing is the artist duo Anna Jurkiewicz and Reza Kellner, based in Graz, Austria, working with sound, photography, voice, video and writing. Explore the projects as a hand-drawn map.">
 <meta property="og:type" content="website">
@@ -16,7 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { width: 100%; height: 100%; overflow: hidden; }
+html, body { width: 100%; height: 100%; overflow: hidden; touch-action: manipulation; }
 body { background: #F2EEE7; transition: background 400ms; }
 [data-theme="dark"] body { background: #0E1012; }
 canvas { display: block; width: 100%; height: 100%; }
@@ -76,11 +76,18 @@ canvas { display: block; width: 100%; height: 100%; }
   color: #F0EBE2;
 }
 .legend-head {
+  display: block;
+  background: none;
+  border: none;
+  color: inherit;
+  font-family: inherit;
   font-size: 7px;
   letter-spacing: .26em;
   text-transform: uppercase;
   opacity: .26;
   margin-bottom: 10px;
+  padding: 0;
+  text-align: left;
 }
 .legend-rows { list-style: none; display: flex; flex-direction: column; gap: 4px; }
 .legend-r { display: flex; align-items: center; gap: 9px; }
@@ -92,9 +99,56 @@ canvas { display: block; width: 100%; height: 100%; }
 }
 .leg-a:hover { opacity: 1; }
 .legend-rule { border: none; border-top: 1px solid currentColor; opacity: .10; margin: 5px 0; }
-@media (max-width: 480px) {
-  #map-legend { top: auto; bottom: 20px; left: 16px; right: 16px; padding: 10px 14px 12px; }
+
+/* On small screens the legend collapses to a "Key" chip in the bottom-left corner. */
+@media (max-width: 700px) {
+  #map-legend {
+    top: auto;
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    left: 16px;
+    right: auto;
+    padding: 10px 16px;
+  }
+  .legend-head { font-size: 10px; letter-spacing: .22em; opacity: .55; margin-bottom: 0; }
+  #map-legend .legend-rows { display: none; }
+  #map-legend.open .legend-rows { display: flex; margin-top: 12px; gap: 8px; }
+  #map-legend.open .legend-head { margin-bottom: 0; }
+  .leg-txt, .leg-a { font-size: 11px; }
 }
+
+/* ---- PLACE CARD (tap-to-focus on touch screens) ---- */
+#place-card {
+  position: fixed;
+  left: 50%;
+  bottom: calc(68px + env(safe-area-inset-bottom));
+  transform: translateX(-50%) translateY(10px);
+  z-index: 15;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  max-width: calc(100vw - 32px);
+  padding: 13px 20px;
+  border: 1px solid rgba(20,18,18,.22);
+  border-radius: 2px;
+  background: rgba(242,238,231,.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #141212;
+  text-decoration: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms, transform 200ms;
+}
+#place-card.show { opacity: 1; pointer-events: auto; transform: translateX(-50%); }
+[data-theme="dark"] #place-card {
+  background: rgba(14,16,18,.92);
+  color: #F0EBE2;
+  border-color: rgba(240,235,226,.18);
+}
+.pc-title { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 20px; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pc-sub { font-size: 9px; letter-spacing: .15em; text-transform: uppercase; opacity: .4; white-space: nowrap; }
+.pc-sub:empty { display: none; }
+.pc-open { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; opacity: .65; white-space: nowrap; }
 
 /* ---- SITE INDEX (for crawlers + screen readers; links slide in on keyboard focus) ---- */
 #site-index a {
@@ -138,7 +192,7 @@ canvas { display: block; width: 100%; height: 100%; }
 </nav>
 
 <div id="map-legend">
-  <div class="legend-head">Key</div>
+  <button class="legend-head" id="legend-toggle" aria-expanded="false">Key</button>
   <ul class="legend-rows">
     <li class="legend-r">
       <span class="leg-sym">
@@ -195,6 +249,12 @@ canvas { display: block; width: 100%; height: 100%; }
 
 <canvas id="map"></canvas>
 
+<a id="place-card" href="#" aria-hidden="true" tabindex="-1">
+  <span class="pc-title"></span>
+  <span class="pc-sub"></span>
+  <span class="pc-open">Open &#8594;</span>
+</a>
+
 <button class="theme-btn" id="theme-btn" aria-label="toggle theme">
   <svg viewBox="0 0 24 24" width="14" height="14" fill="none">
     <defs>
@@ -220,30 +280,33 @@ canvas { display: block; width: 100%; height: 100%; }
 
 <script>
 // ====== DATA ======
+// x/y: landscape composition (fractions of viewport).
+// px/py: portrait composition, used when the viewport is taller than wide.
+// side 'L': in portrait, the label draws to the LEFT of the dot.
 const PLACES = [
   // ---- projects ----
   { id: 'voicing-places',   label: 'Voicing Places',         sub: '2024 – 25',
-    type: 'project', x: 0.42, y: 0.40, href: 'work/voicing-places/' },
+    type: 'project', x: 0.42, y: 0.40, px: 0.16, py: 0.120, href: 'work/voicing-places/' },
   { id: 'group-shows',      label: 'Group Exhibitions',      sub: '2024 – 25',
-    type: 'project', x: 0.63, y: 0.30, href: 'work/group-exhibitions/' },
-  { id: 'river-becoming',   label: 'River Becoming',         sub: '2023 – 24',
-    type: 'project', x: 0.57, y: 0.57, href: 'work/river-becoming/' },
+    type: 'project', x: 0.63, y: 0.30, px: 0.80, py: 0.210, side: 'L', href: 'work/group-exhibitions/' },
   { id: 'murky-voices',     label: 'Murky Voices',           sub: '2023 – 24',
-    type: 'project', x: 0.50, y: 0.51, href: 'work/murky-voices/' },
-  { id: 'beeing-beecoming', label: 'Beeing, Beecoming',      sub: '2022 – 23',
-    type: 'project', x: 0.30, y: 0.63, href: 'work/beeing-beecoming/' },
-  { id: 'a-word-fell-out',  label: 'A Word Fell Out',        label2: 'of My Mouth and Broke',
-    sub: '2022',     type: 'project', x: 0.10, y: 0.73, href: 'work/a-word-fell-out/' },
-  { id: 'requiem',          label: 'Requiem for a Belief',   sub: '2021',
-    type: 'project', x: 0.22, y: 0.82, href: 'work/requiem-for-a-belief/' },
+    type: 'project', x: 0.50, y: 0.51, px: 0.22, py: 0.300, href: 'work/murky-voices/' },
+  { id: 'river-becoming',   label: 'River Becoming',         sub: '2023 – 24',
+    type: 'project', x: 0.57, y: 0.57, px: 0.74, py: 0.385, side: 'L', href: 'work/river-becoming/' },
   { id: 'soundwalks',       label: 'Soundwalks',             sub: 'practice',
-    type: 'project', x: 0.76, y: 0.56, href: 'soundwalks/' },
+    type: 'project', x: 0.76, y: 0.56, px: 0.20, py: 0.470, href: 'soundwalks/' },
+  { id: 'beeing-beecoming', label: 'Beeing, Beecoming',      sub: '2022 – 23',
+    type: 'project', x: 0.30, y: 0.63, px: 0.76, py: 0.555, side: 'L', href: 'work/beeing-beecoming/' },
+  { id: 'a-word-fell-out',  label: 'A Word Fell Out',        label2: 'of My Mouth and Broke',
+    sub: '2022',     type: 'project', x: 0.10, y: 0.73, px: 0.18, py: 0.645, href: 'work/a-word-fell-out/' },
+  { id: 'requiem',          label: 'Requiem for a Belief',   sub: '2021',
+    type: 'project', x: 0.22, y: 0.82, px: 0.72, py: 0.735, side: 'L', href: 'work/requiem-for-a-belief/' },
 
   // ---- navigation ----
-  { id: 'about',   label: 'About',   sub: '', type: 'nav', x: 0.83, y: 0.19, href: 'info.html#people'  },
-  { id: 'archive', label: 'Archive', sub: '', type: 'nav', x: 0.52, y: 0.88, href: 'info.html#archive' },
+  { id: 'work',    label: 'All Work', sub: '', type: 'nav', x: 0.14, y: 0.46, px: 0.16, py: 0.835, href: 'work/' },
+  { id: 'about',   label: 'About',   sub: '', type: 'nav', x: 0.83, y: 0.19, px: 0.48, py: 0.865, href: 'info.html#people'  },
+  { id: 'archive', label: 'Archive', sub: '', type: 'nav', x: 0.52, y: 0.88, px: 0.72, py: 0.825, href: 'info.html#archive' },
   // { id: 'listen',  label: 'Listen',   sub: '', type: 'nav', x: 0.15, y: 0.22, href: 'info.html#listen'  }, // section removed, see dev-notes.md
-  { id: 'work',    label: 'All Work', sub: '', type: 'nav', x: 0.14, y: 0.46, href: 'work/' },
 ];
 
 const TERRITORIES = [
@@ -261,6 +324,25 @@ const TERRITORIES = [
   { cx: 0.71, cy: 0.66, r: 0.024, pts: 7,  seed: 37 },
   { cx: 0.06, cy: 0.62, r: 0.020, pts: 6,  seed: 43 },
   { cx: 0.90, cy: 0.58, r: 0.018, pts: 6,  seed: 47 },
+];
+
+// Portrait archipelago: islands stacked top to bottom, alternating left/right.
+const TERRITORIES_PORTRAIT = [
+  { cx: 0.20, cy: 0.120, r: 0.170, pts: 16, seed: 3  }, // voicing places
+  { cx: 0.76, cy: 0.210, r: 0.130, pts: 12, seed: 17 }, // group exhibitions
+  { cx: 0.70, cy: 0.390, r: 0.170, pts: 14, seed: 7  }, // river becoming
+  { cx: 0.26, cy: 0.300, r: 0.090, pts: 10, seed: 41 }, // murky voices
+  { cx: 0.72, cy: 0.555, r: 0.130, pts: 12, seed: 11 }, // beeing beecoming
+  { cx: 0.22, cy: 0.645, r: 0.070, pts: 8,  seed: 53 }, // a word fell out
+  { cx: 0.68, cy: 0.735, r: 0.070, pts: 8,  seed: 59 }, // requiem
+  { cx: 0.24, cy: 0.470, r: 0.110, pts: 12, seed: 67 }, // soundwalks
+  // decorative satellite islands
+  { cx: 0.88, cy: 0.080, r: 0.040, pts: 7,  seed: 23 },
+  { cx: 0.10, cy: 0.210, r: 0.035, pts: 7,  seed: 29 },
+  { cx: 0.50, cy: 0.430, r: 0.030, pts: 7,  seed: 37 },
+  { cx: 0.90, cy: 0.500, r: 0.028, pts: 6,  seed: 43 },
+  { cx: 0.08, cy: 0.880, r: 0.030, pts: 6,  seed: 47 },
+  { cx: 0.52, cy: 0.700, r: 0.025, pts: 6,  seed: 61 },
 ];
 
 const CONNECTIONS = [
@@ -367,6 +449,7 @@ const offscreen = document.createElement('canvas');
 const offCtx    = offscreen.getContext('2d');
 let W = 0, H = 0;
 let cursorX = null, cursorY = null;
+let focused = null; // tap-to-focus selection (touch screens)
 
 function resize() {
   const dpr = window.devicePixelRatio || 1;
@@ -416,7 +499,8 @@ function drawTerrain() {
   offCtx.scale(zoom, zoom);
 
   // territories
-  TERRITORIES.forEach((t, i) => {
+  const T = isPortrait() ? TERRITORIES_PORTRAIT : TERRITORIES;
+  T.forEach((t, i) => {
     const pts = makeBlob(t.cx, t.cy, t.r, t.pts, t.seed, W, H);
     const px  = t.cx*W, py = t.cy*H;
     const lc  = C.land[i % 3];
@@ -461,7 +545,7 @@ function drawTerrain() {
     const a = PLACES.find(p => p.id === aId);
     const b = PLACES.find(p => p.id === bId);
     if (!a || !b) return;
-    const ax = a.x*W, ay = a.y*H, bx = b.x*W, by = b.y*H;
+    const ax = PX(a), ay = PY(a), bx = PX(b), by = PY(b);
     const off = (hash(ci, 0, 55) - 0.5) * Math.min(W,H) * 0.07;
     offCtx.beginPath();
     offCtx.moveTo(ax, ay);
@@ -471,10 +555,11 @@ function drawTerrain() {
   offCtx.setLineDash([]);
   offCtx.restore();
 
-  // place dots + labels
+  // place dots + labels (label side flips in portrait; hit rects stored on each place)
   PLACES.forEach(p => {
-    const px = p.x*W, py = p.y*H;
+    const px = PX(p), py = PY(p);
     const isProject = p.type === 'project';
+    const left = isPortrait() && p.side === 'L';
 
     offCtx.save();
     offCtx.fillStyle = C.fg;
@@ -494,46 +579,84 @@ function drawTerrain() {
 
     offCtx.save();
     offCtx.fillStyle = C.fg;
+    offCtx.textAlign = left ? 'right' : 'left';
     if (isProject) {
       const hasL2 = !!p.label2;
+      const lx = left ? px - 13 : px + 13;
       offCtx.globalAlpha = 0.82;
       offCtx.font = 'italic 400 17px "EB Garamond", Georgia, serif';
-      offCtx.fillText(p.label, px+13, py + (hasL2 ? -10 : -5));
-      if (hasL2) offCtx.fillText(p.label2, px+13, py+7);
+      const lw = Math.max(
+        offCtx.measureText(p.label).width,
+        hasL2 ? offCtx.measureText(p.label2).width : 0
+      );
+      offCtx.fillText(p.label, lx, py + (hasL2 ? -10 : -5));
+      if (hasL2) offCtx.fillText(p.label2, lx, py+7);
       if (p.sub) {
         offCtx.globalAlpha = 0.30;
         offCtx.font = '300 9px "Inter", system-ui, sans-serif';
-        offCtx.fillText(p.sub, px+13, py + (hasL2 ? 20 : 9));
+        offCtx.fillText(p.sub, lx, py + (hasL2 ? 20 : 9));
       }
+      p._hit = {
+        x0: left ? px - 13 - lw : px - 14,
+        x1: left ? px + 14 : px + 13 + lw,
+        y0: py - (hasL2 ? 26 : 20),
+        y1: py + (hasL2 ? 28 : 18),
+      };
     } else {
+      const lx = left ? px - 10 : px + 10;
       offCtx.globalAlpha = 0.36;
       offCtx.font = '300 9px "Inter", system-ui, sans-serif';
-      offCtx.fillText(p.label.toUpperCase(), px+10, py+4);
+      const lw = offCtx.measureText(p.label.toUpperCase()).width;
+      offCtx.fillText(p.label.toUpperCase(), lx, py+4);
+      p._hit = {
+        x0: left ? px - 10 - lw : px - 12,
+        x1: left ? px + 12 : px + 10 + lw,
+        y0: py - 16,
+        y1: py + 16,
+      };
     }
     offCtx.restore();
   });
 
   // scale bar
-  drawScaleBar(offCtx, W/2, H-28, 72, C);
+  drawScaleBar(offCtx, W/2, isPortrait() ? H - 30 : H - 28, 72, C);
 
-  // title ghost (bottom left)
+  // title ghost (bottom left on desktop, top left in portrait)
   offCtx.save();
-  const ts = Math.max(26, Math.min(W*0.038, 48));
+  const ts = isPortrait()
+    ? Math.max(22, Math.min(W*0.075, 32))
+    : Math.max(26, Math.min(W*0.038, 48));
   offCtx.globalAlpha = 0.12;
   offCtx.fillStyle = C.fg;
   offCtx.font = `italic 400 ${ts}px "EB Garamond", Georgia, serif`;
-  offCtx.fillText('Messy Sensing', 44, H - 40);
+  if (isPortrait()) offCtx.fillText('Messy Sensing', 20, 24 + ts);
+  else offCtx.fillText('Messy Sensing', 44, H - 40);
   offCtx.restore();
 
   offCtx.restore(); // end zoom transform
 }
 
-// Composite terrain + live compass (called on every mousemove)
+// Composite terrain + live compass + focus halo (called on every mousemove / focus change)
 function drawFrame() {
   if (!W) return;
   ctx.clearRect(0, 0, W, H);
   ctx.drawImage(offscreen, 0, 0, W, H);
-  drawCompass(ctx, W-58, H-66, 28, palette(), cursorX, cursorY);
+  if (isPortrait()) drawCompass(ctx, W-54, 132, 26, palette(), cursorX, cursorY);
+  else drawCompass(ctx, W-58, H-66, 28, palette(), cursorX, cursorY);
+  if (focused) {
+    const zoom = getZoom(), { ox, oy } = getOffset(zoom);
+    const fx = ox + PX(focused)*zoom, fy = oy + PY(focused)*zoom;
+    const C = palette();
+    ctx.save();
+    ctx.fillStyle = C.fg;
+    ctx.strokeStyle = C.fg;
+    ctx.globalAlpha = 0.08;
+    ctx.beginPath(); ctx.arc(fx, fy, 24, 0, Math.PI*2); ctx.fill();
+    ctx.globalAlpha = 0.55;
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(fx, fy, 13, 0, Math.PI*2); ctx.stroke();
+    ctx.restore();
+  }
 }
 
 function draw() {
@@ -632,25 +755,29 @@ function drawScaleBar(ctx, cx, cy, len, C) {
   ctx.restore();
 }
 
-// ====== ZOOM (mobile) ======
-function getZoom() { return W < 700 ? 0.72 : 1; }
+// ====== LAYOUT MODE / ZOOM ======
+function isPortrait() { return H > W; }
+// Place coordinates: portrait set when available and the viewport is portrait.
+function PX(p) { return (isPortrait() && p.px != null ? p.px : p.x) * W; }
+function PY(p) { return (isPortrait() && p.py != null ? p.py : p.y) * H; }
+// The 0.72 shrink is only needed for narrow LANDSCAPE windows; portrait has its own coords.
+function getZoom() { return (!isPortrait() && W < 700) ? 0.72 : 1; }
 function getOffset(zoom) { return { ox: W*(1-zoom)/2, oy: H*(1-zoom)/2 }; }
 
 // ====== HIT TEST ======
-function hitPlace(mx, my) {
+// Uses the label rects measured during drawTerrain (p._hit), so taps can't land
+// on a neighbour's oversized hit band. `pad` widens everything for fingers.
+function hitPlace(mx, my, pad = 0) {
   const zoom = getZoom();
   const { ox, oy } = getOffset(zoom);
   const tx = (mx - ox) / zoom;
   const ty = (my - oy) / zoom;
   return PLACES.find(p => {
-    const px = p.x*W, py = p.y*H;
+    const px = PX(p), py = PY(p);
     const dx = px - tx, dy = py - ty;
-    if (Math.sqrt(dx*dx+dy*dy) < 20) return true;
-    if (tx >= px + 8 && tx <= px + 220) {
-      const yRange = p.label2 ? 30 : 22;
-      if (ty >= py - yRange && ty <= py + yRange) return true;
-    }
-    return false;
+    if (Math.sqrt(dx*dx+dy*dy) < 20 + pad) return true;
+    const r = p._hit;
+    return r && tx >= r.x0 - pad && tx <= r.x1 + pad && ty >= r.y0 - pad && ty <= r.y1 + pad;
   });
 }
 
@@ -680,15 +807,60 @@ canvas.addEventListener('mouseleave', () => {
   if (comp) comp.style.color = '';
   drawFrame();
 });
+// ====== TAP-TO-FOCUS (touch) ======
+// First tap selects a place (halo + card), second tap on the same place navigates.
+// Mouse clicks keep navigating directly.
+const card = document.getElementById('place-card');
+
+function focusPlace(p) {
+  focused = p || null;
+  if (focused) {
+    card.href = focused.href;
+    card.querySelector('.pc-title').textContent =
+      focused.label + (focused.label2 ? ' ' + focused.label2 : '');
+    card.querySelector('.pc-sub').textContent = focused.sub || '';
+    card.classList.add('show');
+    card.setAttribute('aria-hidden', 'false');
+    card.removeAttribute('tabindex');
+  } else {
+    card.classList.remove('show');
+    card.setAttribute('aria-hidden', 'true');
+    card.setAttribute('tabindex', '-1');
+  }
+  drawFrame();
+}
+
+let lastTouch = 0;
+let touchStart = null;
+
+canvas.addEventListener('touchstart', e => {
+  const t = e.touches[0];
+  touchStart = { x: t.clientX, y: t.clientY };
+}, { passive: true });
+
+canvas.addEventListener('touchend', e => {
+  lastTouch = Date.now();
+  const t = e.changedTouches[0];
+  if (touchStart && Math.hypot(t.clientX - touchStart.x, t.clientY - touchStart.y) > 12) return;
+  const p = hitPlace(t.clientX, t.clientY, 14);
+  if (!p) { focusPlace(null); return; }
+  if (p === focused) { window.location.href = p.href; return; }
+  focusPlace(p);
+}, { passive: true });
+
 canvas.addEventListener('click', e => {
+  if (Date.now() - lastTouch < 700) return; // synthetic click after a touch tap
   const p = hitPlace(e.clientX, e.clientY);
   if (p) window.location.href = p.href;
 });
-canvas.addEventListener('touchend', e => {
-  const t = e.changedTouches[0];
-  const p = hitPlace(t.clientX, t.clientY);
-  if (p) window.location.href = p.href;
-}, { passive: true });
+
+// ====== LEGEND TOGGLE (chip on small screens) ======
+const legendEl = document.getElementById('map-legend');
+const legendToggle = document.getElementById('legend-toggle');
+legendToggle.addEventListener('click', () => {
+  const open = legendEl.classList.toggle('open');
+  legendToggle.setAttribute('aria-expanded', String(open));
+});
 
 // ====== BLOB CURSOR ======
 if (window.matchMedia('(pointer: fine)').matches) (function () {
@@ -708,8 +880,15 @@ if (window.matchMedia('(pointer: fine)').matches) (function () {
 })();
 
 // ====== INIT ======
-window.addEventListener('resize', () => { resize(); draw(); });
-document.fonts.ready.then(() => { resize(); draw(); });
+window.addEventListener('resize', () => { resize(); draw(); if (focused) focusPlace(focused); });
+document.fonts.ready.then(() => {
+  resize(); draw();
+  // debug hooks for screenshots/testing: ?focus=<place-id>&legend=open
+  const q = new URLSearchParams(location.search);
+  const f = q.get('focus');
+  if (f) { const p = PLACES.find(p => p.id === f); if (p) focusPlace(p); }
+  if (q.get('legend') === 'open') legendToggle.click();
+});
 </script>
 </body>
 </html>

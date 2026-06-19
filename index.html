@@ -613,11 +613,12 @@ function drawTerrain(p = 1) {
         y1: py + (hasL2 ? 28 : 18),
       };
     } else {
+      const big = p.id === 'about';
       const lx = left ? px - 10 : px + 10;
-      offCtx.globalAlpha = 0.36 * late;
-      offCtx.font = '300 9px "Inter", system-ui, sans-serif';
+      offCtx.globalAlpha = (big ? 0.5 : 0.36) * late;
+      offCtx.font = (big ? '300 15px' : '300 9px') + ' "Inter", system-ui, sans-serif';
       const lw = offCtx.measureText(p.label.toUpperCase()).width;
-      offCtx.fillText(p.label.toUpperCase(), lx, py+4);
+      offCtx.fillText(p.label.toUpperCase(), lx, py + (big ? 5 : 4));
       p._hit = {
         x0: left ? px - 10 - lw : px - 12,
         x1: left ? px + 12 : px + 10 + lw,

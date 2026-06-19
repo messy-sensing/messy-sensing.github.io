@@ -110,7 +110,7 @@
 .archive-inner { max-width: 1360px; margin: 0 auto; padding: 0 52px; }
 .archive-desc { font-size: 14px; line-height: 1.7; opacity: .55; margin-top: 16px; max-width: 52ch; }
 .shows { list-style: none; margin-top: 52px; }
-.show { display: grid; grid-template-columns: 72px 110px 1fr 160px; gap: 24px; padding: 16px 0; border-bottom: 1px solid rgba(20,18,18,.08); align-items: baseline; }
+.show { display: grid; grid-template-columns: 72px 110px 1fr 160px; gap: 24px; padding: 16px 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
 .show-year { font-size: 11px; letter-spacing: .14em; opacity: .38; }
 .show-type { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; opacity: .32; padding-top: 2px; }
 .show-title { font-family: var(--serif); font-size: 17px; font-style: italic; }
@@ -163,7 +163,8 @@
 
 <nav id="nav">
   <a href="index.html" class="nav-logo" id="logo-link">
-    <img src="svg/logo.svg" alt="Messy Sensing">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="3.5" opacity=".75"/><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width=".8" opacity=".3"/></svg>
+    <span>Messy Sensing</span>
   </a>
   <div class="nav-right">
     <ul class="nav-links">
@@ -190,7 +191,7 @@
       <p>It wants to honour all kinds of bodies, surrounded and absorbed by messy feasting and messy growing. Perpetual sensory exchanges and negotiations between crowds of not closely related bodies, affected by each other.</p>
     </div>
     <div class="about-photo">
-      <img width="978" height="652" loading="lazy" decoding="async" src="photo_2024-04-30_17-27-052.jpg" alt="Messy Sensing, Anna Jurkiewicz and Reza Kellner, 2024">
+      <img width="978" height="652" loading="lazy" decoding="async" srcset="photo_2024-04-30_17-27-052-800.jpg 800w, photo_2024-04-30_17-27-052.jpg 978w" sizes="(min-width: 1465px) 588px, (max-width: 860px) calc(100vw - 48px), calc((100vw - 184px)/2)" src="photo_2024-04-30_17-27-052.jpg" alt="Messy Sensing, Anna Jurkiewicz and Reza Kellner, 2024">
     </div>
   </div>
 </section>

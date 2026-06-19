@@ -22,6 +22,9 @@ body { background: #F2EEE7; transition: background 400ms; }
 canvas { display: block; width: 100%; height: 100%; }
 @media (pointer: fine) { canvas, canvas.hovering, #map-legend, #map-legend * { cursor: none; } }
 
+a:focus-visible, button:focus-visible { outline: 1px solid #141212; outline-offset: 3px; border-radius: 2px; }
+[data-theme="dark"] a:focus-visible, [data-theme="dark"] button:focus-visible { outline-color: #F0EBE2; }
+
 #cursor-blob {
   position: fixed; left: 0; top: 0;
   pointer-events: none; z-index: 99999;
@@ -463,10 +466,12 @@ function resize() {
   offCtx.scale(dpr, dpr);
 }
 
-// ====== DRAW TERRAIN (offscreen, redrawn only on resize or theme change) ======
-function drawTerrain() {
+// ====== DRAW TERRAIN (offscreen; p < 1 only during the intro animation) ======
+function drawTerrain(p = 1) {
   if (!W) return;
   const C = palette();
+  const easeP = t => Math.min(Math.max(t, 0), 1);
+  const late = easeP((p - 0.55) / 0.45); // connections, labels, furniture appear after the islands
   offCtx.clearRect(0, 0, W, H);
 
   // sea texture
@@ -501,11 +506,15 @@ function drawTerrain() {
   // territories
   const T = isPortrait() ? TERRITORIES_PORTRAIT : TERRITORIES;
   T.forEach((t, i) => {
-    const pts = makeBlob(t.cx, t.cy, t.r, t.pts, t.seed, W, H);
+    const li = easeP(p * 1.6 - i * 0.07); // staggered island reveal
+    if (li === 0) return;
+    let pts = makeBlob(t.cx, t.cy, t.r, t.pts, t.seed, W, H);
     const px  = t.cx*W, py = t.cy*H;
+    if (li < 1) pts = scaledBlob(pts, px, py, 0.86 + 0.14 * li);
     const lc  = C.land[i % 3];
 
     offCtx.save();
+    offCtx.globalAlpha = li;
 
     drawSmooth(offCtx, pts);
     offCtx.fillStyle = lc + '0.12)';
@@ -538,6 +547,7 @@ function drawTerrain() {
 
   // connection paths (dashed)
   offCtx.save();
+  offCtx.globalAlpha = late;
   offCtx.setLineDash([3, 9]);
   offCtx.lineWidth = 0.8;
   offCtx.strokeStyle = C.fgA + '0.12)';
@@ -565,13 +575,13 @@ function drawTerrain() {
     offCtx.fillStyle = C.fg;
     offCtx.beginPath();
     offCtx.arc(px, py, isProject ? 3.5 : 2.5, 0, Math.PI*2);
-    offCtx.globalAlpha = isProject ? 0.78 : 0.38;
+    offCtx.globalAlpha = (isProject ? 0.78 : 0.38) * late;
     offCtx.fill();
     if (isProject) {
       offCtx.beginPath();
       offCtx.arc(px, py, 7, 0, Math.PI*2);
       offCtx.strokeStyle = C.fg;
-      offCtx.globalAlpha = 0.15;
+      offCtx.globalAlpha = 0.15 * late;
       offCtx.lineWidth = 0.8;
       offCtx.stroke();
     }
@@ -583,7 +593,7 @@ function drawTerrain() {
     if (isProject) {
       const hasL2 = !!p.label2;
       const lx = left ? px - 13 : px + 13;
-      offCtx.globalAlpha = 0.82;
+      offCtx.globalAlpha = 0.82 * late;
       offCtx.font = 'italic 400 17px "EB Garamond", Georgia, serif';
       const lw = Math.max(
         offCtx.measureText(p.label).width,
@@ -592,7 +602,7 @@ function drawTerrain() {
       offCtx.fillText(p.label, lx, py + (hasL2 ? -10 : -5));
       if (hasL2) offCtx.fillText(p.label2, lx, py+7);
       if (p.sub) {
-        offCtx.globalAlpha = 0.30;
+        offCtx.globalAlpha = 0.30 * late;
         offCtx.font = '300 9px "Inter", system-ui, sans-serif';
         offCtx.fillText(p.sub, lx, py + (hasL2 ? 20 : 9));
       }
@@ -604,7 +614,7 @@ function drawTerrain() {
       };
     } else {
       const lx = left ? px - 10 : px + 10;
-      offCtx.globalAlpha = 0.36;
+      offCtx.globalAlpha = 0.36 * late;
       offCtx.font = '300 9px "Inter", system-ui, sans-serif';
       const lw = offCtx.measureText(p.label.toUpperCase()).width;
       offCtx.fillText(p.label.toUpperCase(), lx, py+4);
@@ -619,14 +629,14 @@ function drawTerrain() {
   });
 
   // scale bar
-  drawScaleBar(offCtx, W/2, isPortrait() ? H - 30 : H - 28, 72, C);
+  drawScaleBar(offCtx, W/2, isPortrait() ? H - 30 : H - 28, 72, C, late);
 
   // title ghost (bottom left on desktop, top left in portrait)
   offCtx.save();
   const ts = isPortrait()
     ? Math.max(22, Math.min(W*0.075, 32))
     : Math.max(26, Math.min(W*0.038, 48));
-  offCtx.globalAlpha = 0.12;
+  offCtx.globalAlpha = 0.12 * late;
   offCtx.fillStyle = C.fg;
   offCtx.font = `italic 400 ${ts}px "EB Garamond", Georgia, serif`;
   if (isPortrait()) offCtx.fillText('Messy Sensing', 20, 24 + ts);
@@ -659,8 +669,8 @@ function drawFrame() {
   }
 }
 
-function draw() {
-  drawTerrain();
+function draw(p = 1) {
+  drawTerrain(p);
   drawFrame();
 }
 
@@ -738,9 +748,9 @@ function drawCompass(ctx, cx, cy, r, C, mx, my) {
   ctx.restore();
 }
 
-function drawScaleBar(ctx, cx, cy, len, C) {
+function drawScaleBar(ctx, cx, cy, len, C, a = 1) {
   ctx.save();
-  ctx.globalAlpha = 0.16;
+  ctx.globalAlpha = 0.16 * a;
   ctx.strokeStyle = C.fg;
   ctx.fillStyle   = C.fg;
   ctx.lineWidth = 0.8;
@@ -881,8 +891,22 @@ if (window.matchMedia('(pointer: fine)').matches) (function () {
 
 // ====== INIT ======
 window.addEventListener('resize', () => { resize(); draw(); if (focused) focusPlace(focused); });
+// First visit per session: the map draws itself in. Skipped for reduced motion.
+function intro() {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced || sessionStorage.getItem('ms-intro')) { draw(); return; }
+  sessionStorage.setItem('ms-intro', '1');
+  const t0 = performance.now(), DUR = 1400;
+  requestAnimationFrame(function tick(now) {
+    const t = Math.min((now - t0) / DUR, 1);
+    draw(1 - Math.pow(1 - t, 3)); // ease-out cubic
+    if (t < 1) requestAnimationFrame(tick);
+  });
+}
+
 document.fonts.ready.then(() => {
-  resize(); draw();
+  resize();
+  intro();
   // debug hooks for screenshots/testing: ?focus=<place-id>&legend=open
   const q = new URLSearchParams(location.search);
   const f = q.get('focus');

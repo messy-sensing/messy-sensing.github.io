@@ -37,7 +37,7 @@
 .project-text-detail strong { font-weight: 400; opacity: .75; }
 .project-section-label { display: block; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; opacity: .38; margin: 72px 0 24px; }
 .support-note { font-size: 11px; letter-spacing: .08em; opacity: .32; margin-top: 52px; line-height: 1.8; }
-.project-nav-bar { max-width: 1360px; margin: 80px auto 0; padding: 36px 52px; border-top: 1px solid rgba(20,18,18,.1); display: flex; justify-content: space-between; position: relative; z-index: 1; }
+.project-nav-bar { max-width: 1360px; margin: 80px auto 0; padding: 36px 52px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; position: relative; z-index: 1; }
 .project-nav-bar a { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--fg); text-decoration: none; opacity: .38; transition: opacity 200ms; }
 .project-nav-bar a:hover { opacity: 1; }
 .pn-next::after { content: ' →'; }
@@ -65,7 +65,8 @@
 
 <nav id="nav">
   <a href="../../" class="nav-logo" id="logo-link">
-    <img src="../../svg/logo.svg" alt="Messy Sensing">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="3.5" opacity=".75"/><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width=".8" opacity=".3"/></svg>
+    <span>Messy Sensing</span>
   </a>
   <div class="nav-right">
     <ul class="nav-links">
@@ -95,12 +96,14 @@
 
     <p class="project-lead">A video-performance experiment on the cycle of transforming matter, working with performer Vera Hagemann. An important source of inspiration was the multi-sensory cinematography of Sergei Paradjanov (<em>The Colour of Pomegranates</em>).</p>
 
-    <div class="vimeo" style="margin-bottom: 80px;">
-      <iframe src="https://player.vimeo.com/video/776383684?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
-        frameborder="0"
-        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-        referrerpolicy="strict-origin-when-cross-origin"
-        title="A Word Fell Out of My Mouth and Broke"></iframe>
+    <div class="vimeo vimeo-f" style="margin-bottom: 80px;" data-src="https://player.vimeo.com/video/776383684?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&autoplay=1" data-title="A Word Fell Out of My Mouth and Broke">
+      <img src="../../posters/776383684.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+      <button type="button" class="vimeo-play" aria-label="Play video: A Word Fell Out of My Mouth and Broke">
+        <svg viewBox="0 0 64 64" width="56" height="56" fill="none" aria-hidden="true">
+          <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="1.2" opacity=".9"/>
+          <path d="M26 21.5 45 32 26 42.5 Z" fill="currentColor"/>
+        </svg>
+      </button>
     </div>
 
     <div class="project-text-cols">
@@ -126,7 +129,7 @@
       </div>
     </div>
 
-    <img width="558" height="794" loading="lazy" decoding="async" src="images/d01632652e-poster.jpg"
+    <img width="558" height="794" loading="lazy" decoding="async" srcset="images/d01632652e-poster-800.jpg 558w, images/d01632652e-poster.jpg 558w" sizes="(max-width: 412px) calc(100vw - 48px), 340px" src="images/d01632652e-poster.jpg"
       alt="A Word Fell Out of My Mouth and Broke — poster"
       style="display:block; width:100%; max-width:340px; border-radius:2px; margin-top:52px;">
 

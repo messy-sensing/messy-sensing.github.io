@@ -35,7 +35,7 @@
 .project-text-detail { font-size: 13px; line-height: 1.8; opacity: .55; }
 .project-text-detail p + p { margin-top: 10px; }
 .project-text-detail strong { font-weight: 400; opacity: .75; }
-.project-nav-bar { max-width: 1360px; margin: 80px auto 0; padding: 36px 52px; border-top: 1px solid rgba(20,18,18,.1); display: flex; justify-content: space-between; position: relative; z-index: 1; }
+.project-nav-bar { max-width: 1360px; margin: 80px auto 0; padding: 36px 52px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; position: relative; z-index: 1; }
 .project-nav-bar a { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--fg); text-decoration: none; opacity: .38; transition: opacity 200ms; }
 .project-nav-bar a:hover { opacity: 1; }
 .pn-prev::before { content: '← '; }
@@ -62,7 +62,8 @@
 
 <nav id="nav">
   <a href="../../" class="nav-logo" id="logo-link">
-    <img src="../../svg/logo.svg" alt="Messy Sensing">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="3.5" opacity=".75"/><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width=".8" opacity=".3"/></svg>
+    <span>Messy Sensing</span>
   </a>
   <div class="nav-right">
     <ul class="nav-links">
@@ -92,12 +93,14 @@
 
     <p class="project-lead">Three performers immersed in parallel processes, creating a ritual timespace for 13 minutes — exploring historic practices as natural cycles of decay and disintegration.</p>
 
-    <div class="vimeo" style="margin-bottom: 80px;">
-      <iframe src="https://player.vimeo.com/video/684352693?h=9648f75f28&badge=0&autopause=0&player_id=0&app_id=58479"
-        frameborder="0"
-        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-        referrerpolicy="strict-origin-when-cross-origin"
-        title="Requiem for a Belief"></iframe>
+    <div class="vimeo vimeo-f" style="margin-bottom: 80px;" data-src="https://player.vimeo.com/video/684352693?h=9648f75f28&badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1" data-title="Requiem for a Belief">
+      <img src="../../posters/684352693.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+      <button type="button" class="vimeo-play" aria-label="Play video: Requiem for a Belief">
+        <svg viewBox="0 0 64 64" width="56" height="56" fill="none" aria-hidden="true">
+          <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="1.2" opacity=".9"/>
+          <path d="M26 21.5 45 32 26 42.5 Z" fill="currentColor"/>
+        </svg>
+      </button>
     </div>
 
     <div class="project-text-cols">

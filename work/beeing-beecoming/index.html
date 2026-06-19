@@ -40,7 +40,7 @@
 .photo-credit { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; opacity: .28; margin-top: 6px; margin-bottom: 52px; }
 .photo-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px; }
 .photo-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
-.project-nav-bar { max-width: 1360px; margin: 80px auto 0; padding: 36px 52px; border-top: 1px solid rgba(20,18,18,.1); display: flex; justify-content: space-between; position: relative; z-index: 1; }
+.project-nav-bar { max-width: 1360px; margin: 80px auto 0; padding: 36px 52px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; position: relative; z-index: 1; }
 .project-nav-bar a { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--fg); text-decoration: none; opacity: .38; transition: opacity 200ms; }
 .project-nav-bar a:hover { opacity: 1; }
 .pn-next::after { content: ' →'; }
@@ -92,7 +92,8 @@
 
 <nav id="nav">
   <a href="../../" class="nav-logo" id="logo-link">
-    <img src="../../svg/logo.svg" alt="Messy Sensing">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="3.5" opacity=".75"/><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width=".8" opacity=".3"/></svg>
+    <span>Messy Sensing</span>
   </a>
   <div class="nav-right">
     <ul class="nav-links">
@@ -139,57 +140,77 @@
       </div>
     </div>
 
-    <img width="1600" height="1069" loading="lazy" decoding="async" src="images/1.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px; margin-bottom:10px;">
+    <img width="1600" height="1069" loading="lazy" decoding="async" srcset="images/1-800.jpg 800w, images/1.jpg 1600w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="images/1.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px; margin-bottom:10px;">
     <div class="photo-grid-2" style="margin-bottom:10px;">
-      <img width="1600" height="1068" loading="lazy" decoding="async" src="images/2.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1067" loading="lazy" decoding="async" src="images/3.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1068" loading="lazy" decoding="async" srcset="images/2-800.jpg 800w, images/2.jpg 1600w" sizes="(min-width: 1465px) 623px, (max-width: 860px) calc(100vw - 48px), calc((100vw - 114px)/2)" src="images/2.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1067" loading="lazy" decoding="async" srcset="images/3-800.jpg 800w, images/3.jpg 1600w" sizes="(min-width: 1465px) 623px, (max-width: 860px) calc(100vw - 48px), calc((100vw - 114px)/2)" src="images/3.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
     </div>
-    <img width="1600" height="1069" loading="lazy" decoding="async" src="images/4.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px; margin-bottom:10px;">
+    <img width="1600" height="1069" loading="lazy" decoding="async" srcset="images/4-800.jpg 800w, images/4.jpg 1600w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="images/4.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px; margin-bottom:10px;">
     <div class="photo-grid-3" style="margin-bottom:10px;">
-      <img width="1600" height="1069" loading="lazy" decoding="async" src="images/6.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1069" loading="lazy" decoding="async" src="images/7.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1068" loading="lazy" decoding="async" src="images/8.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1069" loading="lazy" decoding="async" srcset="images/6-800.jpg 800w, images/6.jpg 1600w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/6.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1069" loading="lazy" decoding="async" srcset="images/7-800.jpg 800w, images/7.jpg 1600w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/7.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1068" loading="lazy" decoding="async" srcset="images/8-800.jpg 800w, images/8.jpg 1600w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/8.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
     </div>
     <p class="photo-credit">Photography — Reza Kellner</p>
 
     <span class="project-section-label">Video works</span>
 
     <div class="video-grid">
-      <div class="vimeo">
-        <iframe src="https://player.vimeo.com/video/907040139?title=0&byline=0&portrait=0&badge=0&app_id=58479"
-                frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                allowfullscreen title="Beeing Beecoming (excerpt)"></iframe>
+      <div class="video-item">
+      <div class="vimeo vimeo-f" data-src="https://player.vimeo.com/video/907040139?title=0&byline=0&portrait=0&badge=0&app_id=58479&autoplay=1" data-title="Beeing Beecoming (excerpt)">
+        <img src="../../posters/907040139.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+        <button type="button" class="vimeo-play" aria-label="Play video: Beeing Beecoming (excerpt)">
+          <svg viewBox="0 0 64 64" width="56" height="56" fill="none" aria-hidden="true">
+            <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="1.2" opacity=".9"/>
+            <path d="M26 21.5 45 32 26 42.5 Z" fill="currentColor"/>
+          </svg>
+        </button>
       </div>
-      <div class="vimeo">
-        <iframe src="https://player.vimeo.com/video/929119945?title=0&byline=0&portrait=0&badge=0&app_id=58479"
-                frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                allowfullscreen title="Beeing Beecoming — Deepmapping a Meadow"></iframe>
+      <p class="video-cap">Beeing Beecoming (excerpt)</p>
       </div>
-      <div class="vimeo">
-        <iframe src="https://player.vimeo.com/video/1193056061?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
-                frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                title="bee drone"></iframe>
+      <div class="video-item">
+      <div class="vimeo vimeo-f" data-src="https://player.vimeo.com/video/929119945?title=0&byline=0&portrait=0&badge=0&app_id=58479&autoplay=1" data-title="Beeing Beecoming — Deepmapping a Meadow">
+        <img src="../../posters/929119945.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+        <button type="button" class="vimeo-play" aria-label="Play video: Beeing Beecoming — Deepmapping a Meadow">
+          <svg viewBox="0 0 64 64" width="56" height="56" fill="none" aria-hidden="true">
+            <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="1.2" opacity=".9"/>
+            <path d="M26 21.5 45 32 26 42.5 Z" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+      <p class="video-cap">Beeing Beecoming — Deepmapping a Meadow</p>
+      </div>
+      <div class="video-item">
+      <div class="vimeo vimeo-f" data-src="https://player.vimeo.com/video/1193056061?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&autoplay=1" data-title="bee drone">
+        <img src="../../posters/1193056061.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+        <button type="button" class="vimeo-play" aria-label="Play video: bee drone">
+          <svg viewBox="0 0 64 64" width="56" height="56" fill="none" aria-hidden="true">
+            <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="1.2" opacity=".9"/>
+            <path d="M26 21.5 45 32 26 42.5 Z" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+      <p class="video-cap">bee drone</p>
       </div>
     </div>
 
     <div class="photo-grid-2" style="margin-bottom:10px;">
-      <img width="1132" height="1600" loading="lazy" decoding="async" src="images/9.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1069" loading="lazy" decoding="async" src="images/9_2.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
+      <img width="1132" height="1600" loading="lazy" decoding="async" srcset="images/9-800.jpg 566w, images/9.jpg 1132w" sizes="(min-width: 1465px) 623px, (max-width: 860px) calc(100vw - 48px), calc((100vw - 114px)/2)" src="images/9.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1069" loading="lazy" decoding="async" srcset="images/9_2-800.jpg 800w, images/9_2.jpg 1600w" sizes="(min-width: 1465px) 623px, (max-width: 860px) calc(100vw - 48px), calc((100vw - 114px)/2)" src="images/9_2.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
     </div>
     <div class="photo-grid-3" style="margin-bottom:10px;">
-      <img width="1600" height="1067" loading="lazy" decoding="async" src="images/10.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
-      <img width="1132" height="1600" loading="lazy" decoding="async" src="images/12.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
-      <img width="1132" height="1600" loading="lazy" decoding="async" src="images/13.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1067" loading="lazy" decoding="async" srcset="images/10-800.jpg 800w, images/10.jpg 1600w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/10.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
+      <img width="1132" height="1600" loading="lazy" decoding="async" srcset="images/12-800.jpg 566w, images/12.jpg 1132w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/12.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
+      <img width="1132" height="1600" loading="lazy" decoding="async" srcset="images/13-800.jpg 566w, images/13.jpg 1132w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/13.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
     </div>
     <div class="photo-grid-3" style="margin-bottom:10px;">
-      <img width="1132" height="1600" loading="lazy" decoding="async" src="images/14.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
-      <img width="1132" height="1600" loading="lazy" decoding="async" src="images/15.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
-      <img width="1067" height="1600" loading="lazy" decoding="async" src="images/16.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
+      <img width="1132" height="1600" loading="lazy" decoding="async" srcset="images/14-800.jpg 566w, images/14.jpg 1132w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/14.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
+      <img width="1132" height="1600" loading="lazy" decoding="async" srcset="images/15-800.jpg 566w, images/15.jpg 1132w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/15.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
+      <img width="1067" height="1600" loading="lazy" decoding="async" srcset="images/16-800.jpg 534w, images/16.jpg 1067w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/16.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
     </div>
     <div class="photo-grid-2">
-      <img width="1600" height="900" loading="lazy" decoding="async" src="images/17.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1067" loading="lazy" decoding="async" src="images/18.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="900" loading="lazy" decoding="async" srcset="images/17-800.jpg 800w, images/17.jpg 1600w" sizes="(min-width: 1465px) 623px, (max-width: 860px) calc(100vw - 48px), calc((100vw - 114px)/2)" src="images/17.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1067" loading="lazy" decoding="async" srcset="images/18-800.jpg 800w, images/18.jpg 1600w" sizes="(min-width: 1465px) 623px, (max-width: 860px) calc(100vw - 48px), calc((100vw - 114px)/2)" src="images/18.jpg" alt="Beeing, Beecoming" style="width:100%; display:block; border-radius:2px;">
     </div>
     <p class="photo-credit">Photography — Reza Kellner</p>
 
@@ -197,12 +218,12 @@
 
     <div class="slide-viewer">
       <div class="slide-stage">
-        <img width="1131" height="1600" loading="lazy" decoding="async" src="images/portfolio/000.jpg" alt="Beeing, Beecoming portfolio" class="active">
-        <img width="1131" height="1600" loading="lazy" decoding="async" src="images/portfolio/001.jpg" alt="Beeing, Beecoming portfolio">
-        <img width="1131" height="1600" loading="lazy" decoding="async" src="images/portfolio/002.jpg" alt="Beeing, Beecoming portfolio">
-        <img width="1131" height="1600" loading="lazy" decoding="async" src="images/portfolio/003.jpg" alt="Beeing, Beecoming portfolio">
-        <img width="1131" height="1600" loading="lazy" decoding="async" src="images/portfolio/004.jpg" alt="Beeing, Beecoming portfolio">
-        <img width="1131" height="1600" loading="lazy" decoding="async" src="images/portfolio/005.jpg" alt="Beeing, Beecoming portfolio">
+        <img width="1131" height="1600" loading="lazy" decoding="async" srcset="images/portfolio/000-800.jpg 566w, images/portfolio/000.jpg 1131w, images/portfolio/000-2400.jpg 1697w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="images/portfolio/000.jpg" alt="Beeing, Beecoming portfolio" class="active">
+        <img width="1131" height="1600" loading="lazy" decoding="async" srcset="images/portfolio/001-800.jpg 566w, images/portfolio/001.jpg 1131w, images/portfolio/001-2400.jpg 1697w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="images/portfolio/001.jpg" alt="Beeing, Beecoming portfolio">
+        <img width="1131" height="1600" loading="lazy" decoding="async" srcset="images/portfolio/002-800.jpg 566w, images/portfolio/002.jpg 1131w, images/portfolio/002-2400.jpg 1697w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="images/portfolio/002.jpg" alt="Beeing, Beecoming portfolio">
+        <img width="1131" height="1600" loading="lazy" decoding="async" srcset="images/portfolio/003-800.jpg 566w, images/portfolio/003.jpg 1131w, images/portfolio/003-2400.jpg 1697w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="images/portfolio/003.jpg" alt="Beeing, Beecoming portfolio">
+        <img width="1131" height="1600" loading="lazy" decoding="async" srcset="images/portfolio/004-800.jpg 566w, images/portfolio/004.jpg 1131w, images/portfolio/004-2400.jpg 1697w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="images/portfolio/004.jpg" alt="Beeing, Beecoming portfolio">
+        <img width="1131" height="1600" loading="lazy" decoding="async" srcset="images/portfolio/005-800.jpg 566w, images/portfolio/005.jpg 1131w, images/portfolio/005-2400.jpg 1697w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="images/portfolio/005.jpg" alt="Beeing, Beecoming portfolio">
       </div>
       <div class="slide-controls">
         <button class="slide-btn" id="sv-prev" aria-label="Previous page">&#8592;</button>
@@ -250,7 +271,7 @@
     count.textContent = (cur + 1) + ' / ' + imgs.length;
     prev.disabled = cur === 0;
     next.disabled = cur === imgs.length - 1;
-    [n - 1, n + 1].forEach(i => { if (imgs[i]) (new Image()).src = imgs[i].src; });
+    [n - 1, n + 1].forEach(i => { if (!imgs[i]) return; const pre = new Image(); if (imgs[i].srcset) { pre.srcset = imgs[i].srcset; pre.sizes = imgs[i].sizes || ''; } pre.src = imgs[i].src; });
   }
   prev.addEventListener('click', () => { if (cur > 0) show(cur - 1); });
   next.addEventListener('click', () => { if (cur < imgs.length - 1) show(cur + 1); });

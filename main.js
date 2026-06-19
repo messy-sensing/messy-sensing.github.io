@@ -32,6 +32,19 @@ themeBtn.addEventListener('click', () =>
   applyTheme(html.dataset.theme === 'dark' ? 'light' : 'dark')
 );
 
+// ---- VIMEO FACADES (click-to-play) ----
+document.addEventListener('click', e => {
+  const f = e.target.closest('.vimeo-f');
+  if (!f || !f.dataset.src) return;
+  const iframe = document.createElement('iframe');
+  iframe.src = f.dataset.src;
+  iframe.allow = 'autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share';
+  iframe.allowFullscreen = true;
+  iframe.title = f.dataset.title || 'Video';
+  f.classList.remove('vimeo-f');
+  f.replaceChildren(iframe);
+});
+
 // ---- NAV SCROLL FADE ----
 const nav = document.getElementById('nav');
 

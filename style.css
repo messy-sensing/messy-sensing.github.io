@@ -12,6 +12,7 @@
   --wash3:    rgba(181,159,154,.28);
   --listen-bg:#141212;
   --listen-fg:#F2EEE7;
+  --rule:     rgba(20,18,18,.11);
   --serif:    'EB Garamond', Georgia, serif;
   --sans:     'Inter', system-ui, sans-serif;
 }
@@ -28,6 +29,7 @@
   --wash3:    rgba(122,82,112,.32);
   --listen-bg:#111618;
   --listen-fg:#F0EBE2;
+  --rule:     rgba(240,235,226,.14);
 }
 
 :root {
@@ -40,6 +42,20 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 @media (pointer: fine) { * { cursor: none !important; } }
+
+/* Images carry width/height attributes (aspect-ratio hint before load).
+   Without this rule the height attribute would FIX the rendered height and
+   stretch any image whose CSS only sets width — keep it. Rules that need
+   height:100% (object-fit crops) override this via higher specificity. */
+img { height: auto; }
+
+/* ---- KEYBOARD FOCUS ---- */
+a:focus-visible,
+button:focus-visible {
+  outline: 1px solid var(--fg);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
 
 /* ---- BLOB CURSOR ---- */
 #cursor-blob {
@@ -125,20 +141,23 @@ nav {
   transition: background 300ms, box-shadow 300ms;
 }
 
+/* Interim wordmark (dot-and-ring glyph + serif italic name).
+   Swap for the custom SVG logo when it is ready. */
 .nav-logo {
   display: flex;
   align-items: center;
+  gap: 9px;
   text-decoration: none;
-}
-.nav-logo img {
-  height: 20px;
-  width: auto;
-  display: block;
-  filter: none;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 19px;
+  letter-spacing: .01em;
+  color: var(--fg);
+  opacity: .85;
   transition: opacity 200ms;
 }
-.nav-logo:hover img { opacity: 0.65; }
-[data-theme="dark"] .nav-logo img { filter: invert(1); }
+.nav-logo:hover { opacity: .5; }
+.nav-logo svg { flex-shrink: 0; }
 
 .nav-right { display: flex; align-items: center; gap: 32px; }
 
@@ -164,7 +183,7 @@ nav {
 
 .divider {
   border: none;
-  border-top: 1px solid rgba(20,18,18,.11);
+  border-top: 1px solid var(--rule);
   margin: 0 52px;
   max-width: calc(1360px - 104px);
   position: relative;
@@ -267,6 +286,41 @@ nav {
   border: none;
 }
 
+/* Click-to-play facade: poster + play button, iframe injected by main.js */
+.vimeo-f { cursor: pointer; }
+.vimeo-f > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100% !important; /* wins over the global img { height: auto } */
+  object-fit: cover;
+  filter: saturate(.88);
+  transition: filter 400ms, transform 500ms;
+}
+.vimeo-f:hover > img { filter: saturate(1); transform: scale(1.015); }
+.vimeo-play {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: none;
+  border: none;
+  padding: 0;
+  color: #F0EBE2;
+  opacity: .88;
+  filter: drop-shadow(0 1px 10px rgba(0,0,0,.5));
+  transition: opacity 200ms, transform 200ms;
+}
+.vimeo-f:hover .vimeo-play { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+
+.video-item { min-width: 0; }
+.video-cap {
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  opacity: .28;
+  margin-top: 6px;
+}
+
 .bandcamp { border-radius: 2px; overflow: hidden; }
 .bandcamp iframe { border: 0; width: 100%; height: 120px; display: block; }
 
@@ -346,8 +400,7 @@ footer {
   transform: none;
 }
 #nav-drawer ul { list-style: none; }
-#nav-drawer ul li { border-bottom: 1px solid rgba(20,18,18,.08); }
-[data-theme="dark"] #nav-drawer ul li { border-bottom-color: rgba(240,235,226,.08); }
+#nav-drawer ul li { border-bottom: 1px solid var(--rule); }
 #nav-drawer ul li:last-child { border-bottom: none; }
 #nav-drawer ul li a {
   display: block;

@@ -99,7 +99,7 @@
 .exhibition-venue { font-size: 13px; line-height: 1.8; opacity: .55; }
 .exhibition-venue p + p { margin-top: 8px; }
 .exhibition-note { font-size: 14px; line-height: 1.72; margin-top: 22px; }
-.project-nav-bar { max-width: 1360px; margin: 80px auto 0; padding: 36px 52px; border-top: 1px solid rgba(20,18,18,.1); display: flex; justify-content: space-between; position: relative; z-index: 1; }
+.project-nav-bar { max-width: 1360px; margin: 80px auto 0; padding: 36px 52px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; position: relative; z-index: 1; }
 .project-nav-bar a { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--fg); text-decoration: none; opacity: .38; transition: opacity 200ms; }
 .project-nav-bar a:hover { opacity: 1; }
 .pn-next::after { content: ' →'; }
@@ -170,7 +170,8 @@
 
 <nav id="nav">
   <a href="../../" class="nav-logo" id="logo-link">
-    <img src="../../svg/logo.svg" alt="Messy Sensing">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="3.5" opacity=".75"/><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width=".8" opacity=".3"/></svg>
+    <span>Messy Sensing</span>
   </a>
   <div class="nav-right">
     <ul class="nav-links">
@@ -217,20 +218,20 @@
     <!-- Art photos — single-image viewer -->
     <div class="slide-viewer">
       <div class="slide-stage">
-        <img width="1600" height="1067" loading="lazy" decoding="async" src="Images/Art/big/RKP00075.jpg" alt="River Mur, Graz" class="active">
-        <img width="1600" height="1067" loading="lazy" decoding="async" src="Images/Art/big/PIL00056.jpg" alt="River Mur, Graz">
-        <img width="1600" height="1067" loading="lazy" decoding="async" src="Images/Art/big/PIL00141.jpg" alt="River Mur, Graz">
-        <img width="1600" height="1067" loading="lazy" decoding="async" src="Images/Art/big/RKP00076_2.jpg" alt="River Mur, Graz">
-        <img width="1600" height="1067" loading="lazy" decoding="async" src="Images/Art/medium/ELE00074.jpg" alt="River Mur, Graz">
-        <img width="2000" height="1333" loading="lazy" decoding="async" src="Images/Art/medium/ELE00088.jpg" alt="River Mur, Graz">
-        <img width="2000" height="1333" loading="lazy" decoding="async" src="Images/Art/medium/PIL00079.jpg" alt="River Mur, Graz">
-        <img width="2000" height="1333" loading="lazy" decoding="async" src="Images/Art/medium/RKP00213.jpg" alt="River Mur, Graz">
-        <img width="1600" height="1067" loading="lazy" decoding="async" src="Images/Art/small/ELE00048.jpg" alt="River Mur, Graz">
-        <img width="2000" height="1333" loading="lazy" decoding="async" src="Images/Art/small/PIL00077.jpg" alt="River Mur, Graz">
-        <img width="2000" height="1333" loading="lazy" decoding="async" src="Images/Art/small/P1000238.jpg" alt="River Mur, Graz">
-        <img width="2000" height="1333" loading="lazy" decoding="async" src="Images/Art/small/P1000239.jpg" alt="River Mur, Graz">
-        <img width="2000" height="1333" loading="lazy" decoding="async" src="Images/Art/small/RKP00048.jpg" alt="River Mur, Graz">
-        <img width="2000" height="1333" loading="lazy" decoding="async" src="Images/Art/small/RKP00069.jpg" alt="River Mur, Graz">
+        <img width="1600" height="1067" loading="lazy" decoding="async" srcset="Images/Art/big/RKP00075-800.jpg 800w, Images/Art/big/RKP00075.jpg 1600w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="Images/Art/big/RKP00075.jpg" alt="River Mur, Graz" class="active">
+        <img width="1600" height="1067" loading="lazy" decoding="async" srcset="Images/Art/big/PIL00056-800.jpg 800w, Images/Art/big/PIL00056.jpg 1600w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="Images/Art/big/PIL00056.jpg" alt="River Mur, Graz">
+        <img width="1600" height="1067" loading="lazy" decoding="async" srcset="Images/Art/big/PIL00141-800.jpg 800w, Images/Art/big/PIL00141.jpg 1600w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="Images/Art/big/PIL00141.jpg" alt="River Mur, Graz">
+        <img width="1600" height="1067" loading="lazy" decoding="async" srcset="Images/Art/big/RKP00076_2-800.jpg 800w, Images/Art/big/RKP00076_2.jpg 1600w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="Images/Art/big/RKP00076_2.jpg" alt="River Mur, Graz">
+        <img width="1600" height="1067" loading="lazy" decoding="async" srcset="Images/Art/medium/ELE00074-800.jpg 800w, Images/Art/medium/ELE00074.jpg 1600w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="Images/Art/medium/ELE00074.jpg" alt="River Mur, Graz">
+        <img width="2000" height="1333" loading="lazy" decoding="async" srcset="Images/Art/medium/ELE00088-800.jpg 800w, Images/Art/medium/ELE00088.jpg 2000w, Images/Art/medium/ELE00088-2400.jpg 2400w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="Images/Art/medium/ELE00088.jpg" alt="River Mur, Graz">
+        <img width="2000" height="1333" loading="lazy" decoding="async" srcset="Images/Art/medium/PIL00079-800.jpg 800w, Images/Art/medium/PIL00079.jpg 2000w, Images/Art/medium/PIL00079-2400.jpg 2400w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="Images/Art/medium/PIL00079.jpg" alt="River Mur, Graz">
+        <img width="2000" height="1333" loading="lazy" decoding="async" srcset="Images/Art/medium/RKP00213-800.jpg 800w, Images/Art/medium/RKP00213.jpg 2000w, Images/Art/medium/RKP00213-2400.jpg 2400w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="Images/Art/medium/RKP00213.jpg" alt="River Mur, Graz">
+        <img width="1600" height="1067" loading="lazy" decoding="async" srcset="Images/Art/small/ELE00048-800.jpg 800w, Images/Art/small/ELE00048.jpg 1600w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="Images/Art/small/ELE00048.jpg" alt="River Mur, Graz">
+        <img width="2000" height="1333" loading="lazy" decoding="async" srcset="Images/Art/small/PIL00077-800.jpg 800w, Images/Art/small/PIL00077.jpg 2000w, Images/Art/small/PIL00077-2400.jpg 2400w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="Images/Art/small/PIL00077.jpg" alt="River Mur, Graz">
+        <img width="2000" height="1333" loading="lazy" decoding="async" srcset="Images/Art/small/P1000238-800.jpg 800w, Images/Art/small/P1000238.jpg 2000w, Images/Art/small/P1000238-2400.jpg 2400w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="Images/Art/small/P1000238.jpg" alt="River Mur, Graz">
+        <img width="2000" height="1333" loading="lazy" decoding="async" srcset="Images/Art/small/P1000239-800.jpg 800w, Images/Art/small/P1000239.jpg 2000w, Images/Art/small/P1000239-2400.jpg 2400w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="Images/Art/small/P1000239.jpg" alt="River Mur, Graz">
+        <img width="2000" height="1333" loading="lazy" decoding="async" srcset="Images/Art/small/RKP00048-800.jpg 800w, Images/Art/small/RKP00048.jpg 2000w, Images/Art/small/RKP00048-2400.jpg 2400w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="Images/Art/small/RKP00048.jpg" alt="River Mur, Graz">
+        <img width="2000" height="1333" loading="lazy" decoding="async" srcset="Images/Art/small/RKP00069-800.jpg 800w, Images/Art/small/RKP00069.jpg 2000w, Images/Art/small/RKP00069-2400.jpg 2400w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="Images/Art/small/RKP00069.jpg" alt="River Mur, Graz">
       </div>
       <div class="slide-controls">
         <button class="slide-btn" id="sv-prev" aria-label="Previous image">&#8592;</button>
@@ -263,40 +264,81 @@
     <!-- Videos -->
     <span class="project-section-label">Video works</span>
 
-    <div class="vimeo" style="margin-bottom: 16px;">
-      <iframe src="https://player.vimeo.com/video/1148040262?title=0&byline=0&portrait=0&badge=0&autopause=0&app_id=58479"
-              frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen title="Murky Voices – Excerpts of video works"></iframe>
+    <div class="video-item" style="margin-bottom: 16px;">
+    <div class="vimeo vimeo-f" data-src="https://player.vimeo.com/video/1148040262?title=0&byline=0&portrait=0&badge=0&autopause=0&app_id=58479&autoplay=1" data-title="Murky Voices – Excerpts of video works">
+      <img src="../../posters/1148040262.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+      <button type="button" class="vimeo-play" aria-label="Play video: Murky Voices – Excerpts of video works">
+        <svg viewBox="0 0 64 64" width="56" height="56" fill="none" aria-hidden="true">
+          <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="1.2" opacity=".9"/>
+          <path d="M26 21.5 45 32 26 42.5 Z" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+    <p class="video-cap">Murky Voices &ndash; Excerpts of video works</p>
     </div>
 
     <div class="video-grid">
-      <div class="vimeo">
-        <iframe src="https://player.vimeo.com/video/861159893?title=0&byline=0&portrait=0&badge=0&app_id=58479"
-                frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                allowfullscreen title="Signs / Borderlands"></iframe>
+      <div class="video-item">
+      <div class="vimeo vimeo-f" data-src="https://player.vimeo.com/video/861159893?title=0&byline=0&portrait=0&badge=0&app_id=58479&autoplay=1" data-title="Signs / Borderlands">
+        <img src="../../posters/861159893.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+        <button type="button" class="vimeo-play" aria-label="Play video: Signs / Borderlands">
+          <svg viewBox="0 0 64 64" width="56" height="56" fill="none" aria-hidden="true">
+            <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="1.2" opacity=".9"/>
+            <path d="M26 21.5 45 32 26 42.5 Z" fill="currentColor"/>
+          </svg>
+        </button>
       </div>
-      <div class="vimeo">
-        <iframe src="https://player.vimeo.com/video/856559295?title=0&byline=0&portrait=0&badge=0&app_id=58479"
-                frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                allowfullscreen title="Borderlands (excerpt 2)"></iframe>
+      <p class="video-cap">Signs / Borderlands</p>
       </div>
-      <div class="vimeo">
-        <iframe src="https://player.vimeo.com/video/1192797117?title=0&byline=0&portrait=0&badge=0&app_id=58479"
-                frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                allowfullscreen title="Sleepwalking"></iframe>
+      <div class="video-item">
+      <div class="vimeo vimeo-f" data-src="https://player.vimeo.com/video/856559295?title=0&byline=0&portrait=0&badge=0&app_id=58479&autoplay=1" data-title="Borderlands (excerpt 2)">
+        <img src="../../posters/856559295.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+        <button type="button" class="vimeo-play" aria-label="Play video: Borderlands (excerpt 2)">
+          <svg viewBox="0 0 64 64" width="56" height="56" fill="none" aria-hidden="true">
+            <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="1.2" opacity=".9"/>
+            <path d="M26 21.5 45 32 26 42.5 Z" fill="currentColor"/>
+          </svg>
+        </button>
       </div>
-      <div class="vimeo">
-        <iframe src="https://player.vimeo.com/video/1192797195?title=0&byline=0&portrait=0&badge=0&app_id=58479"
-                frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                allowfullscreen title="Mur 16"></iframe>
+      <p class="video-cap">Borderlands (excerpt 2)</p>
+      </div>
+      <div class="video-item">
+      <div class="vimeo vimeo-f" data-src="https://player.vimeo.com/video/1192797117?title=0&byline=0&portrait=0&badge=0&app_id=58479&autoplay=1" data-title="Sleepwalking">
+        <img src="../../posters/1192797117.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+        <button type="button" class="vimeo-play" aria-label="Play video: Sleepwalking">
+          <svg viewBox="0 0 64 64" width="56" height="56" fill="none" aria-hidden="true">
+            <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="1.2" opacity=".9"/>
+            <path d="M26 21.5 45 32 26 42.5 Z" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+      <p class="video-cap">Sleepwalking</p>
+      </div>
+      <div class="video-item">
+      <div class="vimeo vimeo-f" data-src="https://player.vimeo.com/video/1192797195?title=0&byline=0&portrait=0&badge=0&app_id=58479&autoplay=1" data-title="Mur 16">
+        <img src="../../posters/1192797195.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+        <button type="button" class="vimeo-play" aria-label="Play video: Mur 16">
+          <svg viewBox="0 0 64 64" width="56" height="56" fill="none" aria-hidden="true">
+            <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="1.2" opacity=".9"/>
+            <path d="M26 21.5 45 32 26 42.5 Z" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+      <p class="video-cap">Mur 16</p>
       </div>
     </div>
 
-    <div class="vimeo" style="margin-bottom: 14px;">
-      <iframe src="https://player.vimeo.com/video/1192797194?title=0&byline=0&portrait=0&badge=0&app_id=58479"
-              frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-              allowfullscreen title="Mur 17"></iframe>
+    <div class="video-item" style="margin-bottom: 14px;">
+    <div class="vimeo vimeo-f" data-src="https://player.vimeo.com/video/1192797194?title=0&byline=0&portrait=0&badge=0&app_id=58479&autoplay=1" data-title="Mur 17">
+      <img src="../../posters/1192797194.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+      <button type="button" class="vimeo-play" aria-label="Play video: Mur 17">
+        <svg viewBox="0 0 64 64" width="56" height="56" fill="none" aria-hidden="true">
+          <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="1.2" opacity=".9"/>
+          <path d="M26 21.5 45 32 26 42.5 Z" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+    <p class="video-cap">Mur 17</p>
     </div>
 
     <!-- Short text -->
@@ -330,30 +372,30 @@
     <span class="project-section-label">Documentation</span>
 
     <div class="img-pair" style="margin-bottom:10px;">
-      <img width="1600" height="1067" loading="lazy" decoding="async" src="Images/documentation/Image00001.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1067" loading="lazy" decoding="async" src="Images/documentation/Image00002.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1067" loading="lazy" decoding="async" srcset="Images/documentation/Image00001-800.jpg 800w, Images/documentation/Image00001.jpg 1600w" sizes="(min-width: 1465px) 623px, calc((100vw - 58px)/2)" src="Images/documentation/Image00001.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1067" loading="lazy" decoding="async" srcset="Images/documentation/Image00002-800.jpg 800w, Images/documentation/Image00002.jpg 1600w" sizes="(min-width: 1465px) 623px, calc((100vw - 58px)/2)" src="Images/documentation/Image00002.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
     </div>
     <div class="img-pair" style="margin-bottom:10px;">
-      <img width="1600" height="1067" loading="lazy" decoding="async" src="Images/documentation/Image00003.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1069" loading="lazy" decoding="async" src="Images/documentation/Image00004.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1067" loading="lazy" decoding="async" srcset="Images/documentation/Image00003-800.jpg 800w, Images/documentation/Image00003.jpg 1600w" sizes="(min-width: 1465px) 623px, calc((100vw - 58px)/2)" src="Images/documentation/Image00003.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1069" loading="lazy" decoding="async" srcset="Images/documentation/Image00004-800.jpg 800w, Images/documentation/Image00004.jpg 1600w" sizes="(min-width: 1465px) 623px, calc((100vw - 58px)/2)" src="Images/documentation/Image00004.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
     </div>
     <div class="img-pair" style="margin-bottom:10px;">
-      <img width="1600" height="1069" loading="lazy" decoding="async" src="Images/documentation/Image00005.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1069" loading="lazy" decoding="async" src="Images/documentation/Image00006.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1069" loading="lazy" decoding="async" srcset="Images/documentation/Image00005-800.jpg 800w, Images/documentation/Image00005.jpg 1600w" sizes="(min-width: 1465px) 623px, calc((100vw - 58px)/2)" src="Images/documentation/Image00005.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1069" loading="lazy" decoding="async" srcset="Images/documentation/Image00006-800.jpg 800w, Images/documentation/Image00006.jpg 1600w" sizes="(min-width: 1465px) 623px, calc((100vw - 58px)/2)" src="Images/documentation/Image00006.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
     </div>
     <div class="img-pair" style="margin-bottom:10px;">
-      <img width="1600" height="1069" loading="lazy" decoding="async" src="Images/documentation/Image00007.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1069" loading="lazy" decoding="async" src="Images/documentation/Image00008.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1069" loading="lazy" decoding="async" srcset="Images/documentation/Image00007-800.jpg 800w, Images/documentation/Image00007.jpg 1600w" sizes="(min-width: 1465px) 623px, calc((100vw - 58px)/2)" src="Images/documentation/Image00007.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1069" loading="lazy" decoding="async" srcset="Images/documentation/Image00008-800.jpg 800w, Images/documentation/Image00008.jpg 1600w" sizes="(min-width: 1465px) 623px, calc((100vw - 58px)/2)" src="Images/documentation/Image00008.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
     </div>
     <div class="img-pair" style="margin-bottom:10px;">
-      <img width="1600" height="1069" loading="lazy" decoding="async" src="Images/documentation/Image00009.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1069" loading="lazy" decoding="async" src="Images/documentation/Image00010.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1069" loading="lazy" decoding="async" srcset="Images/documentation/Image00009-800.jpg 800w, Images/documentation/Image00009.jpg 1600w" sizes="(min-width: 1465px) 623px, calc((100vw - 58px)/2)" src="Images/documentation/Image00009.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1069" loading="lazy" decoding="async" srcset="Images/documentation/Image00010-800.jpg 800w, Images/documentation/Image00010.jpg 1600w" sizes="(min-width: 1465px) 623px, calc((100vw - 58px)/2)" src="Images/documentation/Image00010.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
     </div>
     <div class="img-pair" style="margin-bottom:10px;">
-      <img width="1600" height="1069" loading="lazy" decoding="async" src="Images/documentation/Image000012.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1069" loading="lazy" decoding="async" src="Images/documentation/Image000022.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1069" loading="lazy" decoding="async" srcset="Images/documentation/Image000012-800.jpg 800w, Images/documentation/Image000012.jpg 1600w" sizes="(min-width: 1465px) 623px, calc((100vw - 58px)/2)" src="Images/documentation/Image000012.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1069" loading="lazy" decoding="async" srcset="Images/documentation/Image000022-800.jpg 800w, Images/documentation/Image000022.jpg 1600w" sizes="(min-width: 1465px) 623px, calc((100vw - 58px)/2)" src="Images/documentation/Image000022.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
     </div>
-    <img width="1600" height="1069" loading="lazy" decoding="async" src="Images/documentation/Image000033.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
+    <img width="1600" height="1069" loading="lazy" decoding="async" srcset="Images/documentation/Image000033-800.jpg 800w, Images/documentation/Image000033.jpg 1600w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="Images/documentation/Image000033.jpg" alt="River Becoming soundwalk" style="width:100%; display:block; border-radius:2px;">
     <p class="photo-credit">Photography — Reza Kellner</p>
 
     <p class="support-note">River Becoming 2024 was supported by Stadt Graz and Land Steiermark. See the <a href="../murky-voices/" style="color:inherit; opacity:.7;">Murky Voices</a> page for the exhibition.</p>
@@ -394,7 +436,7 @@
     count.textContent = (cur + 1) + ' / ' + imgs.length;
     prev.disabled = cur === 0;
     next.disabled = cur === imgs.length - 1;
-    [n - 1, n + 1].forEach(i => { if (imgs[i]) (new Image()).src = imgs[i].src; });
+    [n - 1, n + 1].forEach(i => { if (!imgs[i]) return; const pre = new Image(); if (imgs[i].srcset) { pre.srcset = imgs[i].srcset; pre.sizes = imgs[i].sizes || ''; } pre.src = imgs[i].src; });
   }
   prev.addEventListener('click', () => { if (cur > 0) show(cur - 1); });
   next.addEventListener('click', () => { if (cur < imgs.length - 1) show(cur + 1); });

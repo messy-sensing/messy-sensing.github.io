@@ -121,7 +121,7 @@
   max-width: 1360px;
   margin: 80px auto 0;
   padding: 36px 52px;
-  border-top: 1px solid rgba(20,18,18,.1);
+  border-top: 1px solid var(--rule);
   display: flex;
   justify-content: space-between;
   position: relative;
@@ -179,7 +179,8 @@
 
 <nav id="nav">
   <a href="../../" class="nav-logo" id="logo-link">
-    <img src="../../svg/logo.svg" alt="Messy Sensing">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="3.5" opacity=".75"/><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width=".8" opacity=".3"/></svg>
+    <span>Messy Sensing</span>
   </a>
   <div class="nav-right">
     <ul class="nav-links">
@@ -212,17 +213,14 @@
     <p class="project-lead">Voicing Places is a platform for artistic research amplifying embodied, community-based reflections on the sensory. Sensing is messy; being in a body and relating to a site is an unstable process. We believe our sonic practices must address this directly, embracing the muddy, shifting ground on which we stand. We connect to the different, often conflicting, aspects of a place — its multiple layers, social dynamics, political contours, and the tensions between them.</p>
 
     <!-- MAIN IMAGE or VIDEO — hero moment of the project -->
-    <!-- Option A: single photo -->
-    <!--
-    <div style="margin-bottom: 16px;">
-      <img src="images/main.jpg" alt="Voicing Places, Forum Stadtpark, 2025" style="width:100%; border-radius:2px; display:block;">
-    </div>
-    -->
-
-    <div class="vimeo" style="margin-bottom: 16px;">
-      <iframe src="https://player.vimeo.com/video/1141897095?h=325c6a94c1&title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479"
-        frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-        referrerpolicy="strict-origin-when-cross-origin" title="Voicing Places"></iframe>
+    <div class="vimeo vimeo-f" style="margin-bottom: 16px;" data-src="https://player.vimeo.com/video/1141897095?h=325c6a94c1&title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1" data-title="Voicing Places">
+      <img src="../../posters/1141897095.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+      <button type="button" class="vimeo-play" aria-label="Play video: Voicing Places">
+        <svg viewBox="0 0 64 64" width="56" height="56" fill="none" aria-hidden="true">
+          <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="1.2" opacity=".9"/>
+          <path d="M26 21.5 45 32 26 42.5 Z" fill="currentColor"/>
+        </svg>
+      </button>
     </div>
 
     <!-- BODY TEXT + DETAILS SIDE BY SIDE -->
@@ -242,72 +240,76 @@
 
     <span class="project-section-label">Documentation — Forum Stadtpark, November 2025</span>
 
-    <img width="1600" height="1200" loading="lazy" decoding="async" src="images/1/251129_Reza_Keller_c_Yola_Moschitz004.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px; margin-bottom:10px;">
+    <img width="1600" height="1200" loading="lazy" decoding="async" srcset="images/1/251129_Reza_Keller_c_Yola_Moschitz004-800.jpg 800w, images/1/251129_Reza_Keller_c_Yola_Moschitz004.jpg 1600w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="images/1/251129_Reza_Keller_c_Yola_Moschitz004.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px; margin-bottom:10px;">
     <div class="photo-grid-3">
-      <img width="1600" height="1200" loading="lazy" decoding="async" src="images/1/251129_Reza_Keller_c_Yola_Moschitz006.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1200" loading="lazy" decoding="async" src="images/1/251129_Reza_Keller_c_Yola_Moschitz008.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1200" loading="lazy" decoding="async" src="images/1/251129_Reza_Keller_c_Yola_Moschitz011.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1200" loading="lazy" decoding="async" srcset="images/1/251129_Reza_Keller_c_Yola_Moschitz006-800.jpg 800w, images/1/251129_Reza_Keller_c_Yola_Moschitz006.jpg 1600w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/1/251129_Reza_Keller_c_Yola_Moschitz006.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1200" loading="lazy" decoding="async" srcset="images/1/251129_Reza_Keller_c_Yola_Moschitz008-800.jpg 800w, images/1/251129_Reza_Keller_c_Yola_Moschitz008.jpg 1600w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/1/251129_Reza_Keller_c_Yola_Moschitz008.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1200" loading="lazy" decoding="async" srcset="images/1/251129_Reza_Keller_c_Yola_Moschitz011-800.jpg 800w, images/1/251129_Reza_Keller_c_Yola_Moschitz011.jpg 1600w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/1/251129_Reza_Keller_c_Yola_Moschitz011.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
     </div>
-    <img width="1600" height="1200" loading="lazy" decoding="async" src="images/1/251129_Reza_Keller_c_Yola_Moschitz014.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px; margin-bottom:10px;">
+    <img width="1600" height="1200" loading="lazy" decoding="async" srcset="images/1/251129_Reza_Keller_c_Yola_Moschitz014-800.jpg 800w, images/1/251129_Reza_Keller_c_Yola_Moschitz014.jpg 1600w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="images/1/251129_Reza_Keller_c_Yola_Moschitz014.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px; margin-bottom:10px;">
     <div class="photo-grid-3">
-      <img width="1600" height="1200" loading="lazy" decoding="async" src="images/1/251129_Reza_Keller_c_Yola_Moschitz017.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1200" loading="lazy" decoding="async" src="images/1/251129_Reza_Keller_c_Yola_Moschitz019.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1200" loading="lazy" decoding="async" src="images/1/251129_Reza_Keller_c_Yola_Moschitz024.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1200" loading="lazy" decoding="async" srcset="images/1/251129_Reza_Keller_c_Yola_Moschitz017-800.jpg 800w, images/1/251129_Reza_Keller_c_Yola_Moschitz017.jpg 1600w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/1/251129_Reza_Keller_c_Yola_Moschitz017.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1200" loading="lazy" decoding="async" srcset="images/1/251129_Reza_Keller_c_Yola_Moschitz019-800.jpg 800w, images/1/251129_Reza_Keller_c_Yola_Moschitz019.jpg 1600w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/1/251129_Reza_Keller_c_Yola_Moschitz019.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1200" loading="lazy" decoding="async" srcset="images/1/251129_Reza_Keller_c_Yola_Moschitz024-800.jpg 800w, images/1/251129_Reza_Keller_c_Yola_Moschitz024.jpg 1600w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/1/251129_Reza_Keller_c_Yola_Moschitz024.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
     </div>
     <div class="photo-grid-2">
-      <img width="1600" height="1200" loading="lazy" decoding="async" src="images/1/251129_Reza_Keller_c_Yola_Moschitz026.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1200" loading="lazy" decoding="async" src="images/1/251129_Reza_Keller_c_Yola_Moschitz029.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1200" loading="lazy" decoding="async" srcset="images/1/251129_Reza_Keller_c_Yola_Moschitz026-800.jpg 800w, images/1/251129_Reza_Keller_c_Yola_Moschitz026.jpg 1600w" sizes="(min-width: 1465px) 623px, (max-width: 860px) calc(100vw - 48px), calc((100vw - 114px)/2)" src="images/1/251129_Reza_Keller_c_Yola_Moschitz026.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1200" loading="lazy" decoding="async" srcset="images/1/251129_Reza_Keller_c_Yola_Moschitz029-800.jpg 800w, images/1/251129_Reza_Keller_c_Yola_Moschitz029.jpg 1600w" sizes="(min-width: 1465px) 623px, (max-width: 860px) calc(100vw - 48px), calc((100vw - 114px)/2)" src="images/1/251129_Reza_Keller_c_Yola_Moschitz029.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
     </div>
     <div class="photo-grid-3">
-      <img width="1600" height="1200" loading="lazy" decoding="async" src="images/1/251129_Reza_Keller_c_Yola_Moschitz031.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1200" loading="lazy" decoding="async" src="images/1/251129_Reza_Keller_c_Yola_Moschitz033.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1200" loading="lazy" decoding="async" src="images/1/251129_Reza_Keller_c_Yola_Moschitz034.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1200" loading="lazy" decoding="async" srcset="images/1/251129_Reza_Keller_c_Yola_Moschitz031-800.jpg 800w, images/1/251129_Reza_Keller_c_Yola_Moschitz031.jpg 1600w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/1/251129_Reza_Keller_c_Yola_Moschitz031.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1200" loading="lazy" decoding="async" srcset="images/1/251129_Reza_Keller_c_Yola_Moschitz033-800.jpg 800w, images/1/251129_Reza_Keller_c_Yola_Moschitz033.jpg 1600w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/1/251129_Reza_Keller_c_Yola_Moschitz033.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1200" loading="lazy" decoding="async" srcset="images/1/251129_Reza_Keller_c_Yola_Moschitz034-800.jpg 800w, images/1/251129_Reza_Keller_c_Yola_Moschitz034.jpg 1600w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/1/251129_Reza_Keller_c_Yola_Moschitz034.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
     </div>
     <div class="photo-grid-2">
-      <img width="1600" height="1200" loading="lazy" decoding="async" src="images/1/251129_Reza_Keller_c_Yola_Moschitz037.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1200" loading="lazy" decoding="async" src="images/1/251129_Reza_Keller_c_Yola_Moschitz038.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1200" loading="lazy" decoding="async" srcset="images/1/251129_Reza_Keller_c_Yola_Moschitz037-800.jpg 800w, images/1/251129_Reza_Keller_c_Yola_Moschitz037.jpg 1600w" sizes="(min-width: 1465px) 623px, (max-width: 860px) calc(100vw - 48px), calc((100vw - 114px)/2)" src="images/1/251129_Reza_Keller_c_Yola_Moschitz037.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1200" loading="lazy" decoding="async" srcset="images/1/251129_Reza_Keller_c_Yola_Moschitz038-800.jpg 800w, images/1/251129_Reza_Keller_c_Yola_Moschitz038.jpg 1600w" sizes="(min-width: 1465px) 623px, (max-width: 860px) calc(100vw - 48px), calc((100vw - 114px)/2)" src="images/1/251129_Reza_Keller_c_Yola_Moschitz038.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
     </div>
     <p class="photo-credit">Photography — &copy; Yola Moschitz</p>
 
-    <div class="vimeo" style="margin-bottom: 72px;">
-      <iframe src="https://player.vimeo.com/video/1141894613?title=0&byline=0&portrait=0"
-        frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-        title="Voicing Places"></iframe>
+    <div class="vimeo vimeo-f" style="margin-bottom: 72px;" data-src="https://player.vimeo.com/video/1141894613?title=0&byline=0&portrait=0&autoplay=1" data-title="Voicing Places">
+      <img src="../../posters/1141894613.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+      <button type="button" class="vimeo-play" aria-label="Play video: Voicing Places">
+        <svg viewBox="0 0 64 64" width="56" height="56" fill="none" aria-hidden="true">
+          <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="1.2" opacity=".9"/>
+          <path d="M26 21.5 45 32 26 42.5 Z" fill="currentColor"/>
+        </svg>
+      </button>
     </div>
 
     <span class="project-section-label">Documentation — February 2026</span>
 
-    <img width="1600" height="1069" loading="lazy" decoding="async" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_02.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px; margin-bottom:10px;">
+    <img width="1600" height="1069" loading="lazy" decoding="async" srcset="images/2/260226_Messy_Sensing_c_Peter_Hutter_02-800.jpg 800w, images/2/260226_Messy_Sensing_c_Peter_Hutter_02.jpg 1600w" sizes="(min-width: 1465px) 1256px, (max-width: 860px) calc(100vw - 48px), calc(100vw - 104px)" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_02.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px; margin-bottom:10px;">
     <div class="photo-grid-3">
-      <img width="1069" height="1600" loading="lazy" decoding="async" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_04.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
-      <img width="1069" height="1600" loading="lazy" decoding="async" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_06.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1069" loading="lazy" decoding="async" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_07.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1069" height="1600" loading="lazy" decoding="async" srcset="images/2/260226_Messy_Sensing_c_Peter_Hutter_04-800.jpg 535w, images/2/260226_Messy_Sensing_c_Peter_Hutter_04.jpg 1069w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_04.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1069" height="1600" loading="lazy" decoding="async" srcset="images/2/260226_Messy_Sensing_c_Peter_Hutter_06-800.jpg 535w, images/2/260226_Messy_Sensing_c_Peter_Hutter_06.jpg 1069w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_06.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1069" loading="lazy" decoding="async" srcset="images/2/260226_Messy_Sensing_c_Peter_Hutter_07-800.jpg 800w, images/2/260226_Messy_Sensing_c_Peter_Hutter_07.jpg 1600w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_07.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
     </div>
     <div class="photo-grid-3">
-      <img width="1600" height="1069" loading="lazy" decoding="async" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_11.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1069" loading="lazy" decoding="async" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_23.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
-      <img width="1069" height="1600" loading="lazy" decoding="async" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_25.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1069" loading="lazy" decoding="async" srcset="images/2/260226_Messy_Sensing_c_Peter_Hutter_11-800.jpg 800w, images/2/260226_Messy_Sensing_c_Peter_Hutter_11.jpg 1600w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_11.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1069" loading="lazy" decoding="async" srcset="images/2/260226_Messy_Sensing_c_Peter_Hutter_23-800.jpg 800w, images/2/260226_Messy_Sensing_c_Peter_Hutter_23.jpg 1600w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_23.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1069" height="1600" loading="lazy" decoding="async" srcset="images/2/260226_Messy_Sensing_c_Peter_Hutter_25-800.jpg 535w, images/2/260226_Messy_Sensing_c_Peter_Hutter_25.jpg 1069w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_25.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
     </div>
     <div class="photo-grid-3">
-      <img width="1069" height="1600" loading="lazy" decoding="async" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_29.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
-      <img width="1069" height="1600" loading="lazy" decoding="async" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_30.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1069" loading="lazy" decoding="async" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_33.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1069" height="1600" loading="lazy" decoding="async" srcset="images/2/260226_Messy_Sensing_c_Peter_Hutter_29-800.jpg 535w, images/2/260226_Messy_Sensing_c_Peter_Hutter_29.jpg 1069w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_29.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1069" height="1600" loading="lazy" decoding="async" srcset="images/2/260226_Messy_Sensing_c_Peter_Hutter_30-800.jpg 535w, images/2/260226_Messy_Sensing_c_Peter_Hutter_30.jpg 1069w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_30.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1069" loading="lazy" decoding="async" srcset="images/2/260226_Messy_Sensing_c_Peter_Hutter_33-800.jpg 800w, images/2/260226_Messy_Sensing_c_Peter_Hutter_33.jpg 1600w" sizes="(min-width: 1465px) 412px, (max-width: 480px) calc(100vw - 48px), (max-width: 860px) calc((100vw - 58px)/2), calc((100vw - 124px)/3)" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_33.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
     </div>
     <div class="photo-grid-2">
-      <img width="1600" height="1069" loading="lazy" decoding="async" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_38.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1069" loading="lazy" decoding="async" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_40.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1069" loading="lazy" decoding="async" srcset="images/2/260226_Messy_Sensing_c_Peter_Hutter_38-800.jpg 800w, images/2/260226_Messy_Sensing_c_Peter_Hutter_38.jpg 1600w" sizes="(min-width: 1465px) 623px, (max-width: 860px) calc(100vw - 48px), calc((100vw - 114px)/2)" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_38.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1069" loading="lazy" decoding="async" srcset="images/2/260226_Messy_Sensing_c_Peter_Hutter_40-800.jpg 800w, images/2/260226_Messy_Sensing_c_Peter_Hutter_40.jpg 1600w" sizes="(min-width: 1465px) 623px, (max-width: 860px) calc(100vw - 48px), calc((100vw - 114px)/2)" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_40.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
     </div>
     <div class="photo-grid-2">
-      <img width="1600" height="1069" loading="lazy" decoding="async" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_41.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
-      <img width="1600" height="1069" loading="lazy" decoding="async" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_42.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1069" loading="lazy" decoding="async" srcset="images/2/260226_Messy_Sensing_c_Peter_Hutter_41-800.jpg 800w, images/2/260226_Messy_Sensing_c_Peter_Hutter_41.jpg 1600w" sizes="(min-width: 1465px) 623px, (max-width: 860px) calc(100vw - 48px), calc((100vw - 114px)/2)" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_41.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
+      <img width="1600" height="1069" loading="lazy" decoding="async" srcset="images/2/260226_Messy_Sensing_c_Peter_Hutter_42-800.jpg 800w, images/2/260226_Messy_Sensing_c_Peter_Hutter_42.jpg 1600w" sizes="(min-width: 1465px) 623px, (max-width: 860px) calc(100vw - 48px), calc((100vw - 114px)/2)" src="images/2/260226_Messy_Sensing_c_Peter_Hutter_42.jpg" alt="Voicing Places" style="width:100%; display:block; border-radius:2px;">
     </div>
     <p class="photo-credit">Photography — &copy; Peter Hutter</p>
 
     <span class="project-section-label">Posters</span>
 
     <div class="photo-grid-2">
-      <img width="1280" height="1600" loading="lazy" decoding="async" src="images/Posters/1.jpg" alt="Voicing Places poster" style="width:100%; display:block; border-radius:2px;">
-      <img width="960" height="1280" loading="lazy" decoding="async" src="images/Posters/2.jpg" alt="Voicing Places poster" style="width:100%; display:block; border-radius:2px;">
+      <img width="1280" height="1600" loading="lazy" decoding="async" srcset="images/Posters/1-800.jpg 640w, images/Posters/1.jpg 1280w" sizes="(min-width: 1465px) 623px, (max-width: 860px) calc(100vw - 48px), calc((100vw - 114px)/2)" src="images/Posters/1.jpg" alt="Voicing Places poster" style="width:100%; display:block; border-radius:2px;">
+      <img width="960" height="1280" loading="lazy" decoding="async" srcset="images/Posters/2-800.jpg 600w, images/Posters/2.jpg 960w" sizes="(min-width: 1465px) 623px, (max-width: 860px) calc(100vw - 48px), calc((100vw - 114px)/2)" src="images/Posters/2.jpg" alt="Voicing Places poster" style="width:100%; display:block; border-radius:2px;">
     </div>
 
     <span class="project-section-label">Art Book</span>

@@ -35,7 +35,7 @@
 .project-text-detail { font-size: 13px; line-height: 1.8; opacity: .55; }
 .project-text-detail p + p { margin-top: 10px; }
 .project-text-detail strong { font-weight: 400; opacity: .75; }
-.project-nav-bar { max-width: 1360px; margin: 80px auto 0; padding: 36px 52px; border-top: 1px solid rgba(20,18,18,.1); display: flex; justify-content: space-between; position: relative; z-index: 1; }
+.project-nav-bar { max-width: 1360px; margin: 80px auto 0; padding: 36px 52px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; position: relative; z-index: 1; }
 .project-nav-bar a { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--fg); text-decoration: none; opacity: .38; transition: opacity 200ms; }
 .project-nav-bar a:hover { opacity: 1; }
 .pn-next::after { content: ' →'; }
@@ -134,7 +134,8 @@
 
 <nav id="nav">
   <a href="../../" class="nav-logo" id="logo-link">
-    <img src="../../svg/logo.svg" alt="Messy Sensing">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="3.5" opacity=".75"/><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width=".8" opacity=".3"/></svg>
+    <span>Messy Sensing</span>
   </a>
   <div class="nav-right">
     <ul class="nav-links">
@@ -289,7 +290,7 @@
           <p>Open 16:00 – 20:00<br>Soft opening 18.02, 18:00<br>Closing concert 22.02, 18:00</p>
         </div>
       </div>
-      <img width="1132" height="1600" loading="lazy" decoding="async" src="../river-becoming/Images/documentation/poster.jpg" alt="Murky Voices exhibition poster" style="width:100%; display:block; border-radius:2px;">
+      <img width="1132" height="1600" loading="lazy" decoding="async" srcset="../river-becoming/Images/documentation/poster-800.jpg 566w, ../river-becoming/Images/documentation/poster.jpg 1132w" sizes="(min-width: 1465px) 623px, (max-width: 860px) calc(100vw - 48px), calc((100vw - 114px)/2)" src="../river-becoming/Images/documentation/poster.jpg" alt="Murky Voices exhibition poster" style="width:100%; display:block; border-radius:2px;">
     </div>
 
     <div class="exhibition-text">

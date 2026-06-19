@@ -16,6 +16,20 @@
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
+/* ---- PAGE BACKGROUND: fixed photo, all sections scroll over it ----
+   Scoped to the About page only. A theme-aware veil keeps text legible
+   over the photo in both light and dark mode. */
+body {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--bg) 42%, transparent),
+                    color-mix(in srgb, var(--bg) 42%, transparent)),
+    url('Media/2024/Web_Fam_photo/2.jpg');
+  background-position: center, center;
+  background-size: cover, cover;
+  background-attachment: fixed, fixed;
+  background-repeat: no-repeat, no-repeat;
+}
+
 /* ---- HERO ---- */
 #hero {
   position: relative;
@@ -93,7 +107,7 @@
 .about-text p { font-family: var(--serif); font-size: 20px; line-height: 1.55; max-width: 52ch; }
 .about-text p + p { margin-top: 18px; }
 .about-photo { aspect-ratio: 4/5; overflow: hidden; border-radius: 2px; }
-.about-photo img { filter: saturate(.82); transition: filter 700ms; }
+.about-photo img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.82); transition: filter 700ms; }
 .about-photo img:hover { filter: saturate(1.05); }
 
 /* ---- BIOS ---- */
@@ -191,7 +205,7 @@
       <p>It wants to honour all kinds of bodies, surrounded and absorbed by messy feasting and messy growing. Perpetual sensory exchanges and negotiations between crowds of not closely related bodies, affected by each other.</p>
     </div>
     <div class="about-photo">
-      <img width="978" height="652" loading="lazy" decoding="async" srcset="photo_2024-04-30_17-27-052-800.jpg 800w, photo_2024-04-30_17-27-052.jpg 978w" sizes="(min-width: 1465px) 588px, (max-width: 860px) calc(100vw - 48px), calc((100vw - 184px)/2)" src="photo_2024-04-30_17-27-052.jpg" alt="Messy Sensing, Anna Jurkiewicz and Reza Kellner, 2024">
+      <img width="1600" height="1067" loading="lazy" decoding="async" srcset="Media/2024/Web_Fam_photo/3-800.jpg 800w, Media/2024/Web_Fam_photo/3.jpg 5561w" sizes="(min-width: 1465px) 588px, (max-width: 860px) calc(100vw - 48px), calc((100vw - 184px)/2)" src="Media/2024/Web_Fam_photo/3.jpg" alt="Messy Sensing, Anna Jurkiewicz and Reza Kellner">
     </div>
   </div>
 </section>
